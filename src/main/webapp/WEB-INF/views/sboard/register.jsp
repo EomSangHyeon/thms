@@ -26,12 +26,6 @@ $(document).ready(function() {
 			return false;
 		}
 
-		if($("form[role='form'] input[name=add_id]").val() == "") {
-			alert("작성자명을 입력해주세요.");
-			$("form[role='form'] input[name=add_id]").focus();
-			return false;
-		}
-
 		formObj.submit();
 	});
 
@@ -118,7 +112,7 @@ $(document).ready(function() {
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Writer</label>
-						<input type="text" name="writer" class="form-control" placeholder="Enter Writer"/>
+						<input type="text" name="writer" value="${login.uid}" class="form-control" placeholder="Enter Writer" readonly/>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">File DROP Here</label>
