@@ -30,4 +30,16 @@
 			value="D:\\BITC\\Spring\\THMS\\WorkSpace\\THMS\\upload">
 		</beans:constructor-arg>
 	</beans:bean>
+	
+	<beans:bean id="authInterceptor"
+		class="com.thms.interceptor.AuthInterceptor">
+	</beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/sboard/register"/>
+			<mapping path="/sboard/modifyPage"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>
