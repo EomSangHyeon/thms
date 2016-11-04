@@ -333,8 +333,10 @@ var printPaging = function(pageMaker, target) {
 
 				<div class="box-footer">
 					<ul class="mailbox-attachments clearfix uploadedList"></ul>
+<c:if test="${login.uid == boardVO.writer}">
 					<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
 					<button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
+</c:if>
 					<button type="submit" class="btn btn-primary" id="goListBtn">GO LIST</button>
 				</div>
 			</div>
@@ -348,6 +350,7 @@ var printPaging = function(pageMaker, target) {
 					<h3 class="box-title">ADD NEW REPLY</h3>
 				</div>
 
+<c:if test="${not empty login}">
 				<div class="box-body">
 					<label for="exampleInputEmail1">Writer</label>
 					<input type="text" placeholder="USER ID" id="newReplyWriter" class="form-control"/>
@@ -358,6 +361,13 @@ var printPaging = function(pageMaker, target) {
 				<div class="box-footer">
 					<button type="submit" class="btn btn-primary" id="replyAddBtn">ADD REPLY</button>
 				</div>
+</c:if>
+
+<c:if test="${empty login}">
+				<div class="box-body">
+					<div><a href="javascript:goLogin();">Login Please</a></div>
+				</div>
+</c:if>
 			</div>
 
 			<!-- The time line -->
