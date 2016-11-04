@@ -35,6 +35,17 @@ footer { background-color: #f2f2f2; padding: 25px; }
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+<script type="text/javascript">
+$(document).ready(function() {
+	var thisFolder_tmp = document.location.pathname.substr(1).split("/");
+	var thisFolder = thisFolder_tmp[0];
+
+	$(".navbar-nav li").each(function() {
+		$(this).removeClass("active");
+	});
+	$("#"+ thisFolder).addClass("active");
+});
+</script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -49,10 +60,10 @@ footer { background-color: #f2f2f2; padding: 25px; }
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">병원소개</a></li>
-				<li><a href="#">진료예약</a></li>
-				<li><a href="#">의료소식</a></li>
-				<li><a href="/sboard/list">병원게시판</a></li>
+				<li id="introduce" class="active"><a href="#">병원소개</a></li>
+				<li id="reservation"><a href="#">진료예약</a></li>
+				<li id="news"><a href="#">의료소식</a></li>
+				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
