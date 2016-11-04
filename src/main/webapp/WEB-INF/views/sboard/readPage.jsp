@@ -266,7 +266,6 @@ Handlerbars.registerHelper("eqReplyer", function(replyer, block) {
 		<div class="timeline-body">{{replytext}}</div>
 		<div class="timeline-footer">
 			<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
-			{{/eqReplyer}}
 		</div>
 	</div>
 </li>
