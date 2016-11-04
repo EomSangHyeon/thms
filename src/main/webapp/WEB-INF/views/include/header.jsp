@@ -37,8 +37,7 @@ footer { background-color: #f2f2f2; padding: 25px; }
 <![endif]-->
 <script type="text/javascript">
 $(document).ready(function() {
-	var thisFolder_tmp = document.location.pathname.substr(1).split("/");
-	var thisFolder = thisFolder_tmp[0];
+	var thisFolder = document.location.pathname.substr(1).split("/")[0];
 
 	$(".navbar-nav li").each(function() {
 		$(this).removeClass("active");
