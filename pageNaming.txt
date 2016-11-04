@@ -1,10 +1,4 @@
 admin
-	login - 관리자 로그인
-	sboard
-		list
-		readPage
-		modifyPage
-		register
 	member
 		list
 		readPage
@@ -28,6 +22,10 @@ admin
 	schedule - 의료진 일정관리
 		list
 		readPage
+		modifyPage
+		register
+	doctor
+		list
 		modifyPage
 		register
 sboard
