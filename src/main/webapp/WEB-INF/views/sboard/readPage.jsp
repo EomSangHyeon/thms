@@ -245,6 +245,14 @@ var printPaging = function(pageMaker, target) {
 
 	target.html(str);
 };
+
+Handlerbars.registerHelper("eqReplyer", function(replyer, block) {
+	var accum = "";
+	if(replyer == "${login.uid}")
+		accum += block.fn();
+
+	return accum;
+});
 </script>
 <script id="template" type="text/x-handlebars-template">
 {{#each .}}
@@ -258,6 +266,7 @@ var printPaging = function(pageMaker, target) {
 		<div class="timeline-body">{{replytext}}</div>
 		<div class="timeline-footer">
 			<a class="btn btn-primary btn-xs" data-toggle="modal" data-target="#modifyModal">Modify</a>
+			{{/eqReplyer}}
 		</div>
 	</div>
 </li>
