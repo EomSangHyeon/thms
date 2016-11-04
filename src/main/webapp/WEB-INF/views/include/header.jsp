@@ -45,14 +45,14 @@ footer { background-color: #f2f2f2; padding: 25px; }
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">THMS</a>
+			<a class="navbar-brand" href="/">THMS</a>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">병원소개</a></li>
 				<li><a href="#">진료예약</a></li>
 				<li><a href="#">의료소식</a></li>
-				<li><a href="#">병원게시판</a></li>
+				<li><a href="/sboard/list">병원게시판</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
