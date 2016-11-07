@@ -1,4 +1,4 @@
-package com.thms.dto;
+package com.thms.persistence;
 
 import javax.inject.Inject;
 
@@ -6,7 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.thms.domain.MemberVO;
-import com.thms.persistence.MemberDAO;
+import com.thms.dto.LoginDTO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
