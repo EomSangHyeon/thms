@@ -21,4 +21,14 @@ public class MemberController {
 	public void join() {
 		logger.info("GET join....................");
 	}
+	
+	@RequestMapping(value = "/id", method = RequestMethod.GET)
+	public void id() {
+		logger.info("GET id....................");
+	}
+	
+	@RequestMapping(value = "/pw", method = RequestMethod.GET)
+	public void pw() {
+		logger.info("GET pw....................");
+	}
 }
