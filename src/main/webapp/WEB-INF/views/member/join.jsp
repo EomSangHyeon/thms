@@ -15,14 +15,14 @@ body {
   margin-bottom: 80px;
 }
 
-.form-signin {
-  max-width: 380px;
+.form-join {
+  max-width: 800px;
   padding: 15px 35px 45px;
   margin: 0 auto;
   background-color: #fff;
   border: 1px solid rgba(0,0,0,0.1);  
 
-  .form-signin-heading,
+  .form-join-heading,
 	.checkbox {
 	  margin-bottom: 30px;
 	}
@@ -58,14 +58,24 @@ body {
 </style>
 
 <div class="wrapper">
-  <form class="form-signin">       
-    <h2 class="form-signin-heading">로그인</h2>
-    <input type="text" class="form-control" name="uid" placeholder="ID" required="required" autofocus="autofocus" />
-    <input type="password" class="form-control" name="upassword" placeholder="Password" required="required"/>      
+	<form class="form-join">
+    <h2 class="form-join-heading">회원가입</h2>
+    <div class="form-group">
+    	<label for="uid">아이디</label>
+    	<input type="text" class="form-control" name="uid" placeholder="아이디" required="required" autofocus="autofocus" />
+    </div>
+    <div class="form-group">
+    	<label for="upassword">비밀번호</label>
+    	<input type="password" class="form-control" name="upassword" placeholder="비밀번호" required="required"/>
+    </div>
+    <div class="form-group">
+    	<label for="upassword">비밀번호 확인</label>
+    	<input type="password" class="form-control" name="upassword" placeholder="비밀번호 확인" required="required"/>
+    	<p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
+    </div>
     <br><br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">로그인</button>
-    <button id="register_lost_btn" type="button" class="btn btn-link">아이디 / 비밀번호 찾기</button>
-    <button id="register_register_btn" type="button" class="btn btn-link">회원가입</button>
+    <button class="btn btn-primary" type="submit">회원가입 <i class="fa fa-check spaceLeft"></i></button>
+    <button class="btn btn-warning" type="submit">취소 <i class="fa fa-times spaceLeft"></i></button>    
   </form>
 </div>
 

@@ -65,7 +65,7 @@ $(document).ready(function() {
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+				<li><a href="member/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 			</ul>
 		</div>
 	</div>
