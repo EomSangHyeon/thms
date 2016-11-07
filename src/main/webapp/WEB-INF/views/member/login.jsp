@@ -4,8 +4,6 @@
 
 <%@ include file="../include/header.jsp" %>
 <style>
-@import "bourbon";
-
 body {
 	background: #eee !important;	
 }
