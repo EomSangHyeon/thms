@@ -82,7 +82,7 @@ body {
     </div>    
     <br>
     <button class="btn btn-primary" type="submit">회원가입 <i class="fa fa-check spaceLeft"></i></button>
-    <button class="btn btn-warning" type="submit">취소 <i class="fa fa-times spaceLeft"></i></button>    
+    <button class="btn btn-warning" type="reset">취소 <i class="fa fa-times spaceLeft"></i></button>    
   </form>
 </div>
 
