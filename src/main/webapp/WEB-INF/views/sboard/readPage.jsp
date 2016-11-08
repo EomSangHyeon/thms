@@ -248,7 +248,7 @@ var printPaging = function(pageMaker, target) {
 	target.html(str);
 };
 
-Handlerbars.registerHelper("eqReplyer", function(replyer, block) {
+Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 	var accum = "";
 	if(replyer == "${login.uid}")
 		accum += block.fn();
