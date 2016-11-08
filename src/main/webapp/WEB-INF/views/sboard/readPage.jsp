@@ -68,7 +68,7 @@ $(document).ready(function() {
 
 	//덧글 보기버튼 클릭
 	$("#repliesDiv").on("click", function() {
-		if($(".timeline li").size() > 1)
+		if($(".timeline").find("li").size() > 1)
 			return;
 
 		getPage("/replies/"+ bno +"/1");

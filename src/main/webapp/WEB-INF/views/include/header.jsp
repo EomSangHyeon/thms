@@ -42,7 +42,8 @@ $(document).ready(function() {
 	$(".navbar-nav li").each(function() {
 		$(this).removeClass("active");
 	});
-	$("#"+ thisFolder).addClass("active");
+	if(thisFolder != "")
+		$("#"+ thisFolder).addClass("active");
 });
 </script>
 </head>
