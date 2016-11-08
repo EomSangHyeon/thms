@@ -80,7 +80,7 @@ $(document).ready(function() {
 
 		replyPage = $(this).attr("href");
 
-		getPage("/comments/"+ bno +"/"+ replyPage);
+		getPage("/replies/"+ bno +"/"+ replyPage);
 	});
 
 	//덧글 등록
@@ -151,26 +151,28 @@ $(document).ready(function() {
 	});
 
 	$("#replyDelBtn").on("click", function() {
-		var rno = $(".modal-title").html();
-		var replytext = $("#replytext").val();
+		if(confirm("삭제 하시겠습니까?")) {
+			var rno = $(".modal-title").html();
+			var replytext = $("#replytext").val();
 
-		$.ajax({
-			type: "delete",
-			url: "/replies/"+ rno,
-			headers: {
-				"Content-Type": "application/json",
-				"X-HTTP-Method-Override": "DELETE"
-			},
-			dataType: "text",
-			success: function(result) {
-				console.log("result : "+ result);
+			$.ajax({
+				type: "delete",
+				url: "/replies/"+ rno,
+				headers: {
+					"Content-Type": "application/json",
+					"X-HTTP-Method-Override": "DELETE"
+				},
+				dataType: "text",
+				success: function(result) {
+					console.log("result : "+ result);
 
-				if(result == "SUCCESS") {
-					alert("삭제 되었습니다.");
-					getPage("/replies/"+ bno +"/"+ replyPage);
+					if(result == "SUCCESS") {
+						alert("삭제 되었습니다.");
+						getPage("/replies/"+ bno +"/"+ replyPage);
+					}
 				}
-			}
-		});
+			});
+		}
 	});
 
 	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event) {
@@ -361,7 +363,7 @@ Handlerbars.registerHelper("eqReplyer", function(replyer, block) {
 <c:if test="${not empty login}">
 				<div class="box-body">
 					<label for="exampleInputEmail1">Writer</label>
-					<input type="text" placeholder="USER ID" id="newReplyWriter" class="form-control"/>
+					<input type="text" value="${login.uid}" placeholder="USER ID" id="newReplyWriter" class="form-control" readonly/>
 					<label for="exampleInputEmail1">Reply Text</label>
 					<input type="text" placeholder="REPLY TEXT" id="newReplyText" class="form-control"/>
 				</div>
