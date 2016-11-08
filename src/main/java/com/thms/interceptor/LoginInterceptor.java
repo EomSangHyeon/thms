@@ -25,13 +25,11 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			Object dest = session.getAttribute("dest");
 
 			response.sendRedirect(dest != null ? (String) dest:"/");
-		} else
-			logger.info("login failed");
+		}
 	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		logger.info("before login test");
 		HttpSession session = request.getSession();
 		if(session.getAttribute(LOGIN) != null) {
 			logger.info("clear login data before");
