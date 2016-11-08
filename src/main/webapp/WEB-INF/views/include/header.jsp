@@ -108,12 +108,22 @@ $(document).ready(function() {
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li id="introduce" class="active"><a href="#">병원소개</a></li>
+				<li class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">병원소개
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#">병원 소개</a></li>
+	          <li><a href="#">의료진 소개</a></li>
+	          <li><a href="#">연혁</a></li> 
+	          <li><a href="#">오시는 길</a></li>
+	        </ul>
+	      </li>
 				<li id="reservation"><a href="#">진료예약</a></li>
 				<li id="news"><a href="#">의료소식</a></li>
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+				<li><a href="member/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 				<li><a href="member/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 			</ul>
 		</div>

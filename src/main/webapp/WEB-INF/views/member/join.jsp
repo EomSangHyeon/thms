@@ -62,13 +62,13 @@ body {
     </div>
     <div class="form-group">
     	<label for="uemail">이메일</label>
-    	<div class="input-group">	    	
-	    	<input type="email" class="form-control" name="uemail" placeholder="이메일" required="required" autofocus="autofocus" />
+    	<div class="input-group">
+	    	<input type="email" class="form-control" name="uemail" placeholder="이메일" required="required"/>
 	    	<span class="input-group-btn">
-	     		<button class="btn btn-primary">중복확인 <i class="fa fa-check spaceLeft"></i></button>
-	      </span>
+		      <button class="btn btn-primary">이메일 인증 <i class="fa fa-check spaceLeft"></i></button>
+		    </span>
 	    </div>
-    </div>
+	  </div>
     <div class="form-group">
     	<label for="ugender">성별</label>
     	<div class="radio">
@@ -82,10 +82,8 @@ body {
     </div>    
     <br>
     <button class="btn btn-primary" type="submit">회원가입 <i class="fa fa-check spaceLeft"></i></button>
-    <button class="btn btn-warning" type="reset">취소 <i class="fa fa-times spaceLeft"></i></button>    
+    <button class="btn btn-warning" type="reset">취소 <i class="fa fa-times spaceLeft"></i></button>
   </form>
 </div>
-
-
 
 <%@ include file="../include/footer.jsp" %>
