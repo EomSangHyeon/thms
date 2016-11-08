@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.thms</groupId>
 	<artifactId>spring</artifactId>
-	<name>Date0920_SpringBBS</name>
+	<name>thms</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
