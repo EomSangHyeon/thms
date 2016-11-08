@@ -28,7 +28,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			Object dest = session.getAttribute("dest");
 
 			response.sendRedirect(dest != null ? (String) dest:"/");
-		}
+		} else
+			logger.info("login failed");
 	}
 
 	@Override
