@@ -108,10 +108,10 @@ $(document).ready(function() {
 
 				if(result == "SUCCESS") {
 					alert("등록 되었습니다.");
-					commentPage = 1;
+					replyPage = 1;
 					getPage("/replies/"+ bno +"/"+ replyPage);
-					commenterObj.val("");
-					contentObj.val("");
+					replyerObj.val("");
+					replytextObj.val("");
 				}
 			}
 		});
