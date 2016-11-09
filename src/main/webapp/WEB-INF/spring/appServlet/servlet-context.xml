@@ -27,7 +27,7 @@
 	
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg
-			value="D:\\BITC\\Spring\\THMS\\WorkSpace\\THMS\\upload">
+			value="C:\\THMS\\data">
 		</beans:constructor-arg>
 	</beans:bean>
 	
