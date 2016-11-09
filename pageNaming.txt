@@ -1,15 +1,16 @@
-admin
+admin - 페이지관리자
 	member
 		list
 		readPage
 		modifyPage
 		register
-	reservation
+	banner - 메인배너 관리
 		list
 		readPage
 		modifyPage
 		register
-	banner - 메인배너 관리
+hospital - 병원관리자
+	reservation
 		list
 		readPage
 		modifyPage
