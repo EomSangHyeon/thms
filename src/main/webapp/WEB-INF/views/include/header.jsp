@@ -67,9 +67,13 @@ $(document).ready(function() {
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
 <c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
 				<li id="member"><a href="/member/list">회원관리</a></li>
+				<li id="banner"><a href="/banner/list">메인배너관리</a></li>
 </c:if>
 <c:if test="${login.ustatus == 'hospital' || login.ustatus == 'master'}">
 				<li id="doctor"><a href="/doctor/list">의료진관리</a></li>
+				<li id="reservation"><a href="/reservation/list">외례관리</a></li>
+				<li id="room"><a href="/room/list">병상관리</a></li>
+				<li id="schedule"><a href="/schedule/list">의료진 일정관리</a></li>
 </c:if>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
