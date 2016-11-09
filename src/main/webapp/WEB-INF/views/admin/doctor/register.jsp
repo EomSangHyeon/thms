@@ -2,13 +2,13 @@
 <%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@ include file="../include/header.jsp" %>
+<%@ include file="../../include/header.jsp" %>
 <div class="container-fluid">
 	<div class="row">
-		<%@ include file="sidebar.jsp" %>
+		<%@ include file="../admin_sidebar.jsp" %>
 		
 		<div class="col-sm-9 col-md-10 main">
-	    <h2 class="sub-header">외래예약 확인</h2>
+	    <h2 class="sub-header">의사 정보</h2>
 	    <div class="table-responsive">
 	      <table class="table table-striped">
 	        <thead>
@@ -74,4 +74,4 @@
 	</div>
 </div>
 
-<%@ include file="../include/footer.jsp" %>
+<%@ include file="../../include/footer.jsp" %>

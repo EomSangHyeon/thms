@@ -56,4 +56,10 @@ public class PageController {
 	public void introduceLocation() {
 		logger.info("GET introduceLocation....................");
 	}
+	
+	//admin
+	@RequestMapping(value = "admin/doctor/register", method = RequestMethod.GET)
+	public void adminDoctorRegister() {
+		logger.info("GET adminDoctorRegister....................");
+	}
 }
