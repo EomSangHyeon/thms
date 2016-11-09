@@ -1,5 +1,6 @@
-<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page session="true" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -64,6 +65,9 @@ $(document).ready(function() {
 				<li id="reservation"><a href="#">진료예약</a></li>
 				<li id="news"><a href="#">의료소식</a></li>
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
+<c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
+				<li id="sboard"><a href="/member/list">회원관리</a></li>
+</c:if>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/member/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
