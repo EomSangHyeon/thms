@@ -15,15 +15,12 @@ $(document).ready(function() {
 	var formObj = $("form[role='form']");
 	var template = Handlebars.compile($("#template").html());
 	console.log(formObj);
-
 	$(".btn-warning").click(function() {
 		self.location = "/sboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}";
 	});
-
 	formObj.submit(function() {
 		alert(11111111);
 		event.preventDefault();
-
 		var that = $(this);
 		var str = "";
 		$(".uploadedList .delbtn").each(function(index) {
@@ -33,7 +30,6 @@ $(document).ready(function() {
 		console.log(str);
 		that.get(0).submit();
 	});
-
 	$(".fileDrop").on({
 		dragenter: function(event) {
 			event.preventDefault();
@@ -43,12 +39,10 @@ $(document).ready(function() {
 		},
 		drop: function(event) {
 			event.preventDefault();
-
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
 			var formData = new FormData();
 			formData.append("file", file);
-
 			$.ajax({
 				type: "post",
 				url: "/uploadAjax",
@@ -59,32 +53,24 @@ $(document).ready(function() {
 				success: function(data) {
 					var fileInfo = getFileInfo(data);
 					var html = template(fileInfo);
-
 					$(".uploadedList").append(html);
 				}
 			});
 		}
 	});
-
 	$(".uploadedList").on("click", ".mailbox-attachment-info a", function(event) {
 		var fileLink = $(this).attr("href");
-
 		if(checkImageType(fileLink)) {
 			event.preventDefault();
-
 			var imgTag = $("#popup_img");
 			imgTag.attr("src", fileLink);
-
 			console.log(imgTag.attr("src"));
-
 			$(".popup").show("slow");
 			imgTag.addClass("show");
 		}
 	});
-
 	$(".uploadedList").on("click", ".delbtn", function(event) {
 		event.preventDefault();
-
 		var that = $(this);
 		$.ajax({
 			type: "post",
@@ -99,11 +85,9 @@ $(document).ready(function() {
 			}
 		});
 	});
-
 	$("#popup_img").on("click", function() {
 		$(".popup").hide("slow");
 	});
-
 	$.getJSON("/sboard/getAttach/"+ bno, function(list) {
 		$(list).each(function() {
 			var fileInfo = getFileInfo(this);
