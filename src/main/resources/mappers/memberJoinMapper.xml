@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thms.mapper.UserMapper">
+
+	<!-- 회원 검색 -->
+	<!-- 비밀번호, 닉네임, 가일일 빼고 다넣기 -->
+	<select id="searchMember" resultType="com.thms.domain.MemberVO">
+
+		select
+		*
+		from
+		tbl_member
+		<where>
+			<choose>
+				<when test="searchType =='uid'">
+					uid like CONCAT('%',#{keyword},'%')
+					limit
+					#{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='uname'">
+					uname like CONCAT('%',#{keyword},'%')
+					limit
+					#{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='uemail'">
+					uemail like CONCAT('%',#{keyword},'%')
+					limit
+					#{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='ugender'">
+					ugender = #{keyword}
+					limit
+					#{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='unick'">
+					unick like CONCAT('%',#{keyword},'%')
+					limit
+					#{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='ubirth'">
+					ubirth like CONCAT('%',#{keyword},'%')
+					limit
+					#{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='ustatus'">
+					ustatus =#{keyword}
+					limit
+					#{pageStart}, #{perPageNum}
+				</when>
+
+
+			</choose>
+
+
+		</where>
+
+
+	</select>
+
+	<!-- 검색 total -->
+	<select id="searchTotal" resultType="int">
+
+		select
+		count(*)
+		from
+		tbl_member
+
+		<where>
+			<choose>
+				<when test="searchType == 'uid'">
+					uid like CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="searchType == 'uname'">
+					uname like CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="searchType == 'uemail'">
+					uemail like CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="searchType == 'unick'">
+					unick like CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="searchType == 'ugender'">
+					ugender = #{keyword}
+				</when>
+				<when test="searchType == 'ustatus'">
+					ustatus =#{keyword}
+				</when>
+				<when test="searchType == 'ubirth'">
+					ubirth like CONCAT('%',#{keyword},'%')
+				</when>
+
+
+
+			</choose>
+
+		</where>
+
+	</select>
+
+
+	<!-- 회원가입 -->
+	<insert id="joinMember">
+
+		insert into
+		tbl_member
+		(uid, unick,upw, uname, uemail,
+		ugender, ubirth)
+		values(#{uid},#{unick},#{upw},#{uname},#{uemail},#{ugender},#{ubirth}
+		)
+
+	</insert>
+	<!-- 아이디 유효성 검사 -->
+	<select id="checkId" resultType="String">
+
+		select
+		*
+		from
+		tbl_member
+		where
+		uid =
+		#{uid}
+
+	</select>
+	<!-- 닉네임 유효성 검사 -->
+	<select id="checkNick" resultType="String">
+
+		select
+		*
+		from
+		tbl_member
+		where
+		unick =
+		#{unick}
+
+	</select>
+	<!-- 회원 정보수정 id를 통해서 -->
+	<update id="updateMember">
+		update
+		tbl_member
+		set
+		upw =#{upw},
+		uname=#{uname},
+		uemail=#{uemail},
+		ugender=#{ugender},
+		ubirth=#{ubirth}
+		where uid=#{uid}
+	</update>
+
+	<!-- 권한주기 (상태 변경) -->
+	<update id="modifyStatus">
+
+		update tbl_member set
+		ustatus =#{ustatus}
+		where
+		uid
+		=#{uid}
+
+
+	</update>
+
+</mapper>
