@@ -27,6 +27,55 @@ footer { background-color: #f2f2f2; padding: 25px; }
 		display: none;
 	}
 }
+body {
+	background: #eee !important;	
+}
+
+.wrapper {	
+	margin-top: 80px;
+  margin-bottom: 80px;
+}
+
+.form-signin {
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.1);  
+
+  .form-signin-heading,
+	.checkbox {
+	  margin-bottom: 30px;
+	}
+
+	.checkbox {
+	  font-weight: normal;
+	}
+
+	.form-control {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+	  padding: 10px;
+		@include box-sizing(border-box);
+
+		&:focus {
+		  z-index: 2;
+		}
+	}
+
+	input[type="text"] {
+	  margin-bottom: -1px;
+	  border-bottom-left-radius: 0;
+	  border-bottom-right-radius: 0;
+	}
+
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  border-top-left-radius: 0;
+	  border-top-right-radius: 0;
+	}
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -61,11 +110,20 @@ $(document).ready(function() {
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav">
-				<li id="introduce" class="active"><a href="#">병원소개</a></li>
+				<li id="introduce" class="dropdown">
+	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">병원소개
+	        <span class="caret"></span></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="#">병원 소개</a></li>
+	          <li><a href="#">의료진 소개</a></li>
+	          <li><a href="#">연혁</a></li> 
+	          <li><a href="#">오시는 길</a></li>
+	        </ul>
+	      </li>
 				<li id="reservation"><a href="#">진료예약</a></li>
 				<li id="news"><a href="#">의료소식</a></li>
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
-<c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
+<%-- <c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
 				<li id="member"><a href="/member/list">회원관리</a></li>
 				<li id="banner"><a href="/banner/list">메인배너관리</a></li>
 </c:if>
@@ -74,10 +132,16 @@ $(document).ready(function() {
 				<li id="reservation"><a href="/reservation/list">외례관리</a></li>
 				<li id="room"><a href="/room/list">병상관리</a></li>
 				<li id="schedule"><a href="/schedule/list">의료진 일정관리</a></li>
-</c:if>
+</c:if> --%>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
+<c:if test="${empty login}">
+				<li><a href="/member/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 				<li><a href="/member/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+</c:if>
+<c:if test="${not empty login}">
+				<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+</c:if>
 			</ul>
 		</div>
 	</div>

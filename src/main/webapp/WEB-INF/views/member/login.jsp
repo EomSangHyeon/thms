@@ -68,8 +68,8 @@ $(document).ready(function () {
 		</div>
 		</form>
 
-		<a href="#">I forgot my password</a><br>
-		<a href="register.html" class="text-center">Register a new membership</a>
+		<a href="/member/pw">I forgot my password</a><br>
+		<a href="/member/join" class="text-center">Register a new membership</a>
 	</div><!-- /.login-box-body -->
 </div><!-- /.login-box -->
 </body>

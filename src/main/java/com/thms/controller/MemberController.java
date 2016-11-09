@@ -3,6 +3,8 @@ package com.thms.controller;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +20,7 @@ import com.thms.service.MemberService;
 public class MemberController {
 	@Inject
 	private MemberService service;
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
@@ -31,5 +34,10 @@ public class MemberController {
 			return;
 
 		model.addAttribute("memberVO", vo);
+	}
+
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public void memberJoin() {
+		logger.info("GET memberJoin....................");
 	}
 }
