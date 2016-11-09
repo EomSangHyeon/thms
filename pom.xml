@@ -175,6 +175,21 @@
 			<artifactId>imgscalr-lib</artifactId>
 			<version>4.2</version>
 		</dependency>
+		
+		<!-- java mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>3.2.8.RELEASE</version>
+		</dependency>
+		<!-- java mail -->
+		
 	</dependencies>
     <build>
         <plugins>
