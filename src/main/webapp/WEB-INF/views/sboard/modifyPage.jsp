@@ -15,11 +15,12 @@ $(document).ready(function() {
 	var formObj = $("form[role='form']");
 	var template = Handlebars.compile($("#template").html());
 	console.log(formObj);
+
 	$(".btn-warning").click(function() {
 		self.location = "/sboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}";
 	});
-	formObj.submit(function() {
-		alert(11111111);
+
+	$(".btn-primary").on("click", function() {
 		event.preventDefault();
 		var that = $(this);
 		var str = "";
@@ -30,6 +31,7 @@ $(document).ready(function() {
 		console.log(str);
 		that.get(0).submit();
 	});
+
 	$(".fileDrop").on({
 		dragenter: function(event) {
 			event.preventDefault();
