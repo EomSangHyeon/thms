@@ -23,9 +23,9 @@
 footer { background-color: #f2f2f2; padding: 25px; }
 .carousel-inner img { width: 100%; margin: auto; min-height:200px; }
 @media (max-width: 600px) {
-  .carousel-caption {
-    display: none;
-  }
+	.carousel-caption {
+		display: none;
+	}
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
