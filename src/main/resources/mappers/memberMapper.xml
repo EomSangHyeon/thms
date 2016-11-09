@@ -5,6 +5,6 @@
 
 <mapper namespace="com.thms.mapper.MemberMapper">
 	<select id="login" resultType="MemberVO">
-		SELECT `uid`, `uname` FROM `tbl_member` WHERE `uid`=#{uid} AND `upw`=#{upw}
+		SELECT `uid`, `uname`, `ustatus` FROM `tbl_member` WHERE `uid`=#{uid} AND `upw`=#{upw}
 	</select>
 </mapper>

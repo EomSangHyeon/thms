@@ -66,7 +66,10 @@ $(document).ready(function() {
 				<li id="news"><a href="#">의료소식</a></li>
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
 <c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
-				<li id="sboard"><a href="/member/list">회원관리</a></li>
+				<li id="member"><a href="/member/list">회원관리</a></li>
+</c:if>
+<c:if test="${login.ustatus == 'hospital' || login.ustatus == 'master'}">
+				<li id="doctor"><a href="/doctor/list">의료진관리</a></li>
 </c:if>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
