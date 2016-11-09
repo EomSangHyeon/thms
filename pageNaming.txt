@@ -14,7 +14,7 @@ admin
 		readPage
 		modifyPage
 		register
-	room - 변상관리
+	room - 병상관리
 		list
 		readPage
 		modifyPage
