@@ -21,7 +21,6 @@ $(document).ready(function() {
 	});
 
 	formObj.submit(function() {
-		alert(11111111);
 		event.preventDefault();
 
 		var that = $(this);
