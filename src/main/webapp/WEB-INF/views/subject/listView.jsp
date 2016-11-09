@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ page session="false" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -20,8 +20,8 @@ function sendID(id){
 </script>
 <form action="post">
 	<table>
-		<th>¹øÈ£</th>
-		<th>ºÎ¼­</th>
+		<th>ë²ˆí˜¸</th>
+		<th>ë¶€ì„œ</th>
 		
 		<c:forEach items="${listView}" var="SubjectVO">
 			<tr>

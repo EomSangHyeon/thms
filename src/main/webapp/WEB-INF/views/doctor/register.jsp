@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,7 +11,7 @@
 		event.preventDefault();
 		var popUrl = "../subject/listView";
 		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=yes;"; 
-		window.open(popUrl,"ºÎ¼­¼±ÅÃ",popOption);
+		window.open(popUrl,"ë¶€ì„œì„ íƒ",popOption);
 
 	}
 	 
@@ -21,14 +21,14 @@
 </script>
 <body>
 <form method="post">
-<div>ÀÌ¸§ : <input type="text" name="dname" id ="dname"></div>
-<div>¼ºº°: <input type="radio" name="dgender" id ="dgender" value="³²">³²
-		<input type="radio" name="dgender" id ="dgender" value="¿©">¿©
+<div>ì´ë¦„ : <input type="text" name="dname" id ="dname"></div>
+<div>ì„±ë³„: <input type="radio" name="dgender" id ="dgender" value="ë‚¨">ë‚¨
+		<input type="radio" name="dgender" id ="dgender" value="ì—¬">ì—¬
 </div>
-<div>º´µ¿ : <input type="text" name="dclinic" id ="dclinic"></div>
-<div>ºÎ¼­ : <input type="text" name="sjid" id ="sjid"><button onclick="searchSJ()">Ã£±â</button></div>
+<div>ë³‘ì‹¤ : <input type="text" name="dclinic" id ="dclinic"></div>
+<div>ë¶€ì„œ : <input type="text" name="sjid" id ="sjid"><button onclick="searchSJ()">ì°¾ê¸°</button></div>
 <div>
-	<button type="submit">ÀÔ·Â</button>
+	<button type="submit">ì…ë ¥</button>
 </div>
 </form>
 </body>

@@ -6,7 +6,8 @@
 </head>
 <body>
 <form method="post">
-<div>sjname : <input type="text" name="sjname"></div>
+<div>방번호 : <input type="text" name="rmnumber"></div>
+<div>입실최고인원 : <input type="text" name="rmheadcount"></div>
 <div>
 	<button type="submit">입력</button>
 </div>

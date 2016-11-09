@@ -9,30 +9,30 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.thms.domain.DoctorVO;
-import com.thms.service.DoctorService;
+import com.thms.domain.RoomVO;
+import com.thms.service.RoomService;
 
 @Controller
-@RequestMapping("/doctor")
-public class DoctorController {
-	private static final Logger logger = LoggerFactory.getLogger(DoctorController.class);
+@RequestMapping("/room")
+public class RoomController {
+	private static final Logger logger = LoggerFactory.getLogger(RoomController.class);
 	
-	 @Inject
-	 private DoctorService service;
-	 
+	@Inject
+	private RoomService service;
+	
 	 @RequestMapping(value="/register", method=RequestMethod.GET)
-		public void DoctorGET(DoctorVO vo, Model model) throws Exception {
+		public void DoctorGET(RoomVO vo, Model model) throws Exception {
 		 	logger.info("input get");
 		}
-	 
 	 @RequestMapping(value="/register", method=RequestMethod.POST)
-		public String DoctorPOST(DoctorVO vo, Model model) throws Exception {
+		public String DoctorPOST(RoomVO vo, Model model) throws Exception {
 			logger.info("input post");
 			logger.info(vo.toString());
 			
 			service.insert(vo);
 			model.addAttribute("result","success");
 			
-			return "/doctor/register";
+			return "/room/register";
 		}
+
 }
