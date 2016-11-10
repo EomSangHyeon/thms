@@ -39,39 +39,7 @@ public class MemberController {
 	@Autowired
 	protected JavaMailSender mailSender;
 
-	@ResponseBody
-	@RequestMapping(value = "ajaxsend", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	public ResponseEntity<String> sendEmailAction(HttpServletRequest request) throws Exception {
-		String uemail = request.getParameter("uemail");
-
-		// 메일 내용을 작성한다
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setFrom("ju583830@gmail.com");
-		msg.setTo(new String[] { uemail });
-
-		ResponseEntity<String> entity = null;
-
-		try {
-			Random random = new Random();
-
-			int number = random.nextInt(10000) + 1000;
-
-			if (number > 10000) {
-				number = number - 1000;
-			}
-
-			msg.setSubject("인증 메일입니다.");
-			msg.setText(number + " 숫자 인증해주세요");
-
-			mailSender.send(msg);
-			return entity = new ResponseEntity<String>(number + "", HttpStatus.OK);
-
-		} catch (MailException ex) {
-			System.out.println("실패");
-			return null;
-		}
-
-	}
+	
 
 	// 회원 검색
 	@RequestMapping(value = "search")
@@ -102,7 +70,9 @@ public class MemberController {
 		dao.memberModify(vo);
 
 	}
-
+	
+	
+//회원가입
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String memberJoin(MemberVO vo) {
 		System.out.println("join");
@@ -111,7 +81,7 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
-
+	//아이디 닉네임 검사 
 	@ResponseBody
 	@RequestMapping(value = "checkId", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public ResponseEntity<String> checkId(HttpServletRequest request, Model model) throws Exception {
@@ -149,6 +119,41 @@ public class MemberController {
 		}
 		return null;
 	}
+	
+	//메일보내기
+		@ResponseBody
+		@RequestMapping(value = "ajaxsend", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+		public ResponseEntity<String> sendEmailAction(HttpServletRequest request) throws Exception {
+			String uemail = request.getParameter("uemail");
+
+			// 메일 내용을 작성한다
+			SimpleMailMessage msg = new SimpleMailMessage();
+			msg.setFrom("ju583830@gmail.com");
+			msg.setTo(new String[] { uemail });
+
+			ResponseEntity<String> entity = null;
+
+			try {
+				Random random = new Random();
+
+				int number = random.nextInt(10000) + 1000;
+
+				if (number > 10000) {
+					number = number - 1000;
+				}
+
+				msg.setSubject("인증 메일입니다.");
+				msg.setText(number + " 숫자 인증해주세요");
+
+				mailSender.send(msg);
+				return entity = new ResponseEntity<String>(number + "", HttpStatus.OK);
+
+			} catch (MailException ex) {
+				System.out.println("실패");
+				return null;
+			}
+
+		}
 
 	// ===============
 
