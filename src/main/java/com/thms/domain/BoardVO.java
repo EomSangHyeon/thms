@@ -11,6 +11,7 @@ public class BoardVO {
 	private int viewcnt;
 	private int replycnt;
 	private String[] files;
+	private String btype;
 
 	//Getter
 	public Integer getBno() {
@@ -37,6 +38,9 @@ public class BoardVO {
 	public String[] getFiles() {
 		return files;
 	}
+	public String getBtype() {
+		return btype;
+	}
 
 	//Setter
 	public void setBno(Integer bno) {
@@ -62,5 +66,8 @@ public class BoardVO {
 	}
 	public void setFiles(String[] files) {
 		this.files = files;
+	}
+	public void setBtype(String btype) {
+		this.btype = btype;
 	}
 }

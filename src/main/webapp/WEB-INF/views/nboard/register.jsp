@@ -90,7 +90,6 @@ $(document).ready(function() {
 </li>
 </script>
 <!-- Main content -->
-
 <section class="content">
 	<div class="row">
 		<!-- left column -->
@@ -101,7 +100,7 @@ $(document).ready(function() {
 					<h3 class="box-title">글쓰기</h3>
 				</div>
 
-				<form role="form" action="register" method="post">						
+				<form role="form" action="register" method="post">
 				<div class="box-body">
 					<div class="form-group">
 						<label for="exampleInputEmail1">Title</label>
@@ -119,7 +118,6 @@ $(document).ready(function() {
 						<label for="exampleInputEmail1">File DROP Here</label>
 						<div class="fileDrop"></div>
 					</div>
-						<input type="hidden" name="btype" value="news">
 				</div>
 				</form>
 

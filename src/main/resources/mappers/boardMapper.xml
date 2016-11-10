@@ -6,8 +6,8 @@
 <mapper namespace="com.thms.mapper.BoardMapper">
 
 	<insert id="create">
-		INSERT INTO `tbl_board` (`title`, `content`, `writer`) 
-		VALUES (#{title}, #{content}, #{writer})
+		INSERT INTO `tbl_board` (`title`, `content`, `writer`, `btype`) 
+		VALUES (#{title}, #{content}, #{writer}, #{btype})
 	</insert>
 
 	<select id="read" resultType="BoardVO">
@@ -26,7 +26,7 @@
 			FROM
 				`tbl_board` 
 			WHERE 
-				`bno`>0 
+				`bno`>0 and `btype` = 'bbs'
 			ORDER BY 
 				`bno` DESC, `regdate` DESC 
 		]]>
@@ -39,7 +39,7 @@
 			FROM
 				`tbl_board` 
 			WHERE 
-				`bno`>0 
+				`bno`>0 and `btype` = 'bbs'
 			ORDER BY 
 				`bno` DESC, `regdate` DESC 
 			LIMIT #{page}, 10
@@ -53,7 +53,7 @@
 			FROM
 				`tbl_board` 
 			WHERE 
-				`bno`>0 
+				`bno`>0 and `btype` = 'bbs'
 			ORDER BY 
 				`bno` DESC, `regdate` DESC 
 			LIMIT #{pageStart}, #{perPageNum}
@@ -115,7 +115,27 @@
 			FROM 
 				`tbl_board` 
 			WHERE 
-				`bno`>0 
+				`bno`>0 and `btype` = 'bbs'
+		]]>
+
+		<include refid="search"></include>
+
+		<![CDATA[
+			ORDER BY 
+				`bno` DESC, `regdate` DESC 
+			LIMIT #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<!-- 하승현 작업중 -->
+	<select id="listNewsSearch" resultType="BoardVO">
+		<![CDATA[
+			SELECT 
+				`bno`, `title`, `viewcnt`, `replycnt`, `regdate`, `writer` 
+			FROM 
+				`tbl_board` 
+			WHERE 
+				`bno`>0 and `btype` = 'news'
 		]]>
 
 		<include refid="search"></include>
@@ -134,7 +154,7 @@
 			FROM 
 				`tbl_board` 
 			WHERE 
-				`bno`>0
+				`bno`>0 
 		]]>
 
 		<include refid="search"></include>
