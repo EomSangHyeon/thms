@@ -39,10 +39,13 @@ public class MemberController {
 	@Autowired
 	protected JavaMailSender mailSender;
 
-	
-
 	// 회원 검색
-	@RequestMapping(value = "search")
+
+	@RequestMapping(value = "testSearch")
+	public void search() {
+	}
+
+	@RequestMapping(value = "testSearchResult")
 	public void listPage(SearchCriteria cri, Model model) {
 
 		model.addAttribute("searchmember", dao.listCriteria(cri));
@@ -70,18 +73,18 @@ public class MemberController {
 		dao.memberModify(vo);
 
 	}
-	
-	
-//회원가입
+
+	// 회원가입
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String memberJoin(MemberVO vo) {
 		System.out.println("join");
 
 		dao.memberJoin(vo);
-		
+
 		return "redirect:/";
 	}
-	//아이디 닉네임 검사 
+
+	// 아이디 닉네임 검사
 	@ResponseBody
 	@RequestMapping(value = "checkId", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public ResponseEntity<String> checkId(HttpServletRequest request, Model model) throws Exception {
@@ -119,41 +122,41 @@ public class MemberController {
 		}
 		return null;
 	}
-	
-	//메일보내기
-		@ResponseBody
-		@RequestMapping(value = "ajaxsend", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-		public ResponseEntity<String> sendEmailAction(HttpServletRequest request) throws Exception {
-			String uemail = request.getParameter("uemail");
 
-			// 메일 내용을 작성한다
-			SimpleMailMessage msg = new SimpleMailMessage();
-			msg.setFrom("ju583830@gmail.com");
-			msg.setTo(new String[] { uemail });
+	// 메일보내기
+	@ResponseBody
+	@RequestMapping(value = "ajaxsend", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public ResponseEntity<String> sendEmailAction(HttpServletRequest request) throws Exception {
+		String uemail = request.getParameter("uemail");
 
-			ResponseEntity<String> entity = null;
+		// 메일 내용을 작성한다
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setFrom("ju583830@gmail.com");
+		msg.setTo(new String[] { uemail });
 
-			try {
-				Random random = new Random();
+		ResponseEntity<String> entity = null;
 
-				int number = random.nextInt(10000) + 1000;
+		try {
+			Random random = new Random();
 
-				if (number > 10000) {
-					number = number - 1000;
-				}
+			int number = random.nextInt(10000) + 1000;
 
-				msg.setSubject("인증 메일입니다.");
-				msg.setText(number + " 숫자 인증해주세요");
-
-				mailSender.send(msg);
-				return entity = new ResponseEntity<String>(number + "", HttpStatus.OK);
-
-			} catch (MailException ex) {
-				System.out.println("실패");
-				return null;
+			if (number > 10000) {
+				number = number - 1000;
 			}
 
+			msg.setSubject("인증 메일입니다.");
+			msg.setText(number + " 숫자 인증해주세요");
+
+			mailSender.send(msg);
+			return entity = new ResponseEntity<String>(number + "", HttpStatus.OK);
+
+		} catch (MailException ex) {
+			System.out.println("실패");
+			return null;
 		}
+
+	}
 
 	// ===============
 
