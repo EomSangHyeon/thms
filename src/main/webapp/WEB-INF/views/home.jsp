@@ -45,20 +45,41 @@
 	<h3>What We Do</h3><br>
 	<div class="row">
 		<div class="col-sm-4">
+			<label>병원 뉴스</label>
+			<div class="well">
+				<table class="table table-bordered">
+					<tbody>
+<c:forEach items="${nlist}" var="row">
+						<tr>
+							<td><a href="/nboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${row.bno}">${row.title}</a></td>																
+						</tr>											
+</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+		<div class="col-sm-4">
+			<label>게시판</label>
+			<div class="well">
+				<table class="table table-bordered">
+					<tbody>
+<c:forEach items="${list}" var="row">
+						<tr>
+							<td><a href="/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${row.bno}">${row.title}<strong>[ ${row.replycnt} ]</strong></a></td>																							
+						</tr>						
+</c:forEach>
+					</tbody>
+				</table>
+			</div>			
+		</div>
+		<div class="col-sm-4">
 			<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
 			<p>Current Project</p>
-		</div>
-		<div class="col-sm-4">
+			
 			<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
 			<p>Project 2</p>
-		</div>
-		<div class="col-sm-4">
-			<div class="well">
-				<p>Some text..</p>
-			</div>
-			<div class="well">
-				<p>Some text..</p>
-			</div>
+			
 		</div>
 	</div>
 </div><br>
