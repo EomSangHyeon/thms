@@ -140,7 +140,17 @@ $(document).ready(function() {
 				<li><a href="/member/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 </c:if>
 <c:if test="${not empty login}">
+	<c:if test="${login.ustatus == 'customer'}">
+				<li><a href="/mypage/edit">my page</a></li>
+	</c:if>
+	<c:if test="${login.ustatus == 'hospital' || login.ustatus == 'master'}">
+				<li><a href="#">hospital page</a></li>
+	</c:if>
+	<c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
+				<li><a href="#">admin page</a></li>
+	</c:if>
 				<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	
 </c:if>
 			</ul>
 		</div>
