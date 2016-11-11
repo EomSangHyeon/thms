@@ -11,7 +11,7 @@
 </head>
 <body>
 
-	<form action="search" method="POST">
+	<form action="testSearchResult" method="POST">
 		<table>
 			<tr>
 				<td>검색유형</td>

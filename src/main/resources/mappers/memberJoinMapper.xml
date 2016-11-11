@@ -141,24 +141,35 @@
 		update
 		tbl_member
 		set
-		upw =#{upw},
 		uname=#{uname},
-		uemail=#{uemail},
 		ugender=#{ugender},
 		ubirth=#{ubirth}
 		where uid=#{uid}
+		<choose>
+			<when test="ustatus =='admin' ">
+				and ustatus=#{ustatus}
+			</when>
+			<when test="ustatus =='master' ">
+				and ustatus=#{ustatus}
+			</when>
+		</choose>
+		
 	</update>
 
 	<!-- 권한주기 (상태 변경) -->
 	<update id="modifyStatus">
-
 		update tbl_member set
 		ustatus =#{ustatus}
 		where
 		uid
 		=#{uid}
-
-
 	</update>
+	<!-- 한명 들고오기 -->
+	<select id="selectOneMember" resultType="com.thms.domain.MemberVO">
+		select * from
+		tbl_member
+		where uid
+		= #{uid}
+	</select>
 
 </mapper>

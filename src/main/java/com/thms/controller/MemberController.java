@@ -40,7 +40,6 @@ public class MemberController {
 	protected JavaMailSender mailSender;
 
 	// 회원 검색
-
 	@RequestMapping(value = "testSearch")
 	public void search() {
 	}
@@ -58,20 +57,50 @@ public class MemberController {
 
 	}
 
+	// ajax를 통한 관리자 인지 아닌지
+	@ResponseBody
+	@RequestMapping(value = "ajaxForUstatus", method = RequestMethod.POST)
+	public ResponseEntity<String> ajaxForUstatus(HttpServletRequest request) {
+		System.out.println("ajaxForUstatus");
+
+		System.out.println(request.getParameter("ustatus") + "    aaaa");
+
+		ResponseEntity<String> entity = null;
+
+		if (request.getParameter("ustatus").equals("admin") || request.getParameter("ustatus").equals("master")) {
+
+			entity = new ResponseEntity<String>("O", HttpStatus.OK);
+		} else {
+			entity = new ResponseEntity<String>("X", HttpStatus.OK);
+		}
+		return entity;
+	}
+
+	// 회원정보수정
+	@RequestMapping(value = "testMemberModify")
+	public void memberModify(HttpServletRequest request, Model model) {
+		System.out.println("modify member");
+
+		// 한개 정보 들고오기
+		model.addAttribute("searchmember", dao.selectOneMember(request.getParameter("uid")));
+		model.addAttribute("Custatus", request.getParameter("ustatus"));
+	}
+
+	// 정보 수정 확정
+	@RequestMapping(value = "confirmUpdateMember", method = RequestMethod.POST)
+	public String confirmUpdateMember(MemberVO vo) {
+		System.out.println("confirmUpdate");
+
+		dao.memberModify(vo);
+		return "redirect:/";
+	}
+
+	/* @RequestMapping(value="yesUpdateMember" ) */
 	// 권한주기
 	@RequestMapping(value = "statusModify", method = RequestMethod.POST)
 	public void statusModify(MemberVO vo) {
 		System.out.println("status modify");
 		dao.statusModify(vo);
-	}
-
-	// 회원정보수정
-	@RequestMapping(value = "memberModify", method = RequestMethod.POST)
-	public void memberModify(MemberVO vo) {
-		System.out.println("modify member");
-
-		dao.memberModify(vo);
-
 	}
 
 	// 회원가입

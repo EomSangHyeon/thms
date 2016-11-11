@@ -23,5 +23,5 @@ public interface JoinDAO {
 	
 	public int searchTotal(SearchCriteria cri);
 
-	
+	public List<MemberVO> selectOneMember(String uid);
 }

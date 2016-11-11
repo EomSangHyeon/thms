@@ -131,7 +131,6 @@ body {
 	};
 
 	function cUnick() {
-
 		$.ajax({
 			type : 'post',
 			url : 'checkId',
@@ -195,27 +194,6 @@ body {
 
 	}
 
-	/* var object = new Object(); //클래스라서 이렇게 생성 키값과 벨류 값 넣음
-	object.name = $("#uid").val();
-	//그냥 보낼 수 가 없어서 스트링으로 바꿔줌
-	var jsonData = JSON.stringify(object);
-
-	$.ajax({
-		url : "aaa",
-		type : "post",
-		data : jsonData,
-		//contentType 제이슨 타입이라는 것을알리기위해 서버에 명시적으로 알려줌 서버가 알 수 있게
-		//아니면 서버가 그냥 문자인줄안다 
-		contentType : "application/json;charset=UTF-8",
-		success : function(data) {
-			var result = data;
-			alert(result);
-		},
-		error : function(a) {
-			alert("실패")
-			alert(a);
-		}
-	}); */
 </script>
 
 <div class="wrapper">
@@ -262,7 +240,7 @@ body {
 			<input type="text" name="utel" id="utel" required="required"
 				placeholder="- 없이 입력" class="form-control">
 		</div>
-		<label>주민번호 앞자리</label>
+		<label>생년월일</label>
 		<div class="form-group">
 			<input type="text" name="ubirth" id="ubirth" required="required"
 				class="form-control">

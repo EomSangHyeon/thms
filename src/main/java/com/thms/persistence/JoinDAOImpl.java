@@ -60,7 +60,13 @@ public class JoinDAOImpl implements JoinDAO {
 	@Override
 	public int searchTotal(SearchCriteria cri) {
 
-		return session.selectOne(namespace+".searchTotal", cri);
+		return session.selectOne(namespace + ".searchTotal", cri);
+	}
+
+	@Override
+	public List<MemberVO> selectOneMember(String uid) {
+
+		return session.selectList(namespace + ".selectOneMember", uid);
 	}
 
 }
