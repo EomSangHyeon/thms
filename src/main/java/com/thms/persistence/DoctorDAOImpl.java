@@ -1,5 +1,7 @@
 package com.thms.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -21,4 +23,8 @@ public class DoctorDAOImpl implements DoctorDAO{
 		
 	}
 
+	@Override
+	public List<DoctorVO> listView(Integer sjid) throws Exception {
+		return session.selectList(namespace +".listView", sjid);
+	}
 }

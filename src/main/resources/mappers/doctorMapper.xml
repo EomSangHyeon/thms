@@ -8,4 +8,10 @@
 			insert into tbl_doctor(dname, dgender, dclinic,sjid)
 			 values(#{dname},#{dgender},#{dclinic},#{sjid});
 		</select>
+
+		<select id="listView" resultType="DoctorVO">
+			<![CDATA[
+				SELECT * FROM `tbl_doctor` WHERE `sjid`=#{sjid}
+			]]>
+		</select>
 	</mapper> 

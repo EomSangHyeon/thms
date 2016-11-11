@@ -4,6 +4,21 @@
 
 <%@ include file="../include/header.jsp" %>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	$("select[name='sjid']").on("change", function() {
+		var selected_sjid = $(this).val();
+
+		$.getJSON("/schedule/doctorList/"+ selected_sjid, function(list) {
+			var htmlStr = "<option value=''>---</option>";
+			$(list).each(function(key, val) {
+				htmlStr += "<option value='"+ val.did +"'>"+ val.dname +"</option>";
+			});
+			$("select[name='did']").html(htmlStr);
+		});
+	});
+});
+</script>
 <!-- Main content -->
 <section class="content">
 	<div class="row">
@@ -18,15 +33,23 @@
 				<form role="form" action="calendar" method="post">
 				<div class="box-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">진료과목</label>
-						<input type="text" name="title" class="form-control" placeholder="Enter Title"/>
+						<label for="exampleInputEmail1">진료과목 선택</label>
+						<select name="sjid">
+							<option value="">---</option>
+<c:forEach items="${subject}" var="sj">
+							<option value="${sj.sjid}">${sj.sjname}</option>
+</c:forEach>
+						</select>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">의료진 선택</label>
-						<textarea class="form-control" name="content" rows="3" placeholder="Enter ..."></textarea>
+						<select name="did">
+							<option value="">---</option>
+						</select>
 					</div>
 					<div class="form-group">
-						<table class="table table-bordered">
+						<h3 class="text-center">${year}년 ${month}월</h3>
+						<table id="calendarTable" class="table table-bordered">
 							<colgroup>
 								<col style="width:14%;"/>
 								<col style="width:14%;"/>
@@ -51,7 +74,15 @@
 <c:forEach begin="0" end="5" step="1" var="i">
 								<tr>
 	<c:forEach begin="0" end="6" step="1" var="j">
-									<td>${i * 7 + j}</td>
+									<td class="text-center" style="height:50px; padding:4px; margin:0px;">
+		<c:if test="${not empty calDate[i][j]}">
+										<div class="text-right">${calDate[i][j]}</div>
+										<br/>
+										오전 : 0
+										<br/>
+										오후 : 0
+		</c:if>
+									</td>
 	</c:forEach>
 								</tr>
 </c:forEach>
