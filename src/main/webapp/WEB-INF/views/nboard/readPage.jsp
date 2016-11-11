@@ -23,7 +23,7 @@ $(document).ready(function() {
 	//수정보튼 클릭
 	$("#modifyBtn").on("click", function() {
 		formObj.attr({
-			action: "/sboard/modifyPage",
+			action: "/nboard/modifyPage",
 			method: "get"
 		});
 		formObj.submit();
@@ -51,7 +51,7 @@ $(document).ready(function() {
 
 			formObj.attr({
 				method: "post", 
-				action: "/sboard/removePage"
+				action: "/nboard/removePage"
 			});
 			formObj.submit();
 		}
@@ -61,7 +61,7 @@ $(document).ready(function() {
 	$("#goListBtn").on("click", function() {
 		formObj.attr({
 			method: "get",
-			action: "/sboard/list"
+			action: "/nboard/list"
 		});
 		formObj.submit();
 	});
@@ -195,7 +195,7 @@ $(document).ready(function() {
 		$(".popup").hide("slow");
 	});
 
-	$.getJSON("/sboard/getAttach/"+ bno, function(list) {
+	$.getJSON("/nboard/getAttach/"+ bno, function(list) {
 		$(list).each(function() {
 			var fileInfo = getFileInfo(this);
 			var html = template(fileInfo);

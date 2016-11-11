@@ -33,11 +33,11 @@ public class SearchNewsBoardController {
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 	    logger.info(cri.toString());
 
-	    model.addAttribute("list", service.listSearchCriteria(cri));
+	    model.addAttribute("list", service.listNewsSearchCriteria(cri));
 
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCri(cri);
-	    pageMaker.setTotalCount(service.listSearchCount(cri));
+	    pageMaker.setTotalCount(service.listNewsSearchCount(cri));
 
 	    model.addAttribute("pageMaker", pageMaker);
 	}
@@ -57,7 +57,7 @@ public class SearchNewsBoardController {
 		rttr.addAttribute("keyword", cri.getKeyword());
 		rttr.addFlashAttribute("msg", "삭제 되었습니다.");
 
-		return "redirect:/sboard/list";
+		return "redirect:/nboard/list";
 	}
 
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
@@ -77,7 +77,7 @@ public class SearchNewsBoardController {
 		rttr.addFlashAttribute("msg", "수정 되었습니다.");
 		logger.info(rttr.toString());
 
-		return "redirect:/sboard/list";
+		return "redirect:/nboard/list";
 	}
 
 	@RequestMapping(value="/register", method=RequestMethod.GET)
@@ -93,7 +93,7 @@ public class SearchNewsBoardController {
 		service.regist(board);
 		rttr.addFlashAttribute("msg", "등록 되었습니다.");
 
-		return "redirect:/sboard/list";
+		return "redirect:/nboard/list";
 	}
 
 	@RequestMapping("/getAttach/{bno}")

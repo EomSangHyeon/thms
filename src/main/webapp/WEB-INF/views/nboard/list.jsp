@@ -71,7 +71,7 @@ $(document).ready(function() {
 <c:forEach items="${list}" var="row">
 							<tr>
 								<td class="text-center">${row.bno}</td>
-								<td><a href="/sboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${row.bno}">${row.title}<strong>[ ${row.replycnt} ]</strong></a></td>
+								<td><a href="/nboard/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${row.bno}">${row.title}<strong>[ ${row.replycnt} ]</strong></a></td>
 								<td class="text-center">${row.writer}</td>
 								<td class="text-center"><span class="badge bg-red">${row.viewcnt}</span></td>
 								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${row.regdate}"/></td>

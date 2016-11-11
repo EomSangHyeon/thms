@@ -119,7 +119,7 @@ $(document).ready(function() {
 						<label for="exampleInputEmail1">File DROP Here</label>
 						<div class="fileDrop"></div>
 					</div>
-						<input type="hidden" name="btype" value="news">
+					<input type="hidden" name="btype" value="bbs">
 				</div>
 				</form>
 
