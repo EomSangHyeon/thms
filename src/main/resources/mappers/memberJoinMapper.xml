@@ -5,6 +5,13 @@
 
 <mapper namespace="com.thms.mapper.UserMapper">
 
+	<!-- 환자 등록을 위한 uid검색 -->
+	<select id="searchForPatient" resultType="String">
+		select uid from tbl_member
+		where
+		uid like CONCAT('%',#{keyword},'%')
+	</select>
+
 	<!-- 회원 검색 -->
 	<!-- 비밀번호, 닉네임, 가일일 빼고 다넣기 -->
 	<select id="searchMember" resultType="com.thms.domain.MemberVO">
@@ -153,7 +160,7 @@
 				and ustatus=#{ustatus}
 			</when>
 		</choose>
-		
+
 	</update>
 
 	<!-- 권한주기 (상태 변경) -->

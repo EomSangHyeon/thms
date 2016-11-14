@@ -1,5 +1,6 @@
 package com.thms.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -24,4 +25,7 @@ public interface JoinDAO {
 	public int searchTotal(SearchCriteria cri);
 
 	public List<MemberVO> selectOneMember(String uid);
+	
+	public List<String> selectSearchForPatientUid(String uid);
+	
 }

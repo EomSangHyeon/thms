@@ -1,5 +1,7 @@
 package com.thms.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -38,6 +40,39 @@ public class MemberController {
 
 	@Autowired
 	protected JavaMailSender mailSender;
+
+	// 환자 입력을 위한 검색
+	@RequestMapping("testJoinPatient")
+	public void joinPatient() {
+
+	}
+
+	@RequestMapping("ajaxForPatientUid")
+	public ResponseEntity<String> forPatient(HttpServletRequest request, Model model) {
+		System.out.println("ajaxForPatientUid");
+		String uid = request.getParameter("uid");
+		System.out.println(uid);
+
+		System.out.println(dao.selectSearchForPatientUid(uid));
+		List<String> lista = new ArrayList<String>();
+		lista.addAll(dao.selectSearchForPatientUid(uid));
+
+		for (int i = 0; i < lista.size(); i++) {
+			lista.get(i);
+		}
+
+		ResponseEntity<String> entity = new ResponseEntity<String>("test" + "," + "test1hh", HttpStatus.OK);
+
+		return entity;
+		/*
+		 * String ss = ""; for (int i = 0; i < lista.size(); i++) { ss +=
+		 * lista.get(i) + " ,"; }
+		 * 
+		 * ResponseEntity<String> entity = new ResponseEntity<String>(ss,
+		 * HttpStatus.OK);
+		 */
+
+	}
 
 	// 회원 검색
 	@RequestMapping(value = "testSearch")
@@ -104,6 +139,12 @@ public class MemberController {
 	}
 
 	// 회원가입
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public void memberJoin() {
+
+		logger.info("memberJoin..............");
+	}
+
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String memberJoin(MemberVO vo) {
 		System.out.println("join");
@@ -187,7 +228,7 @@ public class MemberController {
 
 	}
 
-	// ===============
+	// ===========================================
 
 	@Inject
 	private MemberService service;
@@ -207,8 +248,4 @@ public class MemberController {
 		model.addAttribute("memberVO", vo);
 	}
 
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public void memberJoin() {
-		logger.info("GET memberJoin....................");
-	}
 }

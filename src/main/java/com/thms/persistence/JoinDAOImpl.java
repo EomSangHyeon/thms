@@ -1,5 +1,6 @@
 package com.thms.persistence;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -67,6 +68,12 @@ public class JoinDAOImpl implements JoinDAO {
 	public List<MemberVO> selectOneMember(String uid) {
 
 		return session.selectList(namespace + ".selectOneMember", uid);
+	}
+
+	@Override
+	public List<String> selectSearchForPatientUid(String uid) {
+
+		return session.selectList(namespace + ".searchForPatient", uid);
 	}
 
 }
