@@ -64,7 +64,7 @@ public class UploadController {
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
 		logger.info("originalName: "+ file.getOriginalFilename());
 
-		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
+		return new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
 	}
 
 	@ResponseBody

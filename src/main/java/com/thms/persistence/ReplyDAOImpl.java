@@ -40,7 +40,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public List<ReplyVO> listPage(Integer bno, Criteria cri) throws Exception {
-		Map<String, Object> paramMap = new HashMap<>();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("bno", bno);
 		paramMap.put("cri", cri);
 
