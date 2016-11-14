@@ -4,6 +4,7 @@ public class RoomVO {
 	private int rmid;
 	private String rmnumber;
 	private String rmheadcount;
+	
 	public int getRmid() {
 		return rmid;
 	}

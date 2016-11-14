@@ -1,5 +1,7 @@
 package com.thms.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thms.domain.MemberVO;
 import com.thms.domain.PageMaker;
+import com.thms.domain.PatientVO;
 import com.thms.domain.SearchCriteria;
 import com.thms.dto.LoginDTO;
 import com.thms.persistence.JoinDAOImpl;
@@ -39,42 +42,40 @@ public class MemberController {
 	@Autowired
 	protected JavaMailSender mailSender;
 
-	@ResponseBody
-	@RequestMapping(value = "ajaxsend", method = RequestMethod.POST, produces = "application/text; charset=utf8")
-	public ResponseEntity<String> sendEmailAction(HttpServletRequest request) throws Exception {
-		String uemail = request.getParameter("uemail");
+	@RequestMapping("joinForPatient")
+	public void joinConfirmPatient(PatientVO vo){
+		dao.joinForPatient(vo);
+	}
+	
+	// 환자 입력을 위한 검색
+	@RequestMapping("testJoinPatient")
+	public void joinPatient() {
 
-		// 메일 내용을 작성한다
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setFrom("ju583830@gmail.com");
-		msg.setTo(new String[] { uemail });
+	}
 
-		ResponseEntity<String> entity = null;
+	// 환자 입력할때 아이디 확인
+	@RequestMapping("ajaxForPatientUid")
+	public ResponseEntity<List> forPatient(HttpServletRequest request, Model model) {
+		System.out.println("ajaxForPatientUid");
+		String uid = request.getParameter("uid");
+		System.out.println(uid);
 
-		try {
-			Random random = new Random();
+		System.out.println(dao.selectSearchForPatientUid(uid));
+		List<String> lista = new ArrayList<String>();
+		lista.addAll(dao.selectSearchForPatientUid(uid));
 
-			int number = random.nextInt(10000) + 1000;
+		ResponseEntity<List> entity = new ResponseEntity<List>(lista, HttpStatus.OK);
 
-			if (number > 10000) {
-				number = number - 1000;
-			}
-
-			msg.setSubject("인증 메일입니다.");
-			msg.setText(number + " 숫자 인증해주세요");
-
-			mailSender.send(msg);
-			return entity = new ResponseEntity<String>(number + "", HttpStatus.OK);
-
-		} catch (MailException ex) {
-			System.out.println("실패");
-			return null;
-		}
+		return entity;
 
 	}
 
 	// 회원 검색
-	@RequestMapping(value = "search")
+	@RequestMapping(value = "testSearch")
+	public void search() {
+	}
+
+	@RequestMapping(value = "testSearchResult")
 	public void listPage(SearchCriteria cri, Model model) {
 
 		model.addAttribute("searchmember", dao.listCriteria(cri));
@@ -87,6 +88,45 @@ public class MemberController {
 
 	}
 
+	// ajax를 통한 관리자 인지 아닌지
+	@ResponseBody
+	@RequestMapping(value = "ajaxForUstatus", method = RequestMethod.POST)
+	public ResponseEntity<String> ajaxForUstatus(HttpServletRequest request) {
+		System.out.println("ajaxForUstatus");
+
+		System.out.println(request.getParameter("ustatus") + "    aaaa");
+
+		ResponseEntity<String> entity = null;
+
+		if (request.getParameter("ustatus").equals("admin") || request.getParameter("ustatus").equals("master")) {
+
+			entity = new ResponseEntity<String>("O", HttpStatus.OK);
+		} else {
+			entity = new ResponseEntity<String>("X", HttpStatus.OK);
+		}
+		return entity;
+	}
+
+	// 회원정보수정
+	@RequestMapping(value = "testMemberModify")
+	public void memberModify(HttpServletRequest request, Model model) {
+		System.out.println("modify member");
+
+		// 한개 정보 들고오기
+		model.addAttribute("searchmember", dao.selectOneMember(request.getParameter("uid")));
+		model.addAttribute("Custatus", request.getParameter("ustatus"));
+	}
+
+	// 정보 수정 확정
+	@RequestMapping(value = "confirmUpdateMember", method = RequestMethod.POST)
+	public String confirmUpdateMember(MemberVO vo) {
+		System.out.println("confirmUpdate");
+
+		dao.memberModify(vo);
+		return "redirect:/";
+	}
+
+	/* @RequestMapping(value="yesUpdateMember" ) */
 	// 권한주기
 	@RequestMapping(value = "statusModify", method = RequestMethod.POST)
 	public void statusModify(MemberVO vo) {
@@ -94,13 +134,11 @@ public class MemberController {
 		dao.statusModify(vo);
 	}
 
-	// 회원정보수정
-	@RequestMapping(value = "memberModify", method = RequestMethod.POST)
-	public void memberModify(MemberVO vo) {
-		System.out.println("modify member");
+	// 회원가입
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public void memberJoin() {
 
-		dao.memberModify(vo);
-
+		logger.info("memberJoin..............");
 	}
 
 	@RequestMapping(value = "join", method = RequestMethod.POST)
@@ -108,10 +146,11 @@ public class MemberController {
 		System.out.println("join");
 
 		dao.memberJoin(vo);
-		
+
 		return "redirect:/";
 	}
 
+	// 아이디 닉네임 검사
 	@ResponseBody
 	@RequestMapping(value = "checkId", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public ResponseEntity<String> checkId(HttpServletRequest request, Model model) throws Exception {
@@ -150,7 +189,42 @@ public class MemberController {
 		return null;
 	}
 
-	// ===============
+	// 메일보내기
+	@ResponseBody
+	@RequestMapping(value = "ajaxsend", method = RequestMethod.POST, produces = "application/text; charset=utf8")
+	public ResponseEntity<String> sendEmailAction(HttpServletRequest request) throws Exception {
+		String uemail = request.getParameter("uemail");
+
+		// 메일 내용을 작성한다
+		SimpleMailMessage msg = new SimpleMailMessage();
+		msg.setFrom("ju583830@gmail.com");
+		msg.setTo(new String[] { uemail });
+
+		ResponseEntity<String> entity = null;
+
+		try {
+			Random random = new Random();
+
+			int number = random.nextInt(10000) + 1000;
+
+			if (number > 10000) {
+				number = number - 1000;
+			}
+
+			msg.setSubject("인증 메일입니다.");
+			msg.setText(number + " 숫자 인증해주세요");
+
+			mailSender.send(msg);
+			return entity = new ResponseEntity<String>(number + "", HttpStatus.OK);
+
+		} catch (MailException ex) {
+			System.out.println("실패");
+			return null;
+		}
+
+	}
+
+	// ===========================================
 
 	@Inject
 	private MemberService service;
@@ -170,8 +244,4 @@ public class MemberController {
 		model.addAttribute("memberVO", vo);
 	}
 
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public void memberJoin() {
-		logger.info("GET memberJoin....................");
-	}
 }
