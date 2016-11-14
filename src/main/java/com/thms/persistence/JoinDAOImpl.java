@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.thms.domain.MemberVO;
+import com.thms.domain.PatientVO;
 import com.thms.domain.SearchCriteria;
 
 @Repository
@@ -74,6 +75,15 @@ public class JoinDAOImpl implements JoinDAO {
 	public List<String> selectSearchForPatientUid(String uid) {
 
 		return session.selectList(namespace + ".searchForPatient", uid);
+	}
+
+
+
+	@Override
+	public void joinForPatient(PatientVO vo) {
+
+		session.selectList(namespace + ".joinForPatient", vo);
+
 	}
 
 }

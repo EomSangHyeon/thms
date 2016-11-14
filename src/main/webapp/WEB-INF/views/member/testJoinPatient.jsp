@@ -23,11 +23,8 @@
 
 				success : function(data) {
 					alert(data);
-					alert("test"+"test1");
 					var list = new Array(data);
-				/* 	var list = new Array("test", "test1"); */
-
-					
+					/* 	var list = new Array("test", "test1"); */
 
 					for (var idx = 0; idx < list.length; idx++) {
 						$("#forPatientUid").append(
@@ -53,32 +50,33 @@
 병실 빈병실 검색하게 해서 나오게하기 ajax
 의사 이름으로 검색 하게하기 ajax
 -->
+	<form action="joinForPatient" method="post">
+		<label>사용자 아이디 검색</label>
+		<div>
+			<input type="text" id="uid" name="uid"
+				onchange="searchUidForPatient()">
+		</div>
+		<div id="forPatientUid"></div>
 
-	<label>사용자 아이디 검색</label>
-	<div>
-		<input type="text" id="uid" name="uid"
-			onchange="searchUidForPatient()">
-	</div>
-	<div id="forPatientUid"></div>
-
-	<label> 입원일 입력</label>
-	<div>
-		<input type="text" id="horegdate" name="horegdate">
-	</div>
-
-
-	<label> 빈 병실 검색</label>
-	<div>
-		<input type="text" id="rmid" name="rmid">
-	</div>
-
-	<label> 의사 이름 검색</label>
-	<div>
-		<input type="text" id="did" name="did">
-	</div>
+		<label> 입원일 입력</label>
+		<div>
+			<input type="text" id="horegdate" name="horegdate">
+		</div>
 
 
+		<label> 빈 병실 검색</label>
+		<div>
+			<input type="text" id="rmid" name="rmid">
+		</div>
 
+		<label> 담당의사 번호</label>
+		<div>
+			<input type="text" id="did" name="did"
+				onchange="searchDidForPatient()">
+		</div>
+		<div id="forPatientDid"></div>
+		<input type="submit">
+	</form>
 
 </body>
 </html>

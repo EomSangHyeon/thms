@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thms.domain.MemberVO;
 import com.thms.domain.PageMaker;
+import com.thms.domain.PatientVO;
 import com.thms.domain.SearchCriteria;
 import com.thms.dto.LoginDTO;
 import com.thms.persistence.JoinDAOImpl;
@@ -41,14 +42,20 @@ public class MemberController {
 	@Autowired
 	protected JavaMailSender mailSender;
 
+	@RequestMapping("joinForPatient")
+	public void joinConfirmPatient(PatientVO vo){
+		dao.joinForPatient(vo);
+	}
+	
 	// 환자 입력을 위한 검색
 	@RequestMapping("testJoinPatient")
 	public void joinPatient() {
 
 	}
 
+	// 환자 입력할때 아이디 확인
 	@RequestMapping("ajaxForPatientUid")
-	public ResponseEntity<String> forPatient(HttpServletRequest request, Model model) {
+	public ResponseEntity<List> forPatient(HttpServletRequest request, Model model) {
 		System.out.println("ajaxForPatientUid");
 		String uid = request.getParameter("uid");
 		System.out.println(uid);
@@ -57,20 +64,9 @@ public class MemberController {
 		List<String> lista = new ArrayList<String>();
 		lista.addAll(dao.selectSearchForPatientUid(uid));
 
-		for (int i = 0; i < lista.size(); i++) {
-			lista.get(i);
-		}
-
-		ResponseEntity<String> entity = new ResponseEntity<String>("test" + "," + "test1hh", HttpStatus.OK);
+		ResponseEntity<List> entity = new ResponseEntity<List>(lista, HttpStatus.OK);
 
 		return entity;
-		/*
-		 * String ss = ""; for (int i = 0; i < lista.size(); i++) { ss +=
-		 * lista.get(i) + " ,"; }
-		 * 
-		 * ResponseEntity<String> entity = new ResponseEntity<String>(ss,
-		 * HttpStatus.OK);
-		 */
 
 	}
 
