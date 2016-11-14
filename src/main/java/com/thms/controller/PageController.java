@@ -38,6 +38,14 @@ public class PageController {
 	public void mypageReservation() {
 		logger.info("GET mypageReservation....................");
 	}
+	@RequestMapping(value = "/mypage/checkup", method = RequestMethod.GET)
+	public void mypageCheckup() {
+		logger.info("GET mypageCheckup....................");
+	}
+	@RequestMapping(value = "/mypage/hospitalize", method = RequestMethod.GET)
+	public void mypageHospitalize() {
+		logger.info("GET mypageHospitalize....................");
+	}
 	
 	// introduce
 	@RequestMapping(value = "/introduce/hospital", method = RequestMethod.GET)

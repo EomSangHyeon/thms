@@ -74,6 +74,24 @@ public class BoardDAOImpl implements BoardDAO {
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		return sqlSession.selectOne(namespace +".listSearchCount", cri);
 	}
+	
+	@Override
+	public int countNewsPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace +".countNewsPaging", cri);
+	}
+	
+	@Override
+	public List<BoardVO> listNewsSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace +".listNewsSearch", cri);
+	}
+
+	@Override
+	public int listNewsSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace +".listNewsSearchCount", cri);
+	}
 
 	@Override
 	public void updateReplyCnt(Integer bno, int amount) throws Exception {
@@ -112,4 +130,8 @@ public class BoardDAOImpl implements BoardDAO {
 
 		sqlSession.insert(namespace +".replaceAttach", paramMap);
 	}
+
+
+
+	
 }

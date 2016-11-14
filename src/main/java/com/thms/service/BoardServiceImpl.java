@@ -92,4 +92,22 @@ public class BoardServiceImpl implements BoardService {
 	public List<String> getAttach(Integer bno) throws Exception {
 		return dao.getAttach(bno);
 	}
+
+	@Override
+	public int listNewsCountCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countNewsPaging(cri);
+	}
+
+	@Override
+	public List<BoardVO> listNewsSearchCriteria(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listNewsSearch(cri);
+	}
+
+	@Override
+	public int listNewsSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listNewsSearchCount(cri);
+	}
 }

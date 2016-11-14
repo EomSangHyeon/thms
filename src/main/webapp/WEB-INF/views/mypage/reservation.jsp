@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="true" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%@ include file="../include/header.jsp" %>
@@ -17,7 +16,8 @@
 	            <th>진료과목</th>
 	            <th>담당의사</th>
 	            <th>진료실</th>
-	            <th>예약변경</th>	            
+	            <th>예약변경</th>
+	            <th>예약삭제</th>           
 	          </tr>
 	        </thead>
 	        <tbody>
@@ -27,6 +27,7 @@
 	            <td>김똘똘</td>
 	            <td>102호</td>
 	            <td><button type="button" class="btn btn-warning">변경</button></td>
+	            <td><button type="button" class="btn btn-danger">삭제</button></td>
 	          </tr>
 	          <tr>
 	            <td>2016-12-24</td>
@@ -34,6 +35,7 @@
 	            <td>김똘똘</td>
 	            <td>102호</td>
 	            <td><button type="button" class="btn btn-warning">변경</button></td>
+	            <td><button type="button" class="btn btn-danger">삭제</button></td>
 	          </tr>
 	          <tr>
 	            <td>2016-12-24</td>
@@ -41,6 +43,7 @@
 	            <td>김똘똘</td>
 	            <td>102호</td>
 	            <td><button type="button" class="btn btn-warning">변경</button></td>
+	            <td><button type="button" class="btn btn-danger">삭제</button></td>
 	          </tr>
 	          <tr>
 	            <td>2016-12-24</td>
@@ -48,6 +51,7 @@
 	            <td>김똘똘</td>
 	            <td>102호</td>
 	            <td><button type="button" class="btn btn-warning">변경</button></td>
+	            <td><button type="button" class="btn btn-danger">삭제</button></td>
 	          </tr>
 	          <tr>
 	            <td>2016-12-24</td>
@@ -55,6 +59,7 @@
 	            <td>김똘똘</td>
 	            <td>102호</td>
 	            <td><button type="button" class="btn btn-warning">변경</button></td>
+	            <td><button type="button" class="btn btn-danger">삭제</button></td>
 	          </tr>
 	        </tbody>	        
 	      </table>	      

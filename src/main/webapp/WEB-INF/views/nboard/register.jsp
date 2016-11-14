@@ -14,17 +14,21 @@ $(document).ready(function() {
 	var formObj = $("form[role='form']");
 	var template = Handlebars.compile($("#template").html());
 	console.log(formObj);
+
 	$(".btn-warning").click(function() {
 		self.location = "/sboard/list";
 	});
+
 	$(".btn-primary").click(function() {
 		if($("form[role='form'] input[name=title]").val() == "") {
 			alert("제목을 입력해주세요.");
 			$("form[role='form'] input[name=title]").focus();
 			return false;
 		}
+
 		formObj.submit();
 	});
+
 	$(".fileDrop").on({
 		dragenter: function(event) {
 			event.preventDefault();
@@ -34,10 +38,12 @@ $(document).ready(function() {
 		},
 		drop: function(event) {
 			event.preventDefault();
+
 			var files = event.originalEvent.dataTransfer.files;
 			var file = files[0];
 			var formData = new FormData();
 			formData.append("file", file);
+
 			$.ajax({
 				type: "post",
 				url: "/uploadAjax",
@@ -48,19 +54,24 @@ $(document).ready(function() {
 				success: function(data) {
 					var fileInfo = getFileInfo(data);
 					var html = template(fileInfo);
+
 					$(".uploadedList").append(html);
 				}
 			});
 		}
 	});
+
 	formObj.submit(function(event) {
 		event.preventDefault();
+
 		var that = $(this);
 		var str = "";
+
 		$(".uploadedList .delbtn").each(function(index) {
 			str += "<input type='hidden' name='files["+ index +"]' value='"+ $(this).attr("href") +"'/>";
 		});
 		that.append(str);
+
 		that.get(0).submit();
 	});
 });
@@ -79,7 +90,6 @@ $(document).ready(function() {
 </li>
 </script>
 <!-- Main content -->
-
 <section class="content">
 	<div class="row">
 		<!-- left column -->
@@ -90,7 +100,7 @@ $(document).ready(function() {
 					<h3 class="box-title">글쓰기</h3>
 				</div>
 
-				<form role="form" action="register" method="post">						
+				<form role="form" action="register" method="post">
 				<div class="box-body">
 					<div class="form-group">
 						<label for="exampleInputEmail1">Title</label>
@@ -108,7 +118,7 @@ $(document).ready(function() {
 						<label for="exampleInputEmail1">File DROP Here</label>
 						<div class="fileDrop"></div>
 					</div>
-					<input type="hidden" name="btype" value="bbs">
+					<input type="hidden" name="btype" value="news">
 				</div>
 				</form>
 

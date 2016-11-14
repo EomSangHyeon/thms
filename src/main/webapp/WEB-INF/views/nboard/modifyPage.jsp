@@ -17,10 +17,11 @@ $(document).ready(function() {
 	console.log(formObj);
 
 	$(".btn-warning").click(function() {
-		self.location = "/sboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}";
+		self.location = "/nboard/list?page=${cri.page}&perPageNum=${cri.perPageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}";
 	});
 
 	formObj.submit(function() {
+		alert(11111111);
 		event.preventDefault();
 
 		var that = $(this);
@@ -103,7 +104,7 @@ $(document).ready(function() {
 		$(".popup").hide("slow");
 	});
 
-	$.getJSON("/sboard/getAttach/"+ bno, function(list) {
+	$.getJSON("/nboard/getAttach/"+ bno, function(list) {
 		$(list).each(function() {
 			var fileInfo = getFileInfo(this);
 			var html = template(fileInfo);
@@ -159,6 +160,7 @@ $(document).ready(function() {
 						<div class="fileDrop"></div>
 					</div>
 				</div>
+				
 
 				<div class="box-footer">
 					<div>

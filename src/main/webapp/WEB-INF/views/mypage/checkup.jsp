@@ -1,59 +1,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@ include file="../../include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <div class="container-fluid">
 	<div class="row">
-		<%@ include file="../admin_sidebar.jsp" %>
+		<%@ include file="sidebar.jsp" %>
 		
 		<div class="col-sm-9 col-md-10 main">
-	    <h2 class="sub-header">의사 정보</h2>
+	    <h2 class="sub-header">검사예약 확인</h2>
 	    <div class="table-responsive">
 	      <table class="table table-striped">
 	        <thead>
 	          <tr>
 	            <th>예약일</th>
-	            <th>진료과목</th>
-	            <th>담당의사</th>
-	            <th>진료실</th>
-	            <th>예약변경</th>	            
+	            <th>검사명</th>
+	            <th>진료실</th>	            
 	          </tr>
 	        </thead>
 	        <tbody>
 	          <tr>
 	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
-	            <td>102호</td>
-	            <td><button type="button" class="btn btn-warning">변경</button></td>
+	            <td>x-ray</td>
+	            <td>102호</td>	            
 	          </tr>
 	          <tr>
 	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
-	            <td>102호</td>
-	            <td><button type="button" class="btn btn-warning">변경</button></td>
+	            <td>CT</td>
+	            <td>102호</td>	            
 	          </tr>
 	          <tr>
 	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
+	            <td>피검사</td>
 	            <td>102호</td>
-	            <td><button type="button" class="btn btn-warning">변경</button></td>
 	          </tr>
 	          <tr>
 	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
+	            <td>대장 내시경</td>
 	            <td>102호</td>
-	            <td><button type="button" class="btn btn-warning">변경</button></td>
 	          </tr>
 	          <tr>
 	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
+	            <td>MRI</td>
 	            <td>102호</td>
-	            <td><button type="button" class="btn btn-warning">변경</button></td>
 	          </tr>
 	        </tbody>	        
 	      </table>	      
@@ -73,4 +61,4 @@
 	</div>
 </div>
 
-<%@ include file="../../include/footer.jsp" %>
+<%@ include file="../include/footer.jsp" %>
