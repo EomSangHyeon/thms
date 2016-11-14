@@ -17,7 +17,26 @@ $(document).ready(function() {
 			$("select[name='did']").html(htmlStr);
 		});
 	});
+
+	$("select[name='did']").on("change", function() {
+		
+	});
 });
+
+function getSchedule(year, month) {
+	if(month < 1) {
+		year--;
+		month = 12;
+	} else if(month > 12) {
+		year++;
+		month = 1;
+	}
+
+	if(year < 1)
+		return;
+
+	self.location = "/schedule/calendar?year="+ year +"&month="+ month;
+}
 </script>
 <!-- Main content -->
 <section class="content">
@@ -47,9 +66,15 @@ $(document).ready(function() {
 							<option value="">---</option>
 						</select>
 					</div>
-					<div class="form-group">
-						<h3 class="text-center">${year}년 ${month}월</h3>
-						<table id="calendarTable" class="table table-bordered">
+					<div id="calendarTable" class="form-group">
+						<h3 class="text-center">
+							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getSchedule(${year - 1}, ${month});">◁◁</span>&nbsp;
+							<span style="cursor:pointer;" onclick="getSchedule(${year}, ${month - 1});">◁</span>&nbsp;
+							${year}년 ${month}월&nbsp;
+							<span style="cursor:pointer;" onclick="getSchedule(${year}, ${month + 1});">▷</span>&nbsp;
+							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getSchedule(${year + 1}, ${month});">▷▷</span>
+						</h3>
+						<table class="table table-bordered">
 							<colgroup>
 								<col style="width:14%;"/>
 								<col style="width:14%;"/>
