@@ -29,5 +29,30 @@ public class SubjectDAOImpl implements SubjectDAO{
 		return session.selectList(namespace+".listView");
 	}
 
+	@Override
+	public List<SubjectVO> listAll() throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".listAll");
+	}
+
+	@Override
+	public SubjectVO readPage(Integer sjid) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace +".readPage", sjid);
+	}
+
+	@Override
+	public void delete(Integer sjid) throws Exception {
+		session.delete(namespace+".delete",sjid);
+		
+	}
+
+	@Override
+	public void update(SubjectVO vo) throws Exception {
+		// TODO Auto-generated method stub
+		session.update(namespace+".update",vo);
+		
+	}
+
 	
 }

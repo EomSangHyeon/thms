@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thms.mapper.CheckUpRoomMapper">
+	<select id="insert" resultType="CheckUpRoomVO">
+		insert into tbl_checkuproom(chid,crnumber)
+		values(#{chid},#{crnumber});
+	</select>
+	
+	<select id="listAll" resultType="CheckUpRoomVO"> 
+	<![CDATA[ 
+	SELECT `crid`, `chid`, `crnumber`
+		 FROM 
+	 `tbl_checkuproom` 
+		 WHERE `crid`>0 ORDER BY `crid` DESC 
+		]]>
+	</select>
+	<select id="readPage" resultType="CheckUpRoomVO">
+		SELECT
+		`crid`, `chid`, `crnumber`
+		FROM
+		`tbl_checkuproom` 
+		WHERE
+		`crid`=#{crid}
+	</select>
+	<update id="update">
+		update tbl_checkuproom set 
+			`chid` =#{chid},`crnumber` =#{crnumber}
+		 where 
+		 	`crid`=#{crid} 
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_checkuproom where `crid`=#{crid}
+	</delete>
+
+</mapper>

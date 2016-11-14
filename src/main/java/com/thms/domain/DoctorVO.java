@@ -1,10 +1,19 @@
 package com.thms.domain;
 
 public class DoctorVO {
+	private int did;
 	private String dname;
 	private String dgender;
 	private String dclinic;
 	private int sjid;
+	
+	
+	public int getDid() {
+		return did;
+	}
+	public void setDid(int did) {
+		this.did = did;
+	}
 	public String getDname() {
 		return dname;
 	}

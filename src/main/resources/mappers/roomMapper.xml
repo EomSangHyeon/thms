@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thms.mapper.RoomMapper">
+	<select id="insert" resultType="RoomVO">
+		insert into tbl_room(rmnumber, rmheadcount)
+		values(#{rmnumber},#{rmheadcount});
+	</select>
+	
+	<select id="listAll" resultType="RoomVO"> 
+	<![CDATA[ 
+	SELECT `rmid`, `rmnumber`, `rmheadcount` 
+		 FROM 
+	 `tbl_room` 
+		 WHERE `rmid`>0 ORDER BY `rmid` DESC 
+		]]>		
+	</select>
+	
+	<select id="goRoomTest" resultType="RoomVO"> 
+	<![CDATA[ 
+	SELECT `rmid`, `rmnumber`, `rmheadcount` 
+		 FROM 
+	 `tbl_room` 
+		 WHERE `rmid`>0 ORDER BY `rmid` DESC 
+		]]>
+	</select>
+	
+	<select id="readPage" resultType="RoomVO">
+		SELECT
+		`rmid`, `rmnumber`, `rmheadcount`
+		FROM
+		`tbl_room`
+		WHERE
+		`rmid`=#{rmid}
+	</select>
+	
+	<update id="update">
+		update tbl_room set
+		`rmid` =#{rmid},`rmnumber` =#{rmnumber},`rmheadcount` =#{rmheadcount}
+		where
+		`rmid`=#{rmid}
+	</update>
+
+	<delete id="delete">
+		delete from tbl_room where `rmid`=#{rmid}
+	</delete>
+
+</mapper> 
