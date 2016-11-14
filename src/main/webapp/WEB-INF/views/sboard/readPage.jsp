@@ -250,7 +250,7 @@ var printPaging = function(pageMaker, target) {
 
 Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 	var accum = "";
-	if(replyer == "${login.uid}")
+	if(replyer == "${login.uid}" || "${login.ustatus}" == "admin" || "${login.ustatus}" == "master")
 		accum += block.fn();
 
 	return accum;
@@ -345,7 +345,7 @@ Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 
 				<div class="box-footer">
 					<ul class="mailbox-attachments clearfix uploadedList"></ul>
-<c:if test="${login.uid == boardVO.writer}">
+<c:if test="${login.uid == boardVO.writer || login.ustatus == 'admin' || login.ustatus == 'master'}">
 					<button type="submit" class="btn btn-warning" id="modifyBtn">Modify</button>
 					<button type="submit" class="btn btn-danger" id="removeBtn">REMOVE</button>
 </c:if>

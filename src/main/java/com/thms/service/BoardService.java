@@ -14,7 +14,12 @@ public interface BoardService {
 	public List<BoardVO> listAll() throws Exception;
 	public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 	public int listCountCriteria(Criteria cri) throws Exception;
-	public List<BoardVO> listSearchCriteria(SearchCriteria cri) throws Exception;
+	public List<BoardVO> listSearchCriteria(SearchCriteria cri) throws Exception;	
 	public int listSearchCount(SearchCriteria cri) throws Exception;
+	
+	public int listNewsCountCriteria(Criteria cri) throws Exception;
+	public List<BoardVO> listNewsSearchCriteria(SearchCriteria cri) throws Exception;	
+	public int listNewsSearchCount(SearchCriteria cri) throws Exception;
+	
 	public List<String> getAttach(Integer bno) throws Exception;
 }

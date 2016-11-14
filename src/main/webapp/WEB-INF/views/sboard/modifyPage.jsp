@@ -21,7 +21,6 @@ $(document).ready(function() {
 	});
 
 	formObj.submit(function() {
-		alert(11111111);
 		event.preventDefault();
 
 		var that = $(this);
@@ -160,7 +159,6 @@ $(document).ready(function() {
 						<div class="fileDrop"></div>
 					</div>
 				</div>
-				</form>
 
 				<div class="box-footer">
 					<div>
@@ -170,6 +168,7 @@ $(document).ready(function() {
 					<button type="submit" class="btn btn-primary">SAVE</button>
 					<button type="submit" class="btn btn-warning">CANCEL</button>
 				</div>
+				</form>
 			</div>
 		</div>
 	</div>

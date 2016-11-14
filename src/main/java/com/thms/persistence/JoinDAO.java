@@ -2,9 +2,8 @@ package com.thms.persistence;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.thms.domain.MemberVO;
+import com.thms.domain.PatientVO;
 import com.thms.domain.SearchCriteria;
 
 public interface JoinDAO {
@@ -20,8 +19,14 @@ public interface JoinDAO {
 	public void statusModify(MemberVO vo);
 
 	public List<MemberVO> listCriteria(SearchCriteria cri);
-	
+
 	public int searchTotal(SearchCriteria cri);
 
+	public List<MemberVO> selectOneMember(String uid);
+
+	/// 수정
+	public List<String> selectSearchForPatientUid(String uid);
+	///
 	
+	public void joinForPatient(PatientVO vo);
 }

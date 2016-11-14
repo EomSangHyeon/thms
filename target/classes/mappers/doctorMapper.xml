@@ -2,10 +2,56 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.thms.mapper.DoctorMapper">
+	<insert id="insert">
+		insert into tbl_doctor(dname,
+		dgender, dclinic,sjid)
+		values(#{dname},#{dgender},#{dclinic},#{sjid});
+	</insert>
+
+	<select id="listAll" resultType="DoctorVO"> 
+	<![CDATA[ 
+	SELECT `did`, `dname`, `dgender` ,`dclinic` ,`sjid`
+		 FROM 
+	 `tbl_doctor` 
+		 WHERE `did`>0 ORDER BY `did` DESC 
+		]]>
+	</select>
+	<select id="readPage" resultType="DoctorVO">
+		SELECT
+		`did`, `dname`, `dgender` ,`dclinic` ,`sjid`
+		FROM
+		`tbl_doctor` 
+		WHERE
+		`did`=#{did}
+	</select>
+	<update id="update">
+		update tbl_doctor set 
+			`dname` =#{dname},`dgender` =#{dgender},`dclinic` =#{dclinic},`sjid` =#{sjid}
+		 where 
+		 	`did`=#{did} 
+	</update>
 	
-	<mapper namespace="com.thms.mapper.DoctorMapper">
-		<select id="insert" resultType="DoctorVO">
-			insert into tbl_doctor(dname, dgender, dclinic,sjid)
-			 values(#{dname},#{dgender},#{dclinic},#{sjid});
+
+		<select id="listView" resultType="DoctorVO">
+			<![CDATA[
+				SELECT * FROM `tbl_doctor` WHERE `sjid`=#{sjid}
+			]]>
 		</select>
-	</mapper> 
+
+	<delete id="delete">
+		delete from tbl_doctor where `did`=#{did}
+	</delete>
+	
+	<select id="listCriteria" resultType="DoctorVO"> 
+	<![CDATA[ 
+	SELECT `did`, `dname`, `dgender` ,`dclinic` ,`sjid`
+		 FROM 
+	 `tbl_doctor` 
+		 WHERE `did`>0 ORDER BY `did` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	
+</mapper> 

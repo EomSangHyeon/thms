@@ -17,6 +17,9 @@ public interface BoardDAO {
 	public int countPaging(Criteria cri) throws Exception;
 	public List<BoardVO> listSearch(SearchCriteria cri) throws Exception;
 	public int listSearchCount(SearchCriteria cri) throws Exception;
+	public int countNewsPaging(Criteria cri) throws Exception;
+	public List<BoardVO> listNewsSearch(SearchCriteria cri) throws Exception;
+	public int listNewsSearchCount(SearchCriteria cri) throws Exception;
 	public void updateReplyCnt(Integer bno, int amount) throws Exception;
 	public void updateViewCnt(Integer bno) throws Exception;
 	public void addAttach(String fullName) throws Exception;

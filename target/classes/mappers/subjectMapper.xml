@@ -2,14 +2,14 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
-	<mapper namespace="com.thms.mapper.SubjectMapper">
-		<select id="sjinput" resultType="SubjectVO">
-			insert into	tbl_subject(sjname)
-			values(#{sjname})
-		</select>
-		
-		<select id="listView" resultType="SubjectVO">
+
+<mapper namespace="com.thms.mapper.SubjectMapper">
+	<select id="sjinput" resultType="SubjectVO">
+		insert into tbl_subject(sjname)
+		values(#{sjname})
+	</select>
+
+	<select id="listView" resultType="SubjectVO">
 		<![CDATA[
 			SELECT 
 				`sjid`, `sjname` 
@@ -21,4 +21,34 @@
 				`sjid` DESC
 		]]>
 	</select>
-	</mapper>
+
+	<select id="listAll" resultType="SubjectVO">
+		<![CDATA[
+			SELECT 
+				`sjid`, `sjname` 
+			FROM
+				`tbl_subject` 
+			WHERE 
+				`sjid`>0 
+			ORDER BY 
+				`sjid` DESC
+		]]>
+	</select>
+	
+	<select id="readPage" resultType="SubjectVO">
+		SELECT
+		`sjid`, `sjname`
+		FROM
+		`tbl_subject`
+		WHERE
+		`sjid`=#{sjid}
+	</select>
+	
+	<update id="update">
+		update tbl_subject set `sjname` =#{sjname} where `sjid`=#{sjid} 
+	</update>
+	
+	<delete id="delete">
+		delete from tbl_subject where `sjid`=#{sjid}
+	</delete>
+</mapper>

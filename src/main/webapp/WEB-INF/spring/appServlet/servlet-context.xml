@@ -25,4 +25,26 @@
 	
 	
 	
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg
+			value="C:\\THMS\\data">
+		</beans:constructor-arg>
+	</beans:bean>
+	
+	<beans:bean id="authInterceptor" class="com.thms.interceptor.AuthInterceptor"></beans:bean>
+	<beans:bean id="loginInterceptor" class="com.thms.interceptor.LoginInterceptor"></beans:bean>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/sboard/register"/>
+			<mapping path="/sboard/modifyPage"/>
+			<mapping path="/sboard/removePage"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+
+		<interceptor>
+			<mapping path="/member/loginPost"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 </beans:beans>

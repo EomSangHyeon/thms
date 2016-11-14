@@ -121,7 +121,7 @@ $(document).ready(function() {
 	        </ul>
 	      </li>
 				<li id="reservation"><a href="#">진료예약</a></li>
-				<li id="news"><a href="#">의료소식</a></li>
+				<li id="news"><a href="/nboard/list">의료소식</a></li>
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
 <%-- <c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
 				<li id="member"><a href="/member/list">회원관리</a></li>
@@ -140,7 +140,17 @@ $(document).ready(function() {
 				<li><a href="/member/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 </c:if>
 <c:if test="${not empty login}">
+	<c:if test="${login.ustatus == 'customer'}">
+				<li><a href="/mypage/edit">my page</a></li>
+	</c:if>
+	<c:if test="${login.ustatus == 'hospital' || login.ustatus == 'master'}">
+				<li><a href="#">hospital page</a></li>
+	</c:if>
+	<c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
+				<li><a href="#">admin page</a></li>
+	</c:if>
 				<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	
 </c:if>
 			</ul>
 		</div>
