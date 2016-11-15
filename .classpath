@@ -13,11 +13,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-	<classpathentry including="**/*.java" kind="src" path="src/test/resources"/>
-=======
 	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
->>>>>>> branch 'yama' of https://github.com/EomSangHyeon/thms
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
