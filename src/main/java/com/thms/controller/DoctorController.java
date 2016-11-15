@@ -72,7 +72,7 @@ public class DoctorController {
 	 @RequestMapping(value="/listCri", method=RequestMethod.GET)
 		public void listPage(Criteria cri, Model model) throws Exception {
 		 	logger.info("Show all");
-		 	model.addAttribute("list",service.listCriteria(cri));
+		 	model.addAttribute("listCri",service.listCriteria(cri));
 		}
 	 
 }

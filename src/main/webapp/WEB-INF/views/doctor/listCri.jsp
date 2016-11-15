@@ -15,7 +15,7 @@
 		<th>이름</th>
 		<th>병실</th>		
 		<th>부서ID</th>
-		<c:forEach items="${listCriteria}" var="DoctorVO">
+		<c:forEach items="${listCri}" var="DoctorVO">
 			<tr>
 				<td>${DoctorVO.did}</td>
 				<td><a href="/doctor/readPage?did=${DoctorVO.did}">${DoctorVO.dname}</a></td>
