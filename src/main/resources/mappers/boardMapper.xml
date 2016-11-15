@@ -139,15 +139,14 @@
 	</select>
 	
 	<select id="listSearchCount" resultType="int">
-		<![CDATA[
+		
 			SELECT 
 				COUNT(*) 
 			FROM 
 				`tbl_board` 
 			WHERE 
 				`bno`>0 and `btype` = 'bbs'
-		]]>
-
+		
 		<include refid="search"></include>
 	</select>
 	
@@ -173,15 +172,14 @@
 	</select>
 	
 	<select id="listNewsSearchCount" resultType="int">
-		<![CDATA[
+		
 			SELECT 
 				COUNT(*) 
 			FROM 
 				`tbl_board` 
 			WHERE 
 				`bno`>0 and `btype` = 'news'
-		]]>
-
+		
 		<include refid="search"></include>
 	</select>
 
