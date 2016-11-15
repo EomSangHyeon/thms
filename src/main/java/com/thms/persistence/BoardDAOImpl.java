@@ -130,8 +130,4 @@ public class BoardDAOImpl implements BoardDAO {
 
 		sqlSession.insert(namespace +".replaceAttach", paramMap);
 	}
-
-
-
-	
 }
