@@ -51,7 +51,7 @@ public class HomeController {
     PageMaker pageMaker = new PageMaker();
     pageMaker.setDisplayPageNum(8);
     pageMaker.setCri(cri);    
-    pageMaker.setTotalCount(service.listSearchCount(cri));    
+    pageMaker.setTotalCount(service.listSearchCount(cri));
 
     model.addAttribute("pageMaker", pageMaker);
 		

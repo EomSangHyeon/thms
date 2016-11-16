@@ -92,6 +92,32 @@ public class ScheduleController {
         	}
         }
 
+        if(vo != null) {
+        	List<ScheduleVO> scheduleList = scheduleService.calendar(vo);
+
+        	int[][] medicalCount = new int[7][2];
+        	int weekDay = 0, ampm = 0;
+        	for(int i=0; i<scheduleList.size(); i++) {
+        		switch(scheduleList.get(i).getWeekday()) {
+        			case "Sun" : weekDay = 0; break;
+        			case "Mon" : weekDay = 1; break;
+        			case "Tue" : weekDay = 2; break;
+        			case "Wed" : weekDay = 3; break;
+        			case "Thr" : weekDay = 4; break;
+        			case "Fri" : weekDay = 5; break;
+        			case "Sat" : weekDay = 6; break;
+        		}
+        		if(scheduleList.get(i).getAmpm().equals("am"))
+        			ampm = 0;
+        		else
+        			ampm = 1;
+
+        		medicalCount[weekDay][ampm] = scheduleList.get(i).getMedicalCount();
+        	}
+
+        	model.addAttribute("medicalCount", medicalCount);
+        }
+
         model.addAttribute("calDate", calDate);
         model.addAttribute("year", cal.get(Calendar.YEAR));
         model.addAttribute("month", cal.get(Calendar.MONTH) + 1);

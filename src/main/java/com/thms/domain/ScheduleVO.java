@@ -6,6 +6,7 @@ public class ScheduleVO {
 	private int did;
 	private String weekday;
 	private String ampm;
+	private int medicalCount;
 
 	//Getter
 	public int getSid() {
@@ -23,6 +24,9 @@ public class ScheduleVO {
 	public String getAmpm() {
 		return ampm;
 	}
+	public int getMedicalCount() {
+		return medicalCount;
+	}
 
 	//Setter
 	public void setSid(int sid) {
@@ -39,5 +43,8 @@ public class ScheduleVO {
 	}
 	public void setAmpm(String ampm) {
 		this.ampm = ampm;
+	}
+	public void setMedicalCount(int medicalCount) {
+		this.medicalCount = medicalCount;
 	}
 }
