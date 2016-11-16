@@ -14,18 +14,18 @@
 	<!-- Wrapper for slides -->
 	<div class="carousel-inner" role="listbox">
 		<div class="item active">
-			<img src="https://placehold.it/1200x400?text=IMAGE" alt="Image">
+			<img src="resources/hos_2.png" alt="Image">
 			<div class="carousel-caption">
-				<h3>Sell $</h3>
-				<p>Money Money.</p>
+				<h1>THMS Project</h1>
+				<p>Group2</p>
 			</div>
 		</div>
 
 		<div class="item">
-			<img src="https://placehold.it/1200x400?text=Another Image Maybe" alt="Image">
+			<img src="resources/hos_1.png" alt="Image">
 			<div class="carousel-caption">
-				<h3>More Sell $</h3>
-				<p>Lorem ipsum...</p>
+				<h1>종합 병원 관리 시스템</h1>
+				<p>Total Hospital Management System</p>
 			</div>
 		</div>
 	</div>
@@ -42,7 +42,7 @@
 </div>
 
 <div class="container text-center">
-	<h3>What We Do</h3><br>
+	<h3>Total Hospital Management System</h3><br>
 	<div class="row">
 		<div class="col-sm-4">
 			<label>병원 뉴스</label>
@@ -74,12 +74,12 @@
 			</div>			
 		</div>
 		<div class="col-sm-4">
-			<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-			<p>Current Project</p>
-			
-			<img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image">
-			<p>Project 2</p>
-			
+			<label>찾아오시는 길</label>
+			<img src="resources/root_1.jpg" class="img-responsive" style="width:100%" alt="Image">
+			<br>
+			<label>병원 연락처</label>
+			<img src="resources/tel.png" class="img-responsive" style="width:100%" alt="Image">
+						
 		</div>
 	</div>
 </div><br>

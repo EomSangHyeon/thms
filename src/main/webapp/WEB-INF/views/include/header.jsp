@@ -114,10 +114,10 @@ $(document).ready(function() {
 	        <a class="dropdown-toggle" data-toggle="dropdown" href="#">병원소개
 	        <span class="caret"></span></a>
 	        <ul class="dropdown-menu">
-	          <li><a href="#">병원 소개</a></li>
-	          <li><a href="#">의료진 소개</a></li>
-	          <li><a href="#">연혁</a></li> 
-	          <li><a href="#">오시는 길</a></li>
+	          <li><a href="/introduce/hospital">병원 소개</a></li>
+	          <li><a href="/introduce/doctor">의료진 소개</a></li>
+	          <li><a href="/introduce/history">연혁</a></li> 
+	          <li><a href="/introduce/location">오시는 길</a></li>
 	        </ul>
 	      </li>
 				<li id="reservation"><a href="#">진료예약</a></li>

@@ -335,7 +335,7 @@ Handlebars.registerHelper("eqReplyer", function(replyer, block) {
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Content</label>
-						<textarea class="form-control" name="content" rows="3" readonly>${boardVO.content}</textarea>
+						<textarea class="form-control" name="content" rows="20" readonly>${boardVO.content}</textarea>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Writer</label>

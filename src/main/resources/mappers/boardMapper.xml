@@ -139,6 +139,7 @@
 	</select>
 	
 	<select id="listSearchCount" resultType="int">
+	
 		SELECT 
 			COUNT(*) 
 		FROM 
@@ -171,6 +172,7 @@
 	</select>
 	
 	<select id="listNewsSearchCount" resultType="int">
+	
 		SELECT 
 			COUNT(*) 
 		FROM 
