@@ -2,6 +2,7 @@ package com.thms.persistence;
 
 import java.util.List;
 
+import com.thms.domain.Criteria;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PatientVO;
 import com.thms.domain.SearchCriteria;
@@ -27,6 +28,10 @@ public interface JoinDAO {
 	/// 수정
 	public List<String> selectSearchForPatientUid(String uid);
 	///
-	
+
 	public void joinForPatient(PatientVO vo);
+
+	public List<PatientVO> selectPatientList(Criteria cri);
+
+	public int searchTotalPatient();
 }

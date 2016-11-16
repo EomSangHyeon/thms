@@ -4,6 +4,15 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.thms.mapper.UserMapper">
+
+	<!-- 환자 리스트 총 다 가져오기 -->
+	<select resultType="int" id="totalPatient"> select count(*) from
+		tbl_hospitalize </select>
+
+	<!-- 환자 리스트 가져오기 -->
+	<select resultType="com.thms.domain.PatientVO" id="selectPatientList"> select * from
+		tbl_hospitalize limit #{pageStart}, #{perPageNum} </select>
+
 	<!-- 환자 등록하기 -->
 	<insert id="joinForPatient">
 		insert into tbl_hospitalize(uid,horegdate,rmid,did)

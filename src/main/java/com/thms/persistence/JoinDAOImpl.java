@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.thms.domain.Criteria;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PatientVO;
 import com.thms.domain.SearchCriteria;
@@ -77,13 +78,23 @@ public class JoinDAOImpl implements JoinDAO {
 		return session.selectList(namespace + ".searchForPatient", uid);
 	}
 
-
-
 	@Override
 	public void joinForPatient(PatientVO vo) {
 
 		session.selectList(namespace + ".joinForPatient", vo);
 
+	}
+
+	@Override
+	public List<PatientVO> selectPatientList(Criteria cri) {
+
+		return session.selectList(namespace + ".selectPatientList", cri);
+	}
+
+	@Override
+	public int searchTotalPatient() {
+
+		return session.selectOne(namespace+".totalPatient");
 	}
 
 }

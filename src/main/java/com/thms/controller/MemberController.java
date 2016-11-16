@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.thms.domain.Criteria;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PageMaker;
 import com.thms.domain.PatientVO;
@@ -42,11 +43,26 @@ public class MemberController {
 	@Autowired
 	protected JavaMailSender mailSender;
 
-	@RequestMapping("joinForPatient")
-	public void joinConfirmPatient(PatientVO vo){
-		dao.joinForPatient(vo);
+	// 환자 리스트 불러오기
+	@RequestMapping("testselectPatientList")
+	public void selectPatientList(Criteria cri, Model model) {
+		System.out.println("testselectPatientList");
+
+		model.addAttribute("list", dao.selectPatientList(cri));
+
+		PageMaker maker = new PageMaker();
+		maker.setCri(cri);
+		maker.setTotalCount(dao.searchTotalPatient());
+
 	}
-	
+
+	@RequestMapping("joinForPatient.do")
+	public String joinConfirmPatient(PatientVO vo) {
+		dao.joinForPatient(vo);
+		return "direct:/selectPatientList";
+
+	}
+
 	// 환자 입력을 위한 검색
 	@RequestMapping("testJoinPatient")
 	public void joinPatient() {
