@@ -36,7 +36,7 @@ public class ScheduleController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
 
-	@RequestMapping(value="/before", method=RequestMethod.GET)
+	@RequestMapping(value = "/before", method = RequestMethod.GET)
 	public String before(ScheduleVO vo, RedirectAttributes rttr) throws Exception {
 		Calendar cal = Calendar.getInstance();
 		int year = cal.get(Calendar.YEAR);
@@ -44,84 +44,98 @@ public class ScheduleController {
 
 		rttr.addFlashAttribute(vo);
 
-		return "redirect:/schedule/calendar?year="+ year +"&month="+ month;
+		return "redirect:/schedule/calendar?year=" + year + "&month=" + month;
 	}
 
-	@RequestMapping(value="/calendar", method=RequestMethod.GET)
+	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
 	public void calendarGET(ScheduleVO vo, Integer year, Integer month, Model model) throws Exception {
 		logger.info("doctor schedule calendar called..........");
 		List<SubjectVO> subjectArray = subjectDao.listView();
 
 		Calendar cal = Calendar.getInstance();
 
-	    // 날짜 데이터 배열
-	    String[][] calDate = new String[6][7];
+		// 날짜 데이터 배열
+		String[][] calDate = new String[6][7];
 
-	    // Calendar에 년,월,일 셋팅
-	    if(year > 0)
-	    	cal.set(Calendar.YEAR, year);
-	    if(month > 0)
-	    	cal.set(Calendar.MONTH, month - 1);
-        cal.set(Calendar.DATE, 1);
+		// Calendar에 년,월,일 셋팅
+		if (year > 0)
+			cal.set(Calendar.YEAR, year);
+		if (month > 0)
+			cal.set(Calendar.MONTH, month - 1);
+		cal.set(Calendar.DATE, 1);
 
-        //월의 시작일이 무슨 요일인지 확인
-        int startDay = cal.get(Calendar.DAY_OF_WEEK);
-        //해당 월이 몇일까지 있는지 확인
-        int endDay = cal.getActualMaximum(Calendar.DATE);
+		// 월의 시작일이 무슨 요일인지 확인
+		int startDay = cal.get(Calendar.DAY_OF_WEEK);
+		// 해당 월이 몇일까지 있는지 확인
+		int endDay = cal.getActualMaximum(Calendar.DATE);
 
-        int k = 0;
-        for(int i=0; i<calDate.length; i++) {
-        	for(int j=0; j<calDate[i].length; j++) {
-        		if(k > 0)
-        			k++;
+		int k = 0;
+		for (int i = 0; i < calDate.length; i++) {
+			for (int j = 0; j < calDate[i].length; j++) {
+				if (k > 0)
+					k++;
 
-        		if(i == 0) {//월의 첫째주
-        			if(j + 1 == startDay)
-        				k++;
+				if (i == 0) {// 월의 첫째주
+					if (j + 1 == startDay)
+						k++;
 
-        			if(k > 0)
-        				calDate[i][j] = String.valueOf(k);
-        			else
-        				calDate[i][j] = "";
-        		} else {
-        			if(k <= endDay)
-        				calDate[i][j] = String.valueOf(k);
-        			else
-        				calDate[i][j] = "";
-        		}
-        	}
-        }
+					if (k > 0)
+						calDate[i][j] = String.valueOf(k);
+					else
+						calDate[i][j] = "";
+				} else {
+					if (k <= endDay)
+						calDate[i][j] = String.valueOf(k);
+					else
+						calDate[i][j] = "";
+				}
+			}
+		}
 
-        if(vo != null) {
-        	List<ScheduleVO> scheduleList = scheduleService.calendar(vo);
+		if (vo != null) {
+			List<ScheduleVO> scheduleList = scheduleService.calendar(vo);
 
-        	int[][] medicalCount = new int[7][2];
-        	int weekDay = 0, ampm = 0;
-        	for(int i=0; i<scheduleList.size(); i++) {
-        		switch(scheduleList.get(i).getWeekday()) {
-        			case "Sun" : weekDay = 0; break;
-        			case "Mon" : weekDay = 1; break;
-        			case "Tue" : weekDay = 2; break;
-        			case "Wed" : weekDay = 3; break;
-        			case "Thr" : weekDay = 4; break;
-        			case "Fri" : weekDay = 5; break;
-        			case "Sat" : weekDay = 6; break;
-        		}
-        		if(scheduleList.get(i).getAmpm().equals("am"))
-        			ampm = 0;
-        		else
-        			ampm = 1;
+			int[][] medicalCount = new int[7][2];
+			int weekDay = 0, ampm = 0;
+			for (int i = 0; i < scheduleList.size(); i++) {
+				switch (scheduleList.get(i).getWeekday()) {
+				case "Sun":
+					weekDay = 0;
+					break;
+				case "Mon":
+					weekDay = 1;
+					break;
+				case "Tue":
+					weekDay = 2;
+					break;
+				case "Wed":
+					weekDay = 3;
+					break;
+				case "Thr":
+					weekDay = 4;
+					break;
+				case "Fri":
+					weekDay = 5;
+					break;
+				case "Sat":
+					weekDay = 6;
+					break;
+				}
+				if (scheduleList.get(i).getAmpm().equals("am"))
+					ampm = 0;
+				else
+					ampm = 1;
 
-        		medicalCount[weekDay][ampm] = scheduleList.get(i).getMedicalCount();
-        	}
+				medicalCount[weekDay][ampm] = scheduleList.get(i).getMedicalCount();
+			}
 
-        	model.addAttribute("medicalCount", medicalCount);
-        }
+			model.addAttribute("medicalCount", medicalCount);
+		}
 
-        model.addAttribute("calDate", calDate);
-        model.addAttribute("year", cal.get(Calendar.YEAR));
-        model.addAttribute("month", cal.get(Calendar.MONTH) + 1);
-        model.addAttribute("subject", subjectArray);
+		model.addAttribute("calDate", calDate);
+		model.addAttribute("year", cal.get(Calendar.YEAR));
+		model.addAttribute("month", cal.get(Calendar.MONTH) + 1);
+		model.addAttribute("subject", subjectArray);
 	}
 
 	@RequestMapping("/doctorList/{sjid}")
