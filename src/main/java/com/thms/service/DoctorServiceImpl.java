@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.thms.domain.Criteria;
 import com.thms.domain.DoctorVO;
+import com.thms.domain.SearchCriteria;
 import com.thms.persistence.DoctorDAO;
 
 @Service
@@ -40,11 +41,11 @@ public class DoctorServiceImpl implements DoctorService{
 		dao.delete(did);
 		
 	}
-	@Override
+/*	@Override
 	public List<DoctorVO> listPage(int page) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listPage(page);
-	}
+	}*/
 	@Override
 	public List<DoctorVO> listCriteria(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
@@ -55,5 +56,20 @@ public class DoctorServiceImpl implements DoctorService{
 	@Override
 	public List<DoctorVO> listView(Integer sjid) throws Exception {
 		return dao.listView(sjid);
+	}
+	@Override
+	public int listCountCreiteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
+	@Override
+	public List<DoctorVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearch(cri);
+	}
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearchCount(cri);
 	}
 }

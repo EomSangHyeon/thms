@@ -13,6 +13,7 @@ public interface CheckUpDAO {
 	
 	public List<CheckUpVO> listAll() throws Exception;
 	
+	
 	public void update(CheckUpVO vo)throws Exception;
 	
 	public void delete(Integer chid) throws Exception;
