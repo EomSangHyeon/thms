@@ -75,8 +75,11 @@
 				onchange="searchDidForPatient()">
 		</div>
 		<div id="forPatientDid"></div>
-		<input type="submit">
+		<input type="submit"><input type="button"
+			onclick="location.href='testselectPatientList';" value="리스트 보기 ">
 	</form>
+	
+	
 
 </body>
 </html>
