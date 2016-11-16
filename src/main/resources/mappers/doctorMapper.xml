@@ -20,31 +20,35 @@
 	</select>
 	<select id="readPage" resultType="DoctorVO">
 		SELECT
-		`did`, `dname`, `dgender` ,`dclinic` ,`sjid`
+		`did`, `dname`, `dgender`
+		,`dclinic` ,`sjid`
 		FROM
-		`tbl_doctor` 
+		`tbl_doctor`
 		WHERE
 		`did`=#{did}
 	</select>
 	<update id="update">
-		update tbl_doctor set 
-			`dname` =#{dname},`dgender` =#{dgender},`dclinic` =#{dclinic},`sjid` =#{sjid}
-		 where 
-		 	`did`=#{did} 
+		update tbl_doctor set
+		`dname` =#{dname},`dgender`
+		=#{dgender},`dclinic` =#{dclinic},`sjid` =#{sjid}
+		where
+		`did`=#{did}
 	</update>
-	
 
-		<select id="listView" resultType="DoctorVO">
+
+	<select id="listView" resultType="DoctorVO">
 			<![CDATA[
 				SELECT * FROM `tbl_doctor` WHERE `sjid`=#{sjid}
 			]]>
-		</select>
+	</select>
 
 	<delete id="delete">
 		delete from tbl_doctor where `did`=#{did}
 	</delete>
-	
-	<select id="listCriteria" resultType="DoctorVO"> 
+
+
+
+	<select id="listPage" resultType="DoctorVO"> 
 	<![CDATA[ 
 	SELECT `did`, `dname`, `dgender` ,`dclinic` ,`sjid`
 		 FROM 
@@ -53,5 +57,59 @@
 		 limit #{pageStart},#{perPageNum} 
 		]]>
 	</select>
-	
+	<select id="listCriteria" resultType="DoctorVO"> 
+	<![CDATA[ 
+		SELECT `did`, 
+			`dname`, `dgender` ,`dclinic` ,`sjid`
+		 FROM 
+		 	`tbl_doctor` 
+		 WHERE 
+		 	`did`>0 ORDER BY `did` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="countPaging" resultType="int"> 
+	<![CDATA[ 
+		select count(did) 
+			from
+		tbl_doctor 
+			where 
+		did>0 
+		]]>
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				AND `did` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				AND `dname` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="DoctorVO"> 
+	<![CDATA[ 
+		SELECT `did`, 
+			`dname`, `dgender` ,`dclinic` ,`sjid`
+		 FROM 
+		 	`tbl_doctor` 
+		 WHERE 
+		 	`did`>0  
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+		ORDER BY `did` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(did) 
+			from
+		tbl_doctor 
+			where 
+		did>0 
+		]]>
+		<include refid="search"></include>
+	</select>
 </mapper> 
