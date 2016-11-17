@@ -3,6 +3,11 @@
 
 <%@ include file="../include/header.jsp" %>
 
-<h1>연혁</h1>
+<%@ include file="sidebar.jsp" %>
+<div class="container-fluid">
+	<div class="row">
+		<h1>연혁</h1>
+	</div>
+</div>
 
 <%@ include file="../include/footer.jsp" %>

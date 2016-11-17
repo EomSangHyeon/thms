@@ -21,7 +21,7 @@
 						<tr>
 							<th>번호</th>
 							<th>이름</th>
-							<th>병실</th>
+							<th>진료실</th>
 							<th>부서ID</th>
 							<th>정보수정<th>
 						</tr>

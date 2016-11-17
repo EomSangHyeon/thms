@@ -48,22 +48,22 @@ public class PageController {
 	}
 	
 	// introduce
-	@RequestMapping(value = "/introduce/hospital", method = RequestMethod.GET)
-	public void introduceHospital() {
-		logger.info("GET introduceHospital....................");
-	}
-	@RequestMapping(value = "/introduce/doctor ", method = RequestMethod.GET)
-	public void introduceDoctor () {
-		logger.info("GET introduceDoctor....................");
-	}
-	@RequestMapping(value = "/introduce/history", method = RequestMethod.GET)
-	public void introduceHistory() {
-		logger.info("GET introduceHistory....................");
-	}
-	@RequestMapping(value = "/introduce/location", method = RequestMethod.GET)
-	public void introduceLocation() {
-		logger.info("GET introduceLocation....................");
-	}
+//	@RequestMapping(value = "/introduce/hospital", method = RequestMethod.GET)
+//	public void introduceHospital() {
+//		logger.info("GET introduceHospital....................");
+//	}
+//	@RequestMapping(value = "/introduce/doctor ", method = RequestMethod.GET)
+//	public void introduceDoctor () {
+//		logger.info("GET introduceDoctor....................");
+//	}
+//	@RequestMapping(value = "/introduce/history", method = RequestMethod.GET)
+//	public void introduceHistory() {
+//		logger.info("GET introduceHistory....................");
+//	}
+//	@RequestMapping(value = "/introduce/location", method = RequestMethod.GET)
+//	public void introduceLocation() {
+//		logger.info("GET introduceLocation....................");
+//	}
 	
 	//admin
 	@RequestMapping(value = "admin/doctor/register", method = RequestMethod.GET)
