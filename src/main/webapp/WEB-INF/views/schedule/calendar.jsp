@@ -69,11 +69,14 @@ function getSchedule() {
 	self.location = "/schedule/calendar?sjid="+ sjid +"&did="+ did +"&year="+ year +"&month="+ month;
 }
 </script>
+
 <!-- Main content -->
-<section class="content">
+
+<div class="container-fluid">
 	<div class="row">
+	<%@ include file="../admin/admin_sidebar.jsp"%>
 		<!-- left column -->
-		<div class="col-md-12">
+		<div class="col-sm-9 col-md-10 main">
 			<!-- general form elements -->
 			<form role="form" action="calendar" method="post">
 			<div class="box">
@@ -197,6 +200,7 @@ function getSchedule() {
 			</form>
 		</div>
 	</div>
-</section>
+
+</div>
 
 <%@ include file="../include/footer.jsp" %>

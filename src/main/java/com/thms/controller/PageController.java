@@ -70,4 +70,8 @@ public class PageController {
 	public void adminDoctorRegister() {
 		logger.info("GET adminDoctorRegister....................");
 	}
+	@RequestMapping(value = "/admin/edit", method = RequestMethod.GET)
+	public void adminEdit() {
+		logger.info("GET adminEdit....................");
+	}	
 }

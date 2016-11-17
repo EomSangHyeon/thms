@@ -14,23 +14,29 @@
 		<div class="col-sm-9 col-md-10 main">
 
 			<form action="post">
-				<input type="button" class="btn btn-primary" value="입력" onclick=" location='/doctor/register'"/>
+				<input type="button" class="btn btn-primary" value="의사 정보 입력하기" onclick=" location='/doctor/register'"/>
+				<hr>
 				<table class="table table-striped">
-					<tr>
-						<th>번호</th>
-						<th>이름</th>
-						<th>병실</th>
-						<th>부서ID</th>
-					</tr>
-					<c:forEach items="${listPage}" var="DoctorVO">
+					<thead>
 						<tr>
-							<td>${DoctorVO.did}</td>
-							<td><a href="/doctor/readPage?did=${DoctorVO.did}">${DoctorVO.dname}</a></td>
-							<td>${DoctorVO.dclinic}</td>
-							<td>${DoctorVO.sjid}</td>
+							<th>번호</th>
+							<th>이름</th>
+							<th>병실</th>
+							<th>부서ID</th>
+							<th>정보수정<th>
 						</tr>
-					</c:forEach>
-		
+					</thead>
+					<tbody>
+						<c:forEach items="${listPage}" var="DoctorVO">
+							<tr>
+								<td>${DoctorVO.did}</td>
+								<td><a href="/doctor/readPage?did=${DoctorVO.did}">${DoctorVO.dname}</a></td>
+								<td>${DoctorVO.dclinic}</td>
+								<td>${DoctorVO.sjid}</td>
+								<td><a href="/doctor/modifyPage?did=${DoctorVO.did}"><input class="btn btn-warning" type="button" value="수정"></a></td>
+							</tr>
+						</c:forEach>
+					</tbody>
 				</table>
 				
 				<div class="box-footer">
