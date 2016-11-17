@@ -20,4 +20,9 @@ public class ScheduleDAOImpl implements ScheduleDAO {
 	public List<ScheduleVO> calendar(ScheduleVO vo) throws Exception {
 		return sqlSession.selectList(namespace +".calendar", vo);
 	}
+
+	@Override
+	public void add(ScheduleVO vo) throws Exception {
+		sqlSession.insert(namespace +".add", vo);
+	}
 }

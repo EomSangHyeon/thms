@@ -9,4 +9,17 @@
 			SELECT * FROM `tbl_schedule` WHERE `sjid`=#{sjid} AND `did`=#{did}
 		]]>
 	</select>
+
+	<insert id="add" parameterType="ScheduleVO">
+		INSERT INTO 
+			`tbl_schedule` 
+		SET 
+			`sjid`=#{sjid}, 
+			`did`=#{did}, 
+			`weekday`=#{weekday}, 
+			`ampm`=#{ampm}, 
+			`medicalCount`=#{medicalCount}
+		ON DUPLICATE KEY UPDATE 
+			`medicalCount`=#{medicalCount}
+	</insert>
 </mapper>

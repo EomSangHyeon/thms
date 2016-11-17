@@ -42,19 +42,60 @@ function getDid() {
 		event.preventDefault();
 
 		var i = 0;
-		$(".medicalCount").find("input[type='number']").each(function() {
-			//$.post("/schedule/calendarEdit/"+ $("select[name='sjid']").val() +"/"+ $("select[name='did']").val(), );
-			i++;
+		var type = "";
+		var flag = true;
+		var weekday = "";
+		$(".medicalCount").each(function() {
+			weekday = this.id.replace(/td\_/gi, "");
+
+			$(this).find("input[type='number']").each(function() {
+				type = $(this).prop("class").replace(/Input/gi, "");
+
+				$.post("/schedule/calendarEdit", {
+					sjid: $("select[name='sjid']").val(),
+					did: $("select[name='did']").val(),
+					weekday: getWeekday(weekday),
+					ampm: type,
+					medicalCount: $(this).val()
+				}, function(data) {
+					if(data == "success")
+						flag = true;
+					else
+						flag = false;
+				});
+
+				if(flag == true)
+					i++;
+				else {
+					alert("error");
+					return;
+				}
+			});
 		});
 	});
 }
 
-function getSchedule() {
-	var sjid = $("select[name='sjid']").val();
-	var did = $("select[name='did']").val();
-	var year = "${year}";
-	var month = "${month}";
+function getWeekday(number) {
+	var weekday = "";
 
+	switch(number) {
+		case "0" : weekday = "Sun"; break;
+		case "1" : weekday = "Mon"; break;
+		case "2" : weekday = "Tue"; break;
+		case "3" : weekday = "Wed"; break;
+		case "4" : weekday = "Thr"; break;
+		case "5" : weekday = "Fri"; break;
+		case "6" : weekday = "Sat"; break;
+	}
+
+	return weekday;
+}
+
+function getSchedule() {
+	self.location = "/schedule/calendar?sjid="+ $("select[name='sjid']").val() +"&did="+ $("select[name='did']").val() +"&year=${year}&month=${month}";
+}
+
+function getScheduleEmptyVO(year, month) {
 	if(month < 1) {
 		year--;
 		month = 12;
@@ -66,14 +107,16 @@ function getSchedule() {
 	if(year < 1)
 		return;
 
-	self.location = "/schedule/calendar?sjid="+ sjid +"&did="+ did +"&year="+ year +"&month="+ month;
+	self.location = "/schedule/calendar?sjid="+ $("select[name='sjid']").val() +"&did="+ $("select[name='did']").val() +"&year="+ year +"&month="+ month;
 }
 </script>
 <!-- Main content -->
-<section class="content">
+<div class="container-fluid">
 	<div class="row">
 		<!-- left column -->
-		<div class="col-md-12">
+		<%@ include file="../admin/admin_sidebar.jsp" %>
+
+		<div class="col-sm-9 col-md-10 main">
 			<!-- general form elements -->
 			<form role="form" action="calendar" method="post">
 			<div class="box">
@@ -127,7 +170,7 @@ function getSchedule() {
 							<tbody>
 								<tr>
 <c:forEach begin="0" end="6" step="1" var="w">
-									<td class="text-center medicalCount" style="height:50px; padding:4px; margin:0px;">
+									<td id="td_${w}" class="text-center medicalCount" style="height:50px; padding:4px; margin:0px;">
 										<div class="text-center" style="background-color:#00D8FF;">오전</div>
 										<div><input type="number" name="am[${w}]" value="${medicalCount[w][0]}" class="amInput" style="width:100%;"/></div>
 										<div class="text-center" style="background-color:#FFA7A7;">오후</div>
@@ -140,11 +183,11 @@ function getSchedule() {
 					</div>
 					<div id="calendarTable" class="form-group">
 						<h3 class="text-center">
-							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getSchedule(${year - 1}, ${month});">◁◁</span>&nbsp;
-							<span style="cursor:pointer;" onclick="getSchedule(${year}, ${month - 1});">◁</span>&nbsp;
+							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getScheduleEmptyVO(${year - 1}, ${month});">◁◁</span>&nbsp;
+							<span style="cursor:pointer;" onclick="getScheduleEmptyVO(${year}, ${month - 1});">◁</span>&nbsp;
 							${year}년 ${month}월&nbsp;
-							<span style="cursor:pointer;" onclick="getSchedule(${year}, ${month + 1});">▷</span>&nbsp;
-							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getSchedule(${year + 1}, ${month});">▷▷</span>
+							<span style="cursor:pointer;" onclick="getScheduleEmptyVO(${year}, ${month + 1});">▷</span>&nbsp;
+							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getScheduleEmptyVO(${year + 1}, ${month});">▷▷</span>
 						</h3>
 						<table class="table table-bordered">
 							<colgroup>
@@ -176,9 +219,9 @@ function getSchedule() {
 										<div class="text-right">${calDate[i][j]}</div>
 										<br/>
 										<div class="text-center" style="background-color:#00D8FF;">오전</div>
-										<div class="text-center">${medicalCount[j][0]}</div>
+										<div class="text-center">0 / ${medicalCount[j][0]}</div>
 										<div class="text-center" style="background-color:#FFA7A7;">오후</div>
-										<div class="text-center">${medicalCount[j][1]}</div>
+										<div class="text-center">0 / ${medicalCount[j][1]}</div>
 		</c:if>
 									</td>
 	</c:forEach>
@@ -197,6 +240,6 @@ function getSchedule() {
 			</form>
 		</div>
 	</div>
-</section>
+</div>
 
 <%@ include file="../include/footer.jsp" %>

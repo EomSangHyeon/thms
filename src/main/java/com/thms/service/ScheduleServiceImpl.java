@@ -18,4 +18,9 @@ public class ScheduleServiceImpl implements ScheduleService {
 	public List<ScheduleVO> calendar(ScheduleVO vo) throws Exception {
 		return dao.calendar(vo);
 	}
+
+	@Override
+	public void add(ScheduleVO vo) throws Exception {
+		dao.add(vo);
+	}
 }

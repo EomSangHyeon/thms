@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.thms.domain.CalendarCriteria;
 import com.thms.domain.DoctorVO;
 import com.thms.domain.ScheduleVO;
 import com.thms.domain.SubjectVO;
@@ -36,19 +37,8 @@ public class ScheduleController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ScheduleController.class);
 
-	@RequestMapping(value = "/before", method = RequestMethod.GET)
-	public String before(ScheduleVO vo, RedirectAttributes rttr) throws Exception {
-		Calendar cal = Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-
-		rttr.addFlashAttribute(vo);
-
-		return "redirect:/schedule/calendar?year=" + year + "&month=" + month;
-	}
-
 	@RequestMapping(value = "/calendar", method = RequestMethod.GET)
-	public void calendarGET(ScheduleVO vo, Integer year, Integer month, Model model) throws Exception {
+	public void calendarGET(ScheduleVO vo, CalendarCriteria cri, Model model) throws Exception {
 		logger.info("doctor schedule calendar called..........");
 		List<SubjectVO> subjectArray = subjectDao.listView();
 
@@ -58,10 +48,10 @@ public class ScheduleController {
 		String[][] calDate = new String[6][7];
 
 		// Calendar에 년,월,일 셋팅
-		if (year > 0)
-			cal.set(Calendar.YEAR, year);
-		if (month > 0)
-			cal.set(Calendar.MONTH, month - 1);
+		if (cri.getYear() > 0)
+			cal.set(Calendar.YEAR, cri.getYear());
+		if (cri.getMonth() > 0)
+			cal.set(Calendar.MONTH, cri.getMonth() - 1);
 		cal.set(Calendar.DATE, 1);
 
 		// 월의 시작일이 무슨 요일인지 확인
@@ -136,6 +126,14 @@ public class ScheduleController {
 		model.addAttribute("year", cal.get(Calendar.YEAR));
 		model.addAttribute("month", cal.get(Calendar.MONTH) + 1);
 		model.addAttribute("subject", subjectArray);
+	}
+
+	@RequestMapping(value = "/calendarEdit", method = RequestMethod.POST)
+	@ResponseBody
+	public String calendarPOST(ScheduleVO vo) throws Exception {
+		scheduleService.add(vo);
+
+		return "success";
 	}
 
 	@RequestMapping("/doctorList/{sjid}")
