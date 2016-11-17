@@ -4,6 +4,15 @@
 
 <%@ include file="../include/header.jsp" %>
 
+<style type="text/css">
+.clickable_day {
+	cursor: pointer;
+}
+
+.enter_color {
+	background-color: #FF0000;
+}
+</style>
 <script type="text/javascript">
 $(document).ready(function() {
 	if($("select[name='sjid']").val() != "")
@@ -11,7 +20,21 @@ $(document).ready(function() {
 
 	$("select[name='sjid']").on("change", getDid);
 
-	$("select[name='did']").on("change", getSchedule);
+	$("select[name='did']").on("change", function() {
+		getSchedule("${year}", "${month}");
+	});
+
+	$(".clickable_day").on({
+		mouseenter: function() {
+			$(this).addClass("enter_color");
+		},
+		mouseleave: function() {
+			$(this).removeClass("enter_color");
+		},
+		click: function() {
+			alert(this.id);
+		}
+	});
 });
 
 function getDid() {
@@ -91,11 +114,7 @@ function getWeekday(number) {
 	return weekday;
 }
 
-function getSchedule() {
-	self.location = "/schedule/calendar?sjid="+ $("select[name='sjid']").val() +"&did="+ $("select[name='did']").val() +"&year=${year}&month=${month}";
-}
-
-function getScheduleEmptyVO(year, month) {
+function getSchedule(year, month) {
 	if(month < 1) {
 		year--;
 		month = 12;
@@ -107,16 +126,18 @@ function getScheduleEmptyVO(year, month) {
 	if(year < 1)
 		return;
 
-	self.location = "/schedule/calendar?sjid="+ $("select[name='sjid']").val() +"&did="+ $("select[name='did']").val() +"&year="+ year +"&month="+ month;
+	var url = "/reservation/register?";
+	if($("select[name='sjid']").val() != "" && $("select[name='did']").val() != "")
+		url += "sjid="+ $("select[name='sjid']").val() +"&did="+ $("select[name='did']").val() +"&";
+
+	self.location = url +"year="+ year +"&month="+ month;
 }
 </script>
 <!-- Main content -->
 <div class="container-fluid">
 	<div class="row">
 		<!-- left column -->
-		<%@ include file="../admin/admin_sidebar.jsp" %>
-
-		<div class="col-sm-9 col-md-10 main">
+		<div class="main">
 			<!-- general form elements -->
 			<form role="form" action="calendar" method="post">
 			<div class="box">
@@ -147,11 +168,11 @@ function getScheduleEmptyVO(year, month) {
 					</div>
 					<div id="calendarTable" class="form-group">
 						<h3 class="text-center">
-							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getScheduleEmptyVO(${year - 1}, ${month});">◁◁</span>&nbsp;
-							<span style="cursor:pointer;" onclick="getScheduleEmptyVO(${year}, ${month - 1});">◁</span>&nbsp;
+							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getSchedule(${year - 1}, ${month});">◁◁</span>&nbsp;
+							<span style="cursor:pointer;" onclick="getSchedule(${year}, ${month - 1});">◁</span>&nbsp;
 							${year}년 ${month}월&nbsp;
-							<span style="cursor:pointer;" onclick="getScheduleEmptyVO(${year}, ${month + 1});">▷</span>&nbsp;
-							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getScheduleEmptyVO(${year + 1}, ${month});">▷▷</span>
+							<span style="cursor:pointer;" onclick="getSchedule(${year}, ${month + 1});">▷</span>&nbsp;
+							<span style="letter-spacing:-10px; cursor:pointer;" onclick="getSchedule(${year + 1}, ${month});">▷▷</span>
 						</h3>
 						<table class="table table-bordered">
 							<colgroup>
@@ -180,12 +201,14 @@ function getScheduleEmptyVO(year, month) {
 	<c:forEach begin="0" end="6" step="1" var="j">
 									<td class="text-center" style="height:50px; padding:4px; margin:0px;">
 		<c:if test="${not empty calDate[i][j]}">
-										<div class="text-right">${calDate[i][j]}</div>
-										<br/>
-										<div class="text-center" style="background-color:#00D8FF;">오전</div>
-										<div class="text-center">0 / ${medicalCount[j][0]}</div>
-										<div class="text-center" style="background-color:#FFA7A7;">오후</div>
-										<div class="text-center">0 / ${medicalCount[j][1]}</div>
+										<div id="${year}-${month}-${calDate[i][j]}" class="clickable_day">
+											<div class="text-right">${calDate[i][j]}</div>
+											<br/>
+											<div class="text-center" style="background-color:#00D8FF;">오전</div>
+											<div class="text-center">0 / ${medicalCount[j][0]}</div>
+											<div class="text-center" style="background-color:#FFA7A7;">오후</div>
+											<div class="text-center">0 / ${medicalCount[j][1]}</div>
+										</div>
 		</c:if>
 									</td>
 	</c:forEach>
