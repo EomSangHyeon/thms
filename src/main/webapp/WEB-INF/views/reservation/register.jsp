@@ -12,6 +12,13 @@
 .enter_color {
 	background-color: #FF0000;
 }
+
+.show {
+	position: relative;
+	max-width: 1200px;
+	max-height: 800px;
+	overflow: auto;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -32,7 +39,14 @@ $(document).ready(function() {
 			$(this).removeClass("enter_color");
 		},
 		click: function() {
-			alert(this.id);
+			var clickedDate = this.id;
+			var sjname = $("select[name='sjid'] option:selected").text();
+			var dname = $("select[name='did'] option:selected").text();
+			$("#confirmModal").addClass("show");
+			/* var str = dname +"("+ sjname +")에 "+ clickedDate +" 날짜로 예약 하시겠습니까?";
+			if(confirm(str)) {
+				
+			} */
 		}
 	});
 });
@@ -133,6 +147,25 @@ function getSchedule(year, month) {
 	self.location = url +"year="+ year +"&month="+ month;
 }
 </script>
+<!-- Modal -->
+<div id="conformModal" class="modal modal-primary fade" role="dailog">
+	<div class=modal-dailog>
+		<!-- Modal content -->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title"></h4>
+			</div>
+			<div class="modal-body" data-rno>
+				<p><input type="text" id="replytext" class="form-control"/></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-info" id="replyModBtn">예약하기</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
 <!-- Main content -->
 <div class="container-fluid">
 	<div class="row">
@@ -201,7 +234,7 @@ function getSchedule(year, month) {
 	<c:forEach begin="0" end="6" step="1" var="j">
 									<td class="text-center" style="height:50px; padding:4px; margin:0px;">
 		<c:if test="${not empty calDate[i][j]}">
-										<div id="${year}-${month}-${calDate[i][j]}" class="clickable_day">
+										<div id="${year}-${month}-${calDate[i][j]}" class="clickable_day" data-toggle="modal" data-target="#confirmModal">
 											<div class="text-right">${calDate[i][j]}</div>
 											<br/>
 											<div class="text-center" style="background-color:#00D8FF;">오전</div>
