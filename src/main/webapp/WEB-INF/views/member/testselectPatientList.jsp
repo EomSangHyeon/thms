@@ -9,10 +9,39 @@
 <title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+	var comeon;
+
+	function deleteAjax(here) {
+		$.ajax({
+			url : 'deleteAjax.do',
+			type : 'post',
+			dataType : 'text',
+			data : {
+				hoid : here
+			},
+			success : function() {
+				alert("삭제하였습니다")
+				location.href = 'testselectPatientList'
+			}
+		})
+
+	}
+
+	//환자 입실이미 되어있나 없나 확인후에 환자 
+
+	function goRoom(comeon) {
+		window.open("confirmRoom?hoid=" + comeon, "",
+				"width=600, height=500, left=600");
+
+	}
+</script>
+
 
 </head>
 <body>
 	selectPatientList
+	<input type="button" value="환자병실확인" onclick="self.location='roomList';" />
 	<br>
 	<table>
 		<tr>
@@ -29,6 +58,11 @@
 				<td>${patient.horegdate }</td>
 				<td>${patient.rmid }</td>
 				<td>${patient.did }</td>
+				<td><input type="button" value="입실" id="enterRoom"
+					onclick="goRoom(' ${patient.hoid}')"></td>
+				<td><input type="button" value="퇴실" id="checkOut"></td>
+				<td><input type="button" value=" 삭제"
+					onclick="deleteAjax('${patient.hoid }')"></td>
 			</tr>
 
 		</c:forEach>
@@ -49,15 +83,29 @@
 					<a
 					href="testselectPatientList?page=${idx}&keyword=${pageMaker.cri.keyword}&searchType=${pageMaker.cri.searchType}">${idx }</a>
 				</li>
-
 			</c:forEach>
 
 			<c:if test="${pageMaker.next && pageMaker.endPage>0}">
 				<li><a
 					href="testselectPatientList?page=${pageMaker.endPage+1}&keyword=${pageMaker.cri.keyword}&searchType=${pageMaker.cri.searchType}">&raquo;</a></li>
 			</c:if>
-
 		</ul>
 	</div>
+	<form action="testselectPatientList">
+		<table>
+			<tr>
+				<td>검색유형</td>
+				<td><select name="searchType">
+						<option value="hoid">환자 아이디</option>
+						<option value="uid">유저 아아디</option>
+						<option value="rmid">방번호</option>
+						<option value="did">담당 의사</option>
+				</select></td>
+				<td>검색어</td>
+				<td><input type="text" name="keyword" required="required"></td>
+				<td><input type="submit" value="검색"></td>
+			</tr>
+		</table>
+	</form>
 </body>
 </html>

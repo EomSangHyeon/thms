@@ -12,6 +12,23 @@
 </head>
 <body>
 	<script type="text/javascript">
+		function restRoom() {
+			$.ajax({
+				type : 'post',
+				dataType : 'text',
+				url : "restRoomAjax",
+				data : {
+					rmid : $("#rmid").val()
+				},
+				success : function(data) {
+					$("#searchRmid").html(
+							'<b style="font-size:18px;color:blue">' + data
+									+ '</b>')
+				}
+
+			})
+		}
+
 		function searchUidForPatient() {
 			$.ajax({
 				type : 'post',
@@ -66,9 +83,9 @@
 
 		<label> 빈 병실 검색</label>
 		<div>
-			<input type="text" id="rmid" name="rmid">
+			<input type="text" id="rmid" name="rmid" onchange="restRoom()">
 		</div>
-
+		<div id="searchRmid"></div> 
 		<label> 담당의사 번호</label>
 		<div>
 			<input type="text" id="did" name="did"

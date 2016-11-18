@@ -5,13 +5,120 @@
 
 <mapper namespace="com.thms.mapper.UserMapper">
 
+	<!-- AJAX를 통해서 방이 가능한지 확인 -->
+	<select id="checkRoon" resultType="String">
+		select
+		(select rmheadcount from tbl_room where rmid=#{rmid} ) -
+		(select count(rmid) from tbl_hospitalize where rmid=#{rmid} )
+	</select>
+
+
+
+	<!-- 리스트ROOM에 방 전체 현황 넘기기 -->
+	<select id="nowRoom" resultType="com.thms.domain.RoomVO">
+		select rmid, rmnumber, (select
+		rmheadcount from tbl_room where rmid=2 ) -
+		(select count(rmid) from
+		tbl_hospitalize where rmid=2)
+		rmcurrentcount,rmheadcount from tbl_room;
+	</select>
+
+
+	<delete id="deletePatient">
+		delete from tbl_hospitalize where hoid = #{hoid}
+	</delete>
+
+
+	<update id="updatePatient">
+
+		update
+		tbl_hospitalize
+		set
+		uid=#{uid},
+		horegdate=#{horegdate},
+		rmid=#{rmid},
+		did=#{did}
+		where
+		hoid=#{hoid}
+
+	</update>
+
+	<!-- 환자 한명 들고가기 -->
+	<select id="selectOnePatient" resultType="com.thms.domain.PatientVO">
+
+		select
+		*
+		from
+		tbl_hospitalize
+		where
+		hoid = #{hoid}
+
+	</select>
+
+	<!-- 환자 검색한거 갯수 들고오기 -->
+	<select id="	searchPatientCount " resultType="int">
+
+		select
+		count(*)
+		from
+		tbl_hospitalize
+
+		<where>
+			<choose>
+				<when test="searchType == 'uid'">
+					uid like CONCAT('%',#{keyword},'%')
+				</when>
+				<when test="searchType == 'hoid'">
+					hoid = #{keyword}
+				</when>
+				<when test="searchType == 'rmid'">
+					rmid = #{keyword}
+				</when>
+				<when test="searchType == 'did'">
+					did = #{keyword}
+				</when>
+			</choose>
+		</where>
+
+	</select>
+
+
+	<!-- 환자 검색 리스트 가져오기 -->
+	<select id="searchPatientList" resultType="com.thms.domain.PatientVO">
+		select
+		*
+		from
+		tbl_hospitalize
+		<where>
+			<choose>
+				<when test="searchType =='hoid'">
+					hoid = #{keyword}
+					limit #{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='uid'">
+					uid like CONCAT('%',#{keyword},'%') limit
+					#{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='rmid'"> rmid = #{keyword} limit #{pageStart}, #{perPageNum}
+				</when>
+				<when test="searchType =='did'"> did = #{keyword} limit #{pageStart},
+					#{perPageNum}
+				</when>
+			</choose>
+		</where>
+
+	</select>
+
 	<!-- 환자 리스트 총 다 가져오기 -->
-	<select resultType="int" id="totalPatient"> select count(*) from
-		tbl_hospitalize </select>
+	<select resultType="int" id="totalPatient">
+		select count(*) from
+		tbl_hospitalize
+	</select>
 
 	<!-- 환자 리스트 가져오기 -->
 	<select resultType="com.thms.domain.PatientVO" id="selectPatientList"> select * from
-		tbl_hospitalize limit #{pageStart}, #{perPageNum} </select>
+		tbl_hospitalize limit #{pageStart}, #{perPageNum}
+	</select>
 
 	<!-- 환자 등록하기 -->
 	<insert id="joinForPatient">
@@ -32,7 +139,6 @@
 	<!-- 회원 검색 -->
 	<!-- 비밀번호, 닉네임, 가일일 빼고 다넣기 -->
 	<select id="searchMember" resultType="com.thms.domain.MemberVO">
-
 		select
 		*
 		from
@@ -74,14 +180,8 @@
 					limit
 					#{pageStart}, #{perPageNum}
 				</when>
-
-
 			</choose>
-
-
 		</where>
-
-
 	</select>
 
 	<!-- 검색 total -->
@@ -91,7 +191,6 @@
 		count(*)
 		from
 		tbl_member
-
 		<where>
 			<choose>
 				<when test="searchType == 'uid'">

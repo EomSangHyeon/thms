@@ -21,9 +21,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.thms.domain.Criteria;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PageMaker;
 import com.thms.domain.PatientVO;
@@ -43,19 +43,94 @@ public class MemberController {
 	@Autowired
 	protected JavaMailSender mailSender;
 
-	// 환자 리스트 불러오기
-	@RequestMapping("testselectPatientList")
-	public void selectPatientList(Criteria cri, Model model) {
-		System.out.println("testselectPatientList");
+	// ajax로 입력하는 방이 입실 가능한지 안한지 여부검사
+	@ResponseBody
+	@RequestMapping(value ="restRoomAjax"  ,produces = "application/text; charset=utf8" )
+	public ResponseEntity<String> aviliableRoom(@RequestParam("rmid") String rmid) {
+		String here = dao.checkRoom(rmid);
+		if (Integer.parseInt(here) > 0) {
+			here = here+"명 입실 가능";
+		}else{
+			here = here+" 입실 불가";
+		}
 
-		model.addAttribute("list", dao.selectPatientList(cri));
+		ResponseEntity<String> entity = new ResponseEntity<String>(here, HttpStatus.OK);
 
-		PageMaker maker = new PageMaker();
-		maker.setCri(cri);
-		maker.setTotalCount(dao.searchTotalPatient());
+		return entity;
+	}
+
+	// 방 현황 확인
+	@RequestMapping("roomList")
+	public void RoomList(Model model) {
+
+		model.addAttribute("room", dao.currentRoom());
+		System.out.println(dao.currentRoom());
+	}
+
+	// 아이작스로 환자 삭제
+	@ResponseBody
+	@RequestMapping(value = "deleteAjax.do", method = RequestMethod.POST)
+	public String deletePatient(@RequestParam("hoid") String hoid) {
+		System.out.println("deleteAjax.do");
+		System.out.println(hoid);
+		dao.deletePatient(hoid);
+
+		return "ok";
+	}
+
+	// 방 확정 시키기 위함
+	@ResponseBody
+	@RequestMapping(value = "updateConfirmRoom.do", method = RequestMethod.POST)
+	public String updateRoom(PatientVO vo) {
+		System.out.println("updateConfirmRoom");
+		dao.updatePatient(vo);
+		return "oo";
+	}
+
+	// 방 넣기 위해서 환자 한명의 값을 불러옴
+	@RequestMapping("confirmRoom")
+	public void confirmRoom(@RequestParam("hoid") int hoid, Model model) {
+		System.out.println("confirmRoom");
+		System.out.println(hoid);
+
+		model.addAttribute("here", dao.selectOnePatient(String.valueOf(hoid)));
 
 	}
 
+	// 환자 전체 리스트 불러오기 // 환자 검색해서 리스트 불러오기
+	@RequestMapping("testselectPatientList")
+	public void selectPatientList(SearchCriteria cri, Model model) {
+		System.out.println("testselectPatientList");
+
+		if (cri.getSearchType() == null) {
+
+			model.addAttribute("list", dao.selectPatientList(cri));
+			PageMaker maker = new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(dao.searchTotalPatient());
+			model.addAttribute("pageMaker", maker);
+		} else if (cri.getSearchType() == "") {
+
+			model.addAttribute("list", dao.selectPatientList(cri));
+			PageMaker maker = new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(dao.searchTotalPatient());
+			model.addAttribute("pageMaker", maker);
+		} else if (cri.getSearchType() != null || cri.getSearchType() != "") {
+
+			model.addAttribute("list", dao.searchPatientList(cri));
+			List al = new ArrayList();
+			al = dao.searchPatientList(cri);
+			PageMaker maker = new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(al.size());
+			model.addAttribute("pageMaker", maker);
+
+		}
+
+	}
+
+	// 환자 입력을 수행
 	@RequestMapping("joinForPatient.do")
 	public String joinConfirmPatient(PatientVO vo) {
 		dao.joinForPatient(vo);
@@ -91,6 +166,7 @@ public class MemberController {
 	public void search() {
 	}
 
+	// 유저들 검색 결과를 가져오기
 	@RequestMapping(value = "testSearchResult")
 	public void listPage(SearchCriteria cri, Model model) {
 
@@ -109,8 +185,6 @@ public class MemberController {
 	@RequestMapping(value = "ajaxForUstatus", method = RequestMethod.POST)
 	public ResponseEntity<String> ajaxForUstatus(HttpServletRequest request) {
 		System.out.println("ajaxForUstatus");
-
-		System.out.println(request.getParameter("ustatus") + "    aaaa");
 
 		ResponseEntity<String> entity = null;
 
@@ -166,7 +240,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	// 아이디 닉네임 검사
+	// 아이디 닉네임 검사  produces = "application/text; charset=utf8"  아이작스 한글 로 보내줌
 	@ResponseBody
 	@RequestMapping(value = "checkId", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public ResponseEntity<String> checkId(HttpServletRequest request, Model model) throws Exception {
