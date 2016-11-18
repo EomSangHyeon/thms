@@ -59,13 +59,7 @@ public class MemberController {
 		return entity;
 	}
 
-	// 방 현황 확인
-	@RequestMapping("roomList")
-	public void RoomList(Model model) {
 
-		model.addAttribute("room", dao.currentRoom());
-		System.out.println(dao.currentRoom());
-	}
 
 	// 아이작스로 환자 삭제
 	@ResponseBody

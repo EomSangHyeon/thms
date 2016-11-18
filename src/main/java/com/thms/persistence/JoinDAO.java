@@ -46,7 +46,5 @@ public interface JoinDAO {
 
 	public void deletePatient(String hoid);
 
-	public List<RoomVO> currentRoom();
-
 	public String checkRoom(String rmid);
 }
