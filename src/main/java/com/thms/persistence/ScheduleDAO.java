@@ -6,4 +6,5 @@ import com.thms.domain.ScheduleVO;
 
 public interface ScheduleDAO {
 	public List<ScheduleVO> calendar(ScheduleVO vo) throws Exception;
+	public void add(ScheduleVO vo) throws Exception;
 }

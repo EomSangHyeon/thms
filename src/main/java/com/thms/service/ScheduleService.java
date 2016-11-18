@@ -6,4 +6,5 @@ import com.thms.domain.ScheduleVO;
 
 public interface ScheduleService {
 	public List<ScheduleVO> calendar(ScheduleVO vo) throws Exception;
+	public void add(ScheduleVO vo) throws Exception;
 }
