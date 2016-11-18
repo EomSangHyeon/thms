@@ -53,7 +53,7 @@ public class MemberController {
 		}else{
 			here = here+" 입실 불가";
 		}
-
+		
 		ResponseEntity<String> entity = new ResponseEntity<String>(here, HttpStatus.OK);
 
 		return entity;

@@ -8,6 +8,7 @@
 		<%@ include file="admin_sidebar.jsp" %>
 		
 		<div class="col-sm-9 col-md-10 main">
+			
 	    <h2 class="sub-header">개인정보 수정</h2>
 	    <div class="form-group">
 	    	<label for="upassword">비밀번호 확인</label>

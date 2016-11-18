@@ -18,6 +18,8 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins 
      folder instead of downloading all of them to reduce the load. -->
 <link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 .navbar { margin-bottom: 0; border-radius: 0; }
 footer { background-color: #f2f2f2; padding: 25px; }

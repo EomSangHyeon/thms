@@ -3,11 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
+
+<%@ include file="../include/header.jsp" %>
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -35,7 +33,9 @@
 		});
 	});
 </script>
-<body>
+
+<%@ include file="../admin/admin_sidebar.jsp" %>
+
 	<div>
 		<select name="searchType">
 			<option value="n"
@@ -90,5 +90,4 @@
 		</div>
 	</div>
 
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>
