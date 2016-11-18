@@ -260,4 +260,11 @@ public class MemberController {
 		model.addAttribute("memberVO", vo);
 	}
 
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session, Model model) throws Exception {
+		logger.info("로그아웃 하셔씀");
+		session.removeAttribute("login");
+
+		return "redirect:/";
+	}
 }

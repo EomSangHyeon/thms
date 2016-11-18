@@ -110,12 +110,12 @@ function getScheduleEmptyVO(year, month) {
 	self.location = "/schedule/calendar?sjid="+ $("select[name='sjid']").val() +"&did="+ $("select[name='did']").val() +"&year="+ year +"&month="+ month;
 }
 </script>
+
 <!-- Main content -->
 <div class="container-fluid">
 	<div class="row">
+	<%@ include file="../admin/admin_sidebar.jsp"%>
 		<!-- left column -->
-		<%@ include file="../admin/admin_sidebar.jsp" %>
-
 		<div class="col-sm-9 col-md-10 main">
 			<!-- general form elements -->
 			<form role="form" action="calendar" method="post">
