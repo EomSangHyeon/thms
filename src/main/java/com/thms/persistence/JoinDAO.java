@@ -5,6 +5,7 @@ import java.util.List;
 import com.thms.domain.Criteria;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PatientVO;
+import com.thms.domain.RoomVO;
 import com.thms.domain.SearchCriteria;
 
 public interface JoinDAO {
@@ -34,4 +35,18 @@ public interface JoinDAO {
 	public List<PatientVO> selectPatientList(Criteria cri);
 
 	public int searchTotalPatient();
+
+	public List<PatientVO> searchPatientList(SearchCriteria cri);
+
+	public int searchPatientCount(SearchCriteria cri);
+
+	public List<PatientVO> selectOnePatient(String hoid);
+
+	public void updatePatient(PatientVO vo);
+
+	public void deletePatient(String hoid);
+
+	public List<RoomVO> currentRoom();
+
+	public String checkRoom(String rmid);
 }

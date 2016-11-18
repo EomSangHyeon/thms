@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.thms.domain.Criteria;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PatientVO;
+import com.thms.domain.RoomVO;
 import com.thms.domain.SearchCriteria;
 
 @Repository
@@ -94,7 +95,49 @@ public class JoinDAOImpl implements JoinDAO {
 	@Override
 	public int searchTotalPatient() {
 
-		return session.selectOne(namespace+".totalPatient");
+		return session.selectOne(namespace + ".totalPatient");
+	}
+
+	@Override
+	public List<PatientVO> searchPatientList(SearchCriteria cri) {
+
+		return session.selectList(namespace + ".searchPatientList", cri);
+	}
+
+	@Override
+	public int searchPatientCount(SearchCriteria cri) {
+
+		return session.selectOne(namespace + ".searchPatientCount", cri);
+	}
+
+	@Override
+	public List<PatientVO> selectOnePatient(String hoid) {
+
+		return session.selectList(namespace + ".selectOnePatient", hoid);
+	}
+
+	@Override
+	public void updatePatient(PatientVO vo) {
+		session.update(namespace + ".updatePatient", vo);
+
+	}
+
+	@Override
+	public void deletePatient(String hoid) {
+		session.delete(namespace + ".deletePatient", hoid);
+
+	}
+
+	@Override
+	public List<RoomVO> currentRoom() {
+
+		return session.selectList(namespace + ".nowRoom");
+	}
+
+	@Override
+	public String checkRoom(String rmid) {
+
+		return session.selectOne(namespace + ".checkRoon", rmid);
 	}
 
 }
