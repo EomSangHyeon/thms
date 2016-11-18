@@ -18,23 +18,32 @@
 	function setID(id) {
 		document.getElementById("sjid").value = id;
 	}
-	
-	$(document).ready(function(){
-		var formObj = $("form[role='form']");
-		console.log(formObj);
-		
-		$(".modify").on("click",function(){
-			formObj.submit();
-		});
-		$(".remove").on("click",function(){
-			self.location="/doctor/listPage=?page=${cri.page}&perPageNum=${cri.perPageNum}";
-		}); 
-	});
+
+	$(document)
+			.ready(
+					function() {
+						var formObj = $("form[role='form']");
+						console.log(formObj);
+
+						$(".modify").on("click", function() {
+							formObj.submit();
+						});
+						$(".remove")
+								.on(
+										"click",
+										function() {
+											self.location = "/doctor/list?page=${cri.page}&perPageNum=${cri.perPageNum}"
+													+ "&searchType=${cri.searchType}&keyword=${cri.keyword}";
+										});
+					});
 </script>
 <body>
 	<form role="form" method="post">
-		<input type="hidden" name="page" value="${cri.page}">
-		<input type="hidden" name="perPage" value="${cri.perPageNum}">
+		<input type="hidden" name="did" value="${doctorVO.did}"> <input
+			type="hidden" name="page" value="${cri.page}"> <input
+			type="hidden" name="perPage" value="${cri.perPageNum}"> <input
+			type="hidden" name="searchType" value="${cri.searchType}"> <input
+			type="hidden" name="keyword" value="${cri.keyword}">
 
 		<div>
 			번호 <input type="text" name="did" value="${doctorVO.did}"

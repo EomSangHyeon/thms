@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.thms.domain.CheckUpVO;
+import com.thms.domain.Criteria;
+import com.thms.domain.DoctorVO;
+import com.thms.domain.SearchCriteria;
 
 
 @Repository
@@ -63,6 +66,50 @@ public class CheckUpDAOImpl implements CheckUpDAO{
 	public List<CheckUpVO> listView() throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".listView");
+	}
+
+
+
+	@Override
+	public List<CheckUpVO> listPage(int page) throws Exception {
+		// TODO Auto-generated method stub
+		if (page <= 0) {
+			page = 1;
+		}
+		page = (page - 1) * 10;
+		return session.selectList(namespace + ".listPage", page);
+	}
+
+
+
+	@Override
+	public List<CheckUpVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".listCriteria", cri);
+	}
+
+
+
+	@Override
+	public List<CheckUpVO> listSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".listSearch",cri);
+	}
+
+
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".listSearchCount",cri);
+	}
+
+
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".countPaging", cri);
 	}
 
 }

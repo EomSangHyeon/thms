@@ -48,5 +48,73 @@
 	<delete id="delete">
 		delete from tbl_checkup where `chid`=#{chid}
 	</delete>
+	
+	
+	
+	<select id="listPage" resultType="CheckUpVO"> 
+	<![CDATA[ 
+	SELECT `chid`, `chname`
+		 FROM 
+	 `tbl_checkup` 
+		 WHERE `chid`>0 ORDER BY `chid` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listCriteria" resultType="CheckUpVO"> 
+	<![CDATA[ 
+		SELECT 
+			`chid`, `chname`
+		 FROM 
+		 	`tbl_checkup` 
+		 WHERE 
+		 	`chid`>0 ORDER BY `chid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="countPaging" resultType="int"> 
+	<![CDATA[ 
+		select count(chid) 
+			from
+		tbl_checkup 
+			where 
+		chid>0 
+		]]>
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				AND `chid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				AND `chname` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="CheckUpVO"> 
+	<![CDATA[ 
+		SELECT 
+			`chid`, `chname`
+		 FROM 
+		 	`tbl_checkup` 
+		 WHERE 
+		 	`chid`>0  
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+		ORDER BY `chid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(chid) 
+			from
+		tbl_checkup 
+			where 
+		chid>0 
+		]]>
+		<include refid="search"></include>
+	</select>
+	
 
 </mapper>

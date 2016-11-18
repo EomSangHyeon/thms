@@ -18,14 +18,6 @@
 		]]>		
 	</select>
 	
-	<select id="goRoomTest" resultType="RoomVO"> 
-	<![CDATA[ 
-	SELECT `rmid`, `rmnumber`, `rmheadcount` 
-		 FROM 
-	 `tbl_room` 
-		 WHERE `rmid`>0 ORDER BY `rmid` DESC 
-		]]>
-	</select>
 	
 	<select id="readPage" resultType="RoomVO">
 		SELECT
@@ -46,5 +38,70 @@
 	<delete id="delete">
 		delete from tbl_room where `rmid`=#{rmid}
 	</delete>
+	
+	
+	<select id="listPage" resultType="RoomVO"> 
+	<![CDATA[ 
+	SELECT `rmid`, `rmnumber`, `rmheadcount` 
+		 FROM 
+	 `tbl_room` 
+		 WHERE `rmid`>0 ORDER BY `rmid` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listCriteria" resultType="RoomVO"> 
+	<![CDATA[ 
+		SELECT `rmid`, `rmnumber`, `rmheadcount` 
+		 FROM 
+		 	`tbl_room` 
+		 WHERE 
+		 	`rmid`>0 ORDER BY `rmid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="countPaging" resultType="int"> 
+	<![CDATA[ 
+		select count(rmid) 
+			from
+		tbl_room 
+			where 
+		rmid>0 
+		]]>
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				AND `rmid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				AND `rmnumber` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="RoomVO"> 
+	<![CDATA[ 
+		SELECT 
+			`rmid`, `rmnumber`, `rmheadcount` 
+		 FROM 
+		 	`tbl_room` 
+		 WHERE 
+		 	`rmid`>0  
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+		ORDER BY `rmid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(rmid) 
+			from
+		tbl_room 
+			where 
+		rmid>0 
+		]]>
+		<include refid="search"></include>
+	</select>
 
 </mapper> 

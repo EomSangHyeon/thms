@@ -24,7 +24,7 @@ $(document).ready(function(){
 		formObj.submit();
 	});
 	$(".list").on("click",function(){
-		self.location="/room/listAll";
+		self.location="/room/list";
 	}); 
 });
 
@@ -32,6 +32,10 @@ $(document).ready(function(){
 <body>
 <form role="form" method="post">
 	<input type="hidden" name="rmid" value="${roomVO.rmid}">	
+		<input type="hidden" name="page" value="${cri.page}">
+	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">	
+	<input type="hidden" name="searchType" value="${cri.searchType}">
+	<input type="hidden" name="keyword" value="${cri.keyword}">
 </form>
 
 <label>방번호</label>

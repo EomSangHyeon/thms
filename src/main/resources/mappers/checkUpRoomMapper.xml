@@ -4,10 +4,11 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thms.mapper.CheckUpRoomMapper">
 	<select id="insert" resultType="CheckUpRoomVO">
-		insert into tbl_checkuproom(chid,crnumber)
+		insert into
+		tbl_checkuproom(chid,crnumber)
 		values(#{chid},#{crnumber});
 	</select>
-	
+
 	<select id="listAll" resultType="CheckUpRoomVO"> 
 	<![CDATA[ 
 	SELECT `crid`, `chid`, `crnumber`
@@ -20,19 +21,87 @@
 		SELECT
 		`crid`, `chid`, `crnumber`
 		FROM
-		`tbl_checkuproom` 
+		`tbl_checkuproom`
 		WHERE
 		`crid`=#{crid}
 	</select>
 	<update id="update">
-		update tbl_checkuproom set 
-			`chid` =#{chid},`crnumber` =#{crnumber}
-		 where 
-		 	`crid`=#{crid} 
+		update tbl_checkuproom set
+		`chid` =#{chid},`crnumber` =#{crnumber}
+		where
+		`crid`=#{crid}
 	</update>
-	
+
 	<delete id="delete">
 		delete from tbl_checkuproom where `crid`=#{crid}
 	</delete>
+
+	<select id="listPage" resultType="CheckUpRoomVO"> 
+	<![CDATA[ 
+	SELECT `crid`, `chid`, `crnumber`
+		 FROM 
+	 `tbl_checkuproom` 
+		 WHERE `crid`>0 ORDER BY `crid` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listCriteria" resultType="CheckUpRoomVO"> 
+	<![CDATA[ 
+		SELECT 
+			`crid`, `chid`, `crnumber`
+		 FROM 
+		 	`tbl_checkuproom` 
+		 WHERE 
+		 	`crid`>0 ORDER BY `crid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="countPaging" resultType="int"> 
+	<![CDATA[ 
+		select count(crid) 
+			from
+		tbl_checkuproom 
+			where 
+		crid>0 
+		]]>
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				AND `crid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				AND `chid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'rm'.toString()">
+				AND `crnumber` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="CheckUpRoomVO"> 
+	<![CDATA[ 
+		SELECT 
+			`crid`, `chid`, `crnumber`
+		 FROM 
+		 	`tbl_checkuproom` 
+		 WHERE 
+		 	`crid`>0  
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+		ORDER BY `crid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(crid) 
+			from
+		tbl_checkuproom 
+			where 
+		crid>0 
+		]]>
+		<include refid="search"></include>
+	</select>
 
 </mapper>

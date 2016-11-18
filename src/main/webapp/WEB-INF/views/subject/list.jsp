@@ -12,32 +12,28 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		var formObj = $("form[role='form']");
-		console.log(formObj);
-		
-		$("#searchBtn").click(function() {
-			self.location = "list${pageMaker.makeQuery(1)}&searchType="	+ $("select option:selected").val()
+			$("#searchBtn").click(function() {
+				self.location = "list${pageMaker.makeQuery(1)}&searchType="+ $("select option:selected").val()
 							+ "&keyword="+ $("#keywordInput").val();
-			});
-		$("#newBtn").click(function() {
-			self.location = "register";
 		});
-	 /* 	$(".modify").click(function() {
-			self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&did="+$("#did").val();
-		}); */
-	 	$(".remove").click(function(){
-	 		    $.ajax({
-	 		        dataType:'text',
-	 		    	url: 'remove',
-	 		        type:"post", 
-	 		        data: {"did": $("#did").val()}	,
-	 		        success : function(data){
-	 		        	location.href="list";
-	 		        }
-	 		    })
+		$("#newBtn").click(function() {
+					self.location = "register";
+			});
+		/* $(".modify").click(function() {
+			self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&sjid="+$("#sjid").val();
+		});  */
+ 		$(".remove").click(function(){
+ 			    $.ajax({
+ 			        dataType:'text',
+ 			    	url: 'remove',
+ 			        type:"post", 
+ 		 	       data: {"sjid": $("#sjid").val()}	,
+ 		 	       success : function(data){
+ 		        	location.href="list";
+ 		  	      }
+ 		  	  })
 		});
 	});
-
 </script>
 <body>
 	<div>
@@ -47,34 +43,25 @@
 			<option value="id"
 				<c:out value="${cri.searchType eq 'id'?'selected':''}"/>>번호</option>
 			<option value="na"
-				<c:out value="${cri.searchType eq 'na'?'selected':''}"/>>이름</option>
+				<c:out value="${cri.searchType eq 'na'?'selected':''}"/>>부서</option>
 		</select> <input type="text" name="keyword" id="keywordInput"
 			value="${cri.keyword}" />
 		<button id="searchBtn">Search</button>
 		<button id="newBtn">Add</button>
 	</div>
-
 	<table>
-		<th>번호</th>
-		<th>이름</th>
-		<th>병실</th>
-		<th>부서ID</th>
-		<th></th>
-		<th></th>
-		<c:forEach items="${list}" var="DoctorVO">
+	<th>번호</th>
+		<th>부서</th>
+		<c:forEach items="${list}" var="SubjectVO">
 			<tr>
-				<td >${DoctorVO.did}</td>
-				<td>${DoctorVO.dname}</td>
-				<td>${DoctorVO.dclinic}</td>
-				<td>${DoctorVO.sjid}</td>
-				<td><a href="modifyPage?did=${DoctorVO.did}"><button type="button" class="modify">수정</button></a></td>
+				<td>${SubjectVO.sjid}</td>
+				<td>${SubjectVO.sjname}</td>
+				<td><a href="modifyPage?sjid=${SubjectVO.sjid }"><button type="button" class="modify">수정</button></a></td>
 				<td><button class="remove" >삭제</button></td>
-			
 			</tr>
 		</c:forEach>
 
 	</table>
-
 	<div>
 		<div>
 			<ul>
@@ -98,5 +85,6 @@
 			</ul>
 		</div>
 	</div>
+
 </body>
 </html>

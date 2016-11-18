@@ -6,8 +6,10 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.thms.domain.Criteria;
 import com.thms.domain.MemberVO;
 import com.thms.domain.RoomVO;
+import com.thms.domain.SearchCriteria;
 import com.thms.persistence.RoomDAO;
 @Service
 public class RoomServiceImpl implements RoomService{
@@ -37,6 +39,26 @@ public class RoomServiceImpl implements RoomService{
 	public void delete(Integer rmid) throws Exception {
 		// TODO Auto-generated method stub
 		dao.delete(rmid);
+	}
+	@Override
+	public List<RoomVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
+	}
+	@Override
+	public int listCountCreiteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
+	@Override
+	public List<RoomVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearch(cri);
+	}
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearchCount(cri);
 	}
 
 }
