@@ -5,8 +5,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript">
+$(document).ready(function(){
+	var formObj = $("form[role='form']");
+	console.log(formObj);
+	
+	$(".modify").on("click",function(){
+		formObj.submit();
+	});
+	$(".remove").on("click",function(){
+		self.location="/checkup/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+
+				"&searchType=${cri.searchType}&keyword=${cri.keyword}";
+	}); 
+});
+
+</script>
 <body>
 <form role="form" method="post">
+	<input type="hidden" name="page" value="${cri.page}">
+	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">	
+	<input type="hidden" name="searchType" value="${cri.searchType}">
+	<input type="hidden" name="keyword" value="${cri.keyword}">
 <div>검사ID<input type="text" name="chid" value="${checkUpVO.chid}" readonly="readonly"></div>
 <div>검사내용 : <input type="text" name="chname" value="${checkUpVO.chname}"></div>
 <div>

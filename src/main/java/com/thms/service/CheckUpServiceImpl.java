@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.thms.domain.CheckUpVO;
+import com.thms.domain.Criteria;
+import com.thms.domain.SearchCriteria;
 import com.thms.persistence.CheckUpDAO;
 
 @Service
@@ -49,6 +51,30 @@ public class CheckUpServiceImpl implements CheckUpService{
 	public List<CheckUpVO> listView() throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listView();
+	}
+
+	@Override
+	public List<CheckUpVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int listCountCreiteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<CheckUpVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearchCount(cri);
 	}
 
 }

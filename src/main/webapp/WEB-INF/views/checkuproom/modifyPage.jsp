@@ -17,9 +17,28 @@
 	 function setID(id){
 	      document.getElementById("chid").value = id;
 	}
+	 
+	 $(document).ready(function(){
+			var formObj = $("form[role='form']");
+			console.log(formObj);
+			
+			$(".modify").on("click",function(){
+				formObj.submit();
+			});
+			$(".remove").on("click",function(){
+				self.location="/checkuproom/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+
+						"&searchType=${cri.searchType}&keyword=${cri.keyword}";
+			}); 
+		});
 </script>
 <body>
 <form role="form" method="post">
+<input type="hidden" name="page" value="${cri.page}">
+	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">	
+	<input type="hidden" name="searchType" value="${cri.searchType}">
+	<input type="hidden" name="keyword" value="${cri.keyword}">
+
+
 <div>검사실ID <input type="text" name="crid" value="${checkUpRoomVO.crid}" readonly="readonly"></div>
 <div>검사ID : <input type="text" name="chid" id ="chid" value="${checkUpRoomVO.chid}"><button onclick="searchcheckup()">찾기</button></div>
 <div>검사실 : <input type="text" name="crnumber" id ="crnumber" value="${checkUpRoomVO.crnumber}"></div>

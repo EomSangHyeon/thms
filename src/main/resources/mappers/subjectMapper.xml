@@ -51,4 +51,68 @@
 	<delete id="delete">
 		delete from tbl_subject where `sjid`=#{sjid}
 	</delete>
+	
+	<select id="listPage" resultType="SubjectVO"> 
+	<![CDATA[ 
+	SELECT `sjid`, `sjname` 
+		 FROM 
+	 `tbl_subject` 
+		 WHERE `sjid`>0 ORDER BY `sjid` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listCriteria" resultType="SubjectVO"> 
+	<![CDATA[ 
+		SELECT `sjid`, `sjname` 
+		 FROM 
+		 	`tbl_subject` 
+		 WHERE 
+		 	`sjid`>0 ORDER BY `sjid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="countPaging" resultType="int"> 
+	<![CDATA[ 
+		select count(sjid) 
+			from
+		tbl_subject 
+			where 
+		sjid>0 
+		]]>
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				AND `sjid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				AND `sjname` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="SubjectVO"> 
+	<![CDATA[ 
+		SELECT 
+			 `sjid`, `sjname` 
+		 FROM 
+		 	`tbl_subject` 
+		 WHERE 
+		 	`sjid`>0  
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+		ORDER BY `sjid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(sjid) 
+			from
+		tbl_subject 
+			where 
+		sjid>0 
+		]]>
+		<include refid="search"></include>
+	</select>
 </mapper>

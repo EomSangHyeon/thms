@@ -6,7 +6,25 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function(){
+	var formObj = $("form[role='form']");
+	console.log(formObj);
+	
+	$(".modify").on("click",function(){
+		formObj.submit();
+	});
+	$(".remove").on("click",function(){
+		self.location="/subject/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+
+				"&searchType=${cri.searchType}&keyword=${cri.keyword}";
+	}); 
+});
+</script>
 <form role="form" method="post">
+	<input type="hidden" name="page" value="${cri.page}">
+	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">	
+	<input type="hidden" name="searchType" value="${cri.searchType}">
+	<input type="hidden" name="keyword" value="${cri.keyword}">
 <label>부서번호</label>
 <div> <input type="text" name="sjid" value="${subjectVO.sjid}" readonly="readonly"></div>
 <label>부서명</label>

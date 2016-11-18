@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.thms.domain.CheckUpRoomVO;
+import com.thms.domain.Criteria;
+import com.thms.domain.SearchCriteria;
 @Repository
 public class CheckUpRoomDAOImpl implements CheckUpRoomDAO{
 
@@ -44,6 +46,40 @@ public class CheckUpRoomDAOImpl implements CheckUpRoomDAO{
 	public void delete(Integer crid) throws Exception {
 		// TODO Auto-generated method stub
 		session.delete(namespace+".delete",crid);
+	}
+
+	@Override
+	public List<CheckUpRoomVO> listPage(int page) throws Exception {
+		// TODO Auto-generated method stub
+		if (page <= 0) {
+			page = 1;
+		}
+		page = (page - 1) * 10;
+		return session.selectList(namespace + ".listPage", page);
+	}
+
+	@Override
+	public List<CheckUpRoomVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + ".listCriteria", cri);
+	}
+
+	@Override
+	public List<CheckUpRoomVO> listSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".listSearch",cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".listSearchCount",cri);
+	}
+
+	@Override
+	public int countPaging(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace + ".countPaging", cri);
 	}
 
 }

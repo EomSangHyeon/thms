@@ -6,6 +6,8 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.thms.domain.Criteria;
+import com.thms.domain.SearchCriteria;
 import com.thms.domain.SubjectVO;
 import com.thms.persistence.SubjectDAO;
 @Service
@@ -48,6 +50,30 @@ public class SubjectServiceImpl implements SubjectService{
 	public void delete(Integer sjid) throws Exception {
 		// TODO Auto-generated method stub
 		dao.delete(sjid);
+	}
+
+	@Override
+	public List<SubjectVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int listCountCreiteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<SubjectVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearchCount(cri);
 	}
 
 }

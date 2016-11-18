@@ -24,7 +24,7 @@ $(document).ready(function(){
 		formObj.submit();
 	});
 	$(".list").on("click",function(){
-		self.location="/doctor/listPage";
+		self.location="/doctor/list";
 	}); 
 });
 
@@ -35,6 +35,8 @@ $(document).ready(function(){
 	<input type="hidden" name="did" value="${doctorVO.did}">
 	<input type="hidden" name="page" value="${cri.page}">
 	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">	
+	<input type="hidden" name="searchType" value="${cri.searchType}">
+	<input type="hidden" name="keyword" value="${cri.keyword}">
 </form>
 
 <label>번호</label>
