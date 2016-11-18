@@ -128,11 +128,7 @@ public class JoinDAOImpl implements JoinDAO {
 
 	}
 
-	@Override
-	public List<RoomVO> currentRoom() {
 
-		return session.selectList(namespace + ".nowRoom");
-	}
 
 	@Override
 	public String checkRoom(String rmid) {

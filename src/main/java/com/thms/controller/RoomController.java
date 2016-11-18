@@ -17,16 +17,16 @@ import com.thms.domain.Criteria;
 import com.thms.domain.PageMaker;
 import com.thms.domain.RoomVO;
 import com.thms.domain.SearchCriteria;
+import com.thms.persistence.JoinDAOImpl;
 import com.thms.service.RoomService;
 
 @Controller
 @RequestMapping("/room/*")
 public class RoomController {
 	private static final Logger logger = LoggerFactory.getLogger(RoomController.class);
-	
+
 	@Inject
 	private RoomService service;
-	
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public void RoomGET(RoomVO vo, Model model) throws Exception {
@@ -47,14 +47,15 @@ public class RoomController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		logger.info(cri.toString());
-		
+
 		model.addAttribute("list", service.listSearchCriteria(cri));
-			
+
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(service.listSearchCount(cri));
 
 		model.addAttribute("pageMaker", pageMaker);
+
 	}
 
 	@RequestMapping(value = "/readPage", method = RequestMethod.GET)
@@ -65,10 +66,11 @@ public class RoomController {
 
 	@ResponseBody
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
-	public void remove(@RequestParam("rmid") int rmid, SearchCriteria cri, RedirectAttributes rttr)throws Exception {
+	public void remove(@RequestParam("rmid") int rmid, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
 		service.delete(rmid);
-		
+
 	}
+
 	@RequestMapping(value = "/modifyPage", method = RequestMethod.GET)
 	public void updateGET(int rmid, @ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		model.addAttribute(service.readPage(rmid));

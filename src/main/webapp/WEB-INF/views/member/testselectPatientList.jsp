@@ -41,7 +41,7 @@
 </head>
 <body>
 	selectPatientList
-	<input type="button" value="환자병실확인" onclick="self.location='roomList';" />
+	<input type="button" value="환자병실확인" onclick="self.location='/room/list';" />
 	<br>
 	<table>
 		<tr>

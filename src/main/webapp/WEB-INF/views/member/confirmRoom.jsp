@@ -56,7 +56,7 @@
 
 </head>
 <body>
-	<form action="updateConfirmRoom.do" method="POST">
+	<form action=" updateConfirmRoom.do" method="POST">
 		<table>
 			<c:forEach items="${here }" var="hh">
 				<tr>
