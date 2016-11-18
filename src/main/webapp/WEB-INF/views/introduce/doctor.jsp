@@ -3,13 +3,12 @@
 
 <%@ include file="../include/header.jsp" %>
 <script>
-$(document).ready(function(){
-	/* $(".panel-body").hide();
-	$(".panel-heading").on("click", function(){
-		$(this).parent().children(".panel-collapse collapse in").children().show();		
-	}); */
-	
-});
+/* $(document).ready(function(){
+	$(".panel-body").hide();
+ 	$(".panel-heading").on("click", function(){
+		$(this).next("div").children("div").show();
+	});
+}); */
 
 </script>
 <%@ include file="sidebar.jsp" %>
