@@ -18,7 +18,6 @@
 
 		function forUstatus() {
 
-			alert("${Custatus}");
 			$
 					.ajax({
 						type : 'post',
@@ -37,10 +36,10 @@
 														+ '</td>'
 														+ '<td>'
 														+ "<input type='text' name='ubirth' value='${Custatus}' >"
-														+ '</td>'
-										)}
+														+ '</td>')
+							}
 							if (data == 'X') {
-								alert("ㄴㄴ")
+
 							}
 						}//end of success
 					})

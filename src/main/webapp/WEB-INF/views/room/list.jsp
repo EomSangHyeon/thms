@@ -11,29 +11,39 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#searchBtn").click(function() {
-			self.location = "list${pageMaker.makeQuery(1)}&searchType="+ $("select option:selected").val()
-							+ "&keyword="+ $("#keywordInput").val();
-		});
-		$("#newBtn").click(function() {
-			self.location = "register";
-		});
-	/* 	$(".modify").click(function() {
-			self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&rmid="+$("#rmid").val();
-		}); */
-	 	$(".remove").click(function(){
-	 		    $.ajax({
-	 		        dataType:'text',
-	 		    	url: 'remove',
-	 		        type:"post", 
-	 		        data: {"rmid": $("#rmid").val()}	,
-	 		        success : function(data){
-	 		        	location.href="list";
-	 		        }
-	 		    })
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						$("#searchBtn")
+								.click(
+										function() {
+											self.location = "list${pageMaker.makeQuery(1)}&searchType="
+													+ $(
+															"select option:selected")
+															.val()
+													+ "&keyword="
+													+ $("#keywordInput").val();
+										});
+						$("#newBtn").click(function() {
+							self.location = "register";
+						});
+						/* 	$(".modify").click(function() {
+								self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&rmid="+$("#rmid").val();
+							}); */
+						$(".remove").click(function() {
+							$.ajax({
+								dataType : 'text',
+								url : 'remove',
+								type : "post",
+								data : {
+									"rmid" : $("#rmid").val()
+								},
+								success : function(data) {
+									location.href = "list";
+								}
+							})
+						});
+					});
 </script>
 <body>
 	<div>
@@ -52,6 +62,7 @@
 	<table>
 		<th>방ID</th>
 		<th>방번호</th>
+		<th>현재입실인원</th>
 		<th>입실최고인원</th>
 		<th></th>
 		<th></th>
@@ -59,9 +70,11 @@
 			<tr>
 				<td>${RoomVO.rmid}</td>
 				<td>${RoomVO.rmnumber}</td>
+				<td>${RoomVO.rmcurrentcount }</td>
 				<td>${RoomVO.rmheadcount}</td>
-				<td><a href="modifyPage?rmid=${RoomVO.rmid}"><button type="button" class="modify">수정</button></a></td>
-				<td><button class="remove" >삭제</button></td>
+				<td><a href="modifyPage?rmid=${RoomVO.rmid}"><button
+							type="button" class="modify">수정</button></a></td>
+				<td><button class="remove">삭제</button></td>
 			</tr>
 		</c:forEach>
 

@@ -128,12 +128,28 @@ public class JoinDAOImpl implements JoinDAO {
 
 	}
 
-
-
 	@Override
 	public String checkRoom(String rmid) {
 
 		return session.selectOne(namespace + ".checkRoon", rmid);
 	}
 
+	// 환자 다들고오기
+	@Override
+	public List<MemberVO> selectUser(Criteria cri) {
+
+		return session.selectList(namespace + ".listUser", cri);
+	}
+
+	@Override
+	public void deleteUser(MemberVO vo) {
+
+		System.out.println(vo.getUid() + "여기 나와야함");
+		
+		session.delete(namespace + ".deleteUser", vo);
+
+	}
+
 }
+
+

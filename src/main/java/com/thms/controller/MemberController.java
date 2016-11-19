@@ -45,21 +45,19 @@ public class MemberController {
 
 	// ajax로 입력하는 방이 입실 가능한지 안한지 여부검사
 	@ResponseBody
-	@RequestMapping(value ="restRoomAjax"  ,produces = "application/text; charset=utf8" )
+	@RequestMapping(value = "restRoomAjax", produces = "application/text; charset=utf8")
 	public ResponseEntity<String> aviliableRoom(@RequestParam("rmid") String rmid) {
 		String here = dao.checkRoom(rmid);
 		if (Integer.parseInt(here) > 0) {
-			here = here+"명 입실 가능";
-		}else{
-			here = here+" 입실 불가";
+			here = here + "명 입실 가능";
+		} else {
+			here = here + " 입실 불가";
 		}
 
 		ResponseEntity<String> entity = new ResponseEntity<String>(here, HttpStatus.OK);
 
 		return entity;
 	}
-
-
 
 	// 아이작스로 환자 삭제
 	@ResponseBody
@@ -162,27 +160,58 @@ public class MemberController {
 
 	// 유저들 검색 결과를 가져오기
 	@RequestMapping(value = "testSearchResult")
-	public void listPage(SearchCriteria cri, Model model) {
+	public void listPage(SearchCriteria cri, Model model, HttpSession session) {
+		System.out.println("testSearchResult");
+		String ustatus = ((MemberVO) session.getAttribute("login")).getUstatus();
+		System.out.println(ustatus);
+		model.addAttribute("check", ustatus);
+		if (cri.getSearchType() == null) {
 
-		model.addAttribute("searchmember", dao.listCriteria(cri));
+			model.addAttribute("searchmember", dao.selectUser(cri));
+			List al = new ArrayList();
+			al = dao.listCriteria(cri);
 
-		PageMaker maker = new PageMaker();
-		maker.setCri(cri);
-		maker.setTotalCount(dao.searchTotal(cri));
+			PageMaker maker = new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(al.size());
 
-		model.addAttribute("pageMaker", maker);
+			model.addAttribute("pageMaker", maker);
+		} else if (cri.getSearchType() == "") {
+			List al = new ArrayList();
+			al = dao.listCriteria(cri);
+
+			model.addAttribute("searchmember", dao.selectUser(cri));
+
+			PageMaker maker = new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(al.size());
+
+			model.addAttribute("pageMaker", maker);
+		} else if (cri.getSearchType() != null || cri.getSearchType() != "") {
+
+			model.addAttribute("searchmember", dao.listCriteria(cri));
+
+			PageMaker maker = new PageMaker();
+			maker.setCri(cri);
+			maker.setTotalCount(dao.searchTotal(cri));
+
+			model.addAttribute("pageMaker", maker);
+		}
 
 	}
 
 	// ajax를 통한 관리자 인지 아닌지
 	@ResponseBody
 	@RequestMapping(value = "ajaxForUstatus", method = RequestMethod.POST)
-	public ResponseEntity<String> ajaxForUstatus(HttpServletRequest request) {
+	public ResponseEntity<String> ajaxForUstatus(HttpSession session, Model model) {
 		System.out.println("ajaxForUstatus");
 
 		ResponseEntity<String> entity = null;
 
-		if (request.getParameter("ustatus").equals("admin") || request.getParameter("ustatus").equals("master")) {
+		String ustatus = ((MemberVO) session.getAttribute("login")).getUstatus();
+		System.out.println(ustatus);
+
+		if (ustatus.equals("master")) {
 
 			entity = new ResponseEntity<String>("O", HttpStatus.OK);
 		} else {
@@ -234,7 +263,7 @@ public class MemberController {
 		return "redirect:/";
 	}
 
-	// 아이디 닉네임 검사  produces = "application/text; charset=utf8"  아이작스 한글 로 보내줌
+	// 아이디 닉네임 검사 produces = "application/text; charset=utf8" 아이작스 한글 로 보내줌
 	@ResponseBody
 	@RequestMapping(value = "checkId", method = RequestMethod.POST, produces = "application/text; charset=utf8")
 	public ResponseEntity<String> checkId(HttpServletRequest request, Model model) throws Exception {
@@ -308,6 +337,23 @@ public class MemberController {
 
 	}
 
+	// 유저 삭제
+	@ResponseBody
+	@RequestMapping(value = "deleteUserAjax", method = RequestMethod.POST)
+	public String deleteUser(HttpServletRequest req) throws Exception {
+		
+		
+		MemberVO vo = new MemberVO();
+		vo.setUid(req.getParameter("uid"));
+		System.out.println("deleteUser");
+		System.out.println(vo.getUid());
+		
+		dao.deletePatient(vo.getUid());
+		dao.deleteUser(vo);
+
+		return "ok";
+	}
+
 	// ===========================================
 
 	@Inject
@@ -328,7 +374,7 @@ public class MemberController {
 		model.addAttribute("memberVO", vo);
 	}
 
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session, Model model) throws Exception {
 		logger.info("로그아웃 하셔씀");
 		session.removeAttribute("login");
