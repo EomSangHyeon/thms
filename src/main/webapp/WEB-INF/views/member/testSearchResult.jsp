@@ -86,6 +86,7 @@
 				<td><input type="button" id="deleteuser" value="삭제"
 					onclick="deleteUser('${search.uid }')"></td>
 			</tr>
+				
 		</c:forEach>
 	</table>
 

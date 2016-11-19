@@ -35,9 +35,7 @@ import com.thms.service.MemberService;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
- 
-	
-	
+
 	// ===================hong
 	@Inject
 	JoinDAOImpl dao;
@@ -128,7 +126,7 @@ public class MemberController {
 	@RequestMapping("joinForPatient.do")
 	public String joinConfirmPatient(PatientVO vo) {
 		dao.joinForPatient(vo);
-		return "direct:/selectPatientList";
+		return "redirect:/member/testselectPatientList";
 
 	}
 
@@ -164,9 +162,13 @@ public class MemberController {
 	@RequestMapping(value = "testSearchResult")
 	public void listPage(SearchCriteria cri, Model model, HttpSession session) {
 		System.out.println("testSearchResult");
-		String ustatus = ((MemberVO) session.getAttribute("login")).getUstatus();
-		System.out.println(ustatus);
-		model.addAttribute("check", ustatus);
+		System.out.println(((MemberVO) session.getAttribute("login")).getUstatus());
+	
+			String ustatus = ((MemberVO) session.getAttribute("login")).getUstatus();
+			System.out.println(ustatus);
+			model.addAttribute("check", ustatus);
+		
+		
 		if (cri.getSearchType() == null) {
 
 			model.addAttribute("searchmember", dao.selectUser(cri));
@@ -224,12 +226,12 @@ public class MemberController {
 
 	// 회원정보수정
 	@RequestMapping(value = "testMemberModify")
-	public void memberModify(HttpServletRequest request, Model model) {
+	public void memberModify(HttpServletRequest request, Model model,HttpSession session) {
 		System.out.println("modify member");
 
 		// 한개 정보 들고오기
 		model.addAttribute("searchmember", dao.selectOneMember(request.getParameter("uid")));
-		model.addAttribute("Custatus", request.getParameter("ustatus"));
+	
 	}
 
 	// 정보 수정 확정
@@ -238,7 +240,7 @@ public class MemberController {
 		System.out.println("confirmUpdate");
 
 		dao.memberModify(vo);
-		return "redirect:/";
+		return "redirect:/member/testSearchResult";
 	}
 
 	/* @RequestMapping(value="yesUpdateMember" ) */
@@ -343,17 +345,22 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "deleteUserAjax", method = RequestMethod.POST)
 	public String deleteUser(HttpServletRequest req) throws Exception {
-		
-		
+
 		MemberVO vo = new MemberVO();
 		vo.setUid(req.getParameter("uid"));
 		System.out.println("deleteUser");
 		System.out.println(vo.getUid());
-		
+
 		dao.deletePatient(vo.getUid());
 		dao.deleteUser(vo);
 
 		return "ok";
+	}
+
+	// 환자 가입을 위한 유저 검색하는 작은 페이지로 가기
+	@RequestMapping(value = "searchUid", method = RequestMethod.POST)
+	public void searchUid() {
+
 	}
 
 	// ===========================================

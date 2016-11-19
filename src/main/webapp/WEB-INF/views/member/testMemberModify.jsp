@@ -13,38 +13,7 @@
 </head>
 <body>
 	<!--  정보수정인데 관리자가 오면 status 수정가능하고 아니면 안보이게 -->
-	<script type="text/javascript">
-		$(document).ready(forUstatus());
 
-		function forUstatus() {
-
-			$
-					.ajax({
-						type : 'post',
-						url : 'ajaxForUstatus',
-						dataType : 'text',
-						data : {
-							ustatus : "${Custatus}"
-						},
-						success : function(data) {
-							if (data == 'O') {
-								//아이작스 처리해서 ustatus받아오게함
-								$("#changable")
-										.html(
-												'<td>'
-														+ "상태"
-														+ '</td>'
-														+ '<td>'
-														+ "<input type='text' name='ubirth' value='${Custatus}' >"
-														+ '</td>')
-							}
-							if (data == 'X') {
-
-							}
-						}//end of success
-					})
-		}
-	</script>
 	<form action="confirmUpdateMember" method="POST">
 		<table>
 			<c:forEach items="${searchmember}" var="search">
@@ -77,7 +46,8 @@
 					<td><input type="text" name="ubirth" value="${search.ubirth}"></td>
 				</tr>
 				<tr>
-					<div id="changable"></div>
+					<td>권한</td>
+					<td><input type="text" name="ustatus" value="${search.ustatus}"></td>
 				</tr>
 			</c:forEach>
 			<tr>
