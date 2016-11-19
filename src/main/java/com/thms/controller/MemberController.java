@@ -35,7 +35,9 @@ import com.thms.service.MemberService;
 @Controller
 @RequestMapping("/member")
 public class MemberController {
-
+ 
+	
+	
 	// ===================hong
 	@Inject
 	JoinDAOImpl dao;
