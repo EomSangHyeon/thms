@@ -27,7 +27,7 @@
 					/* 	$(".modify").click(function() {
 							self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&crid="+$("#crid").val();
 						}); */
-				 		$(".remove").click(function(){
+				 		$("#remove").click(function(){
 				 			    $.ajax({
 				 			        dataType:'text',
 				 			    	url: 'remove',
