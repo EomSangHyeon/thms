@@ -19,7 +19,7 @@
 		/* $(".modify").click(function() {
 			self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&sjid="+$("#sjid").val();
 		});  */
- 		$(".btn-danger").click(function(){
+ 		$("#remove").click(function(){
 			    $.ajax({
 			        dataType:'text',
 			    	url: 'remove',
@@ -78,7 +78,7 @@
 							<td>${SubjectVO.sjname}</td>
 							<td>
 								<a href="modifyPage?sjid=${SubjectVO.sjid }"><button type="button" class="btn btn-warning">수정</button></a>
-								<button class="btn btn-danger" >삭제</button>
+								<button class="btn btn-danger" id="remove">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>		

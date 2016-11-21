@@ -21,7 +21,7 @@
 	 /* 	$(".modify").click(function() {
 			self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&did="+$("#did").val();
 		}); */
-	 	$(".btn-danger").click(function(){
+	 	$("#remove").click(function(){
 	 		    $.ajax({
 	 		        dataType:'text',
 	 		    	url: 'remove',
@@ -84,7 +84,7 @@
 							<td>${DoctorVO.sjid}</td>
 							<td>
 								<a href="modifyPage?did=${DoctorVO.did}"><button type="button" class="btn btn-warning">수정</button></a>
-								<button class="btn btn-danger" >삭제</button>
+								<button class="btn btn-danger" id="remove">삭제</button>
 							</td>						
 						</tr>
 					</c:forEach>			

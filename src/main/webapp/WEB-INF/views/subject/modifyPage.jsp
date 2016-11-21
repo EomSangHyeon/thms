@@ -8,10 +8,10 @@ $(document).ready(function(){
 	var formObj = $("form[role='form']");
 	console.log(formObj);
 	
-	$(".btn-warning").on("click",function(){
+	$("#modify").on("click",function(){
 		formObj.submit();
 	});
-	$(".btn-danger").on("click",function(){
+	$("#remove").on("click",function(){
 		self.location="/subject/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+
 				"&searchType=${cri.searchType}&keyword=${cri.keyword}";
 	}); 
@@ -51,8 +51,8 @@ $(document).ready(function(){
 					
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
-							<button type="submit" class="btn btn-warning">수정</button>
-							<button type="submit" class="btn btn-danger">취소</button>
+							<button type="submit" class="btn btn-warning" id="modify">수정</button>
+							<button type="submit" class="btn btn-danger" id="remove">취소</button>
 						</div>
 					</div>				
 				</form>			
