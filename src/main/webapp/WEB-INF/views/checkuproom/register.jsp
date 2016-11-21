@@ -31,7 +31,10 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">검사ID :</label> 
 						<div class="col-sm-6">
-							<input class="form-control" type="text" name="chid" id ="chid"><button onclick="searchcheckup()">찾기</button>
+							<div class="input-group">
+								<input class="form-control" type="text" name="chid" id ="chid">
+								<span class="input-group-btn"><button class="btn btn-primary" onclick="searchcheckup()">찾기</button></span>
+							</div>
 						</div>
 					</div>
 					
@@ -42,8 +45,10 @@
 						</div>
 					</div>
 					
-					<div class="col-offset-sm-2 col-sm-6">
-						<button class="btn btn-primary" type="submit">입력</button>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-6">
+							<button class="btn btn-primary" type="submit">입력</button>
+						</div>
 					</div>
 				</form>
 

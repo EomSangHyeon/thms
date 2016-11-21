@@ -73,8 +73,7 @@
 							<button id="newBtn" class="btn btn-primary">검사실 입력</button>
 						</div>
 					</div>
-				</div>
-			
+				</div>			
 			
 				<table class="table table-striped">
 					<tr>
