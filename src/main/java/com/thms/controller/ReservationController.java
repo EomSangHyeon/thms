@@ -1,9 +1,13 @@
 package com.thms.controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,12 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thms.domain.CalendarCriteria;
+import com.thms.domain.MemberVO;
 import com.thms.domain.ReservationVO;
 import com.thms.domain.ScheduleVO;
 import com.thms.domain.SubjectVO;
+import com.thms.dto.ReservationDTO;
 import com.thms.persistence.SubjectDAO;
 import com.thms.service.ReservationService;
 import com.thms.service.ScheduleService;
@@ -118,6 +125,26 @@ public class ReservationController {
 			}
 
 			model.addAttribute("medicalCount", medicalCount);
+
+			ReservationDTO dto = new ReservationDTO();
+			dto.setSjid(vo.getSjid());
+			dto.setDid(vo.getDid());
+			dto.setSearchMonth(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH) + 1));
+			
+			List<ReservationVO> reservationList = reservationService.getScheduleList(dto);
+			int[][] reservationCount = new int[endDay][2];
+			int ampm2 = 0;
+			for(int i=0; i<reservationList.size(); i++) {
+				int date = Integer.parseInt(reservationList.get(i).getRdate().substring(reservationList.get(i).getRdate().lastIndexOf("-") + 1));
+				if(reservationList.get(i).getAmpm().equals("am"))
+					ampm2 = 0;
+				else
+					ampm2 = 1;
+
+				reservationCount[date][ampm2]++;
+			}
+
+			model.addAttribute("reservationCount", reservationCount);
 		}
 
 		model.addAttribute("calDate", calDate);
@@ -127,9 +154,12 @@ public class ReservationController {
 	}
 
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public void addPOST(ReservationVO vo, RedirectAttributes rttr) throws Exception {
+	@ResponseBody
+	public String addPOST(ReservationVO vo, HttpSession session) throws Exception {
+		MemberVO memberVo = (MemberVO) session.getAttribute("login");
+		vo.setUid(memberVo.getUid());
 		reservationService.add(vo);
 
-		rttr.addFlashAttribute("msg", "저장됐습니다.");
+		return "success";
 	}
 }

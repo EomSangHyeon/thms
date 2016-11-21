@@ -120,7 +120,7 @@ $(document).ready(function() {
 	          <li><a href="/introduce/location">오시는 길</a></li>
 	        </ul>
 	      </li>
-				<li id="reservation"><a href="#">진료예약</a></li>
+				<li id="reservation"><a href="/reservation/register">진료예약</a></li>
 				<li id="nboard"><a href="/nboard/list">의료소식</a></li>
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
 <%-- <c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
