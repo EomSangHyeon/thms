@@ -11,10 +11,10 @@ $(document).ready(function(){
 	var formObj = $("form[role='form']");
 	console.log(formObj);
 	
-	$(".modify").on("click",function(){
+	$("#modify").on("click",function(){
 		formObj.submit();
 	});
-	$(".remove").on("click",function(){
+	$("#remove").on("click",function(){
 		self.location="/subject/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+
 				"&searchType=${cri.searchType}&keyword=${cri.keyword}";
 	}); 
@@ -30,8 +30,8 @@ $(document).ready(function(){
 <label>부서명</label>
 <div><input type="text" name="sjname" value="${subjectVO.sjname}" ></div>
 <div>
-	<button type="submit" class="modify">수정</button>
-	<button type="submit" class="remove">취소</button>
+	<button type="submit" id="modify">수정</button>
+	<button type="submit" id="remove">취소</button>
 </div>
 </form>
 </body>

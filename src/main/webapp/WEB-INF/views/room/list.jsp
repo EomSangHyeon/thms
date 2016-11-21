@@ -19,19 +19,17 @@
 		$("#newBtn").click(function() {
 			self.location = "register";
 		});
-	/* 	$(".modify").click(function() {
-			self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&rmid="+$("#rmid").val();
-		}); */
+
 	 	$(".remove").click(function(){
 	 		    $.ajax({
 	 		        dataType:'text',
 	 		    	url: 'remove',
 	 		        type:"post", 
-	 		        data: {"rmid": $("#rmid").val()}	,
+	 		        data: {"rmid": $("#rmid").val()},
 	 		        success : function(data){
 	 		        	location.href="list";
 	 		        }
-	 		    })
+	 		    });
 		});
 	});
 </script>
@@ -61,7 +59,7 @@
 				<td>${RoomVO.rmnumber}</td>
 				<td>${RoomVO.rmheadcount}</td>
 				<td><a href="modifyPage?rmid=${RoomVO.rmid}"><button type="button" class="modify">수정</button></a></td>
-				<td><button class="remove" >삭제</button></td>
+				<td><input id="rmid" type="hidden" value="${RoomVO.rmid}"><button class="remove" >삭제</button></td>
 			</tr>
 		</c:forEach>
 

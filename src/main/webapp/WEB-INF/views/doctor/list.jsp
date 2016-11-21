@@ -68,7 +68,7 @@
 				<td>${DoctorVO.dclinic}</td>
 				<td>${DoctorVO.sjid}</td>
 				<td><a href="modifyPage?did=${DoctorVO.did}"><button type="button" class="modify">수정</button></a></td>
-				<td><button class="remove" >삭제</button></td>
+				<td><input id="rmid" type="hidden" value="${DoctorVO.did}"><button class="remove" >삭제</button></td>
 			
 			</tr>
 		</c:forEach>
