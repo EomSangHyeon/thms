@@ -12,18 +12,19 @@
 			
 			<div class = "box box-body">
 			
-				<h3>진료과목 입력</h3>
+				<h3> 진료과목 입력</h3>
 				
-				<div class="form-group">
-					<form method="post">
+				<form method="post">
+					<div class="form-group">
+					
 						<div class="col-sm-4">							
 							<input class="form-control" type="text" name="sjname">
 						</div>
 						<div class="col-sm-2">
 							<button type="submit" class="btn btn-primary">입력</button>
 						</div>						
-					</form>					
-				</div>
+					</div>
+				</form>
 				
 			</div><!-- box-body -->
 					

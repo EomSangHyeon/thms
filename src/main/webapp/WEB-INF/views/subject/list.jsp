@@ -70,15 +70,16 @@
 					<tr>
 						<th>번호</th>
 						<th>부서</th>
-						<th>수정</th>
-						<th>삭제</th>
+						<th>수정 / 삭제</th>						
 					</tr>
 					<c:forEach items="${list}" var="SubjectVO">
 						<tr>
 							<td>${SubjectVO.sjid}</td>
 							<td>${SubjectVO.sjname}</td>
-							<td><a href="modifyPage?sjid=${SubjectVO.sjid }"><button type="button" class="btn btn-warning">수정</button></a></td>
-							<td><button class="btn btn-danger" >삭제</button></td>
+							<td>
+								<a href="modifyPage?sjid=${SubjectVO.sjid }"><button type="button" class="btn btn-warning">수정</button></a>
+								<button class="btn btn-danger" >삭제</button>
+							</td>
 						</tr>
 					</c:forEach>		
 				</table>

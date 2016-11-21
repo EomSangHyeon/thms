@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <%@ include file="../include/header.jsp" %>
 <%@ include file="../admin/admin_sidebar.jsp" %>
 
@@ -29,25 +29,31 @@ $(document).ready(function(){
 			
 				<h3>진료과목 수정</h3>				
 				
-				<form role="form" method="post">
+				<form role="form" method="post" class="form-horizontal">
 					<input type="hidden" name="page" value="${cri.page}">
 					<input type="hidden" name="perPageNum" value="${cri.perPageNum}">	
 					<input type="hidden" name="searchType" value="${cri.searchType}">
 					<input type="hidden" name="keyword" value="${cri.keyword}">
 				
 					<div class="form-group">
-						<label>부서번호</label>
-						<input class="form-control" type="text" name="sjid" value="${subjectVO.sjid}" readonly="readonly">
+						<label class="control-label col-sm-2">부서번호 : </label>
+						<div class="col-sm-6">
+							<input class="form-control" type="text" name="sjid" value="${subjectVO.sjid}" readonly="readonly">
+						</div>
 					</div>
 					
 					<div class="form-group">
-						<label>부서명</label>
-						<input class="form-control" type="text" name="sjname" value="${subjectVO.sjname}" >
+						<label class="control-label col-sm-2">부서명 : </label>
+						<div class="col-sm-6">
+							<input class="form-control" type="text" name="sjname" value="${subjectVO.sjname}" >
+						</div>
 					</div>
 					
 					<div class="form-group">
-						<button type="submit" class="btn btn-warning">수정</button>
-						<button type="submit" class="btn btn-danger">취소</button>
+						<div class="col-sm-offset-2 col-sm-6">
+							<button type="submit" class="btn btn-warning">수정</button>
+							<button type="submit" class="btn btn-danger">취소</button>
+						</div>
 					</div>				
 				</form>			
 				
