@@ -26,7 +26,7 @@
 	 		        dataType:'text',
 	 		    	url: 'remove',
 	 		        type:"post", 
-	 		        data: {"did": $("#did").val()}	,
+	 		        data: {"did": $("#remove").val()}	,
 	 		        success : function(data){
 	 		        	location.href="list";
 	 		        }
@@ -40,6 +40,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class = "col-sm-9 col-md-10 main">
+
 			
 			<div class = "box box-header">
 				<h2>의료진 목록 관리</h2>
@@ -84,7 +85,7 @@
 							<td>${DoctorVO.sjid}</td>
 							<td>
 								<a href="modifyPage?did=${DoctorVO.did}"><button type="button" class="btn btn-warning">수정</button></a>
-								<button class="btn btn-danger" id="remove">삭제</button>
+								<button class="btn btn-danger" value="${DoctorVO.did}" id="remove">삭제</button>
 							</td>						
 						</tr>
 					</c:forEach>			

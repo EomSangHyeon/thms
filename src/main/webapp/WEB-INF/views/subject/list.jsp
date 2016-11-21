@@ -16,22 +16,22 @@
 		$("#newBtn").click(function() {
 					self.location = "register";
 			});
-		/* $(".modify").click(function() {
-			self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&sjid="+$("#sjid").val();
-		});  */
+
+		
  		$("#remove").click(function(){
-			    $.ajax({
-			        dataType:'text',
-			    	url: 'remove',
-			        type:"post", 
-		 	       data: {"sjid": $("#sjid").val()}	,
-		 	       success : function(data){
-		        	location.href="list";
-		  	      }
-		  	  })
+ 			    $.ajax({
+ 			        dataType:'text',
+ 			    	url: 'remove',
+ 			        type:"post", 
+ 		 	       data: {"sjid": $("#remove").val()},
+ 		 	       success : function(data){
+ 		        	location.href="list";
+ 		  	      }
+ 		  	  });
 		});
 	});
 </script>
+
 
 <%@ include file="../admin/admin_sidebar.jsp" %>
 <div class="container-fluid">
@@ -78,7 +78,7 @@
 							<td>${SubjectVO.sjname}</td>
 							<td>
 								<a href="modifyPage?sjid=${SubjectVO.sjid }"><button type="button" class="btn btn-warning">수정</button></a>
-								<button class="btn btn-danger" id="remove">삭제</button>
+								<button class="btn btn-danger" value="${SubjectVO.sjid}" id="remove">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>		

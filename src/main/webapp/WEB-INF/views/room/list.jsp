@@ -9,39 +9,28 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$("#searchBtn")
-								.click(
-										function() {
-											self.location = "list${pageMaker.makeQuery(1)}&searchType="
-													+ $(
-															"select option:selected")
-															.val()
-													+ "&keyword="
-													+ $("#keywordInput").val();
-										});
-						$("#newBtn").click(function() {
-							self.location = "register";
-						});
-						/* 	$(".modify").click(function() {
-								self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&rmid="+$("#rmid").val();
-							}); */
-						$(".remove").click(function() {
-							$.ajax({
-								dataType : 'text',
-								url : 'remove',
-								type : "post",
-								data : {
-									"rmid" : $("#rmid").val()
-								},
-								success : function(data) {
-									location.href = "list";
-								}
-							})
-						});
-					});
+
+	$(document).ready(function() {
+		$("#searchBtn").click(function() {
+			self.location = "list${pageMaker.makeQuery(1)}&searchType="+ $("select option:selected").val()
+							+ "&keyword="+ $("#keywordInput").val();
+		});
+		$("#newBtn").click(function() {
+			self.location = "register";
+		});
+
+	 	$("#remove").click(function(){
+	 		    $.ajax({
+	 		        dataType:'text',
+	 		    	url: 'remove',
+	 		        type:"post", 
+	 		        data: {"rmid": $("#remove").val()},
+	 		        success : function(data){
+	 		        	location.href="list";
+	 		        }
+	 		    });
+		});
+	});
 </script>
 
 <%@ include file="../admin/admin_sidebar.jsp" %>
@@ -53,7 +42,7 @@
 			<option value="id"
 				<c:out value="${cri.searchType eq 'id'?'selected':''}"/>>번호</option>
 			<option value="na"
-				<c:out value="${cri.searchType eq 'na'?'selected':''}"/>>방(호)</option>
+				<c:out value="${cri.searchType eq 'na'?'selected':''}"/>>방(호)</option>	
 		</select> <input type="text" name="keyword" id="keywordInput"
 			value="${cri.keyword}" />
 		<button id="searchBtn">Search</button>
@@ -72,9 +61,11 @@
 				<td>${RoomVO.rmnumber}</td>
 				<td>${RoomVO.rmcurrentcount }</td>
 				<td>${RoomVO.rmheadcount}</td>
+
 				<td><a href="modifyPage?rmid=${RoomVO.rmid}"><button
-							type="button" class="modify">수정</button></a></td>
-				<td><button class="remove">삭제</button></td>
+							type="button" id="modify">수정</button></a></td>
+				<td><button id="remove" value="${RoomVO.rmid}">삭제</button></td>
+
 			</tr>
 		</c:forEach>
 

@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thms.mapper.CheckUpReservationMapper">
+	<select id="insert" resultType="CheckUpReservationVO">
+		insert into
+		tbl_checkupreservation(credate,uid,chid,crid)
+		values(#{credate},#{uid},#{chid},#{crid});
+	</select>
+	<select id="readPage" resultType="CheckUpReservationVO">
+		SELECT
+		`creid`, `credate`, `uid`, `chid`, `crid`
+		FROM
+		`tbl_checkupreservation`
+		WHERE
+		`creid`=#{creid}
+	</select>
+	<update id="update">
+		update tbl_checkupreservation set
+		`credate`=#{credate},`uid` =#{uid},`chid` =#{chid},`crid` =#{crid}
+		where
+		`creid`=#{creid}
+	</update>
+	<delete id="delete">
+		delete from tbl_checkupreservation where `creid`=#{creid}
+	</delete>
+<!-- 	//////////////////////////////////////////////////////////
+	////////////////list//////////////////////////////////////
+	//////////////////////////////////////////////////////////	 -->
+	<select id="listPage" resultType="CheckUpReservationVO"> 
+	<![CDATA[ 
+	SELECT `creid`, `credate`, `uid`, `chid`, `crid`
+		 FROM 
+	 `tbl_checkupreservation` 
+		 WHERE `creid`>0 ORDER BY `creid` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listCriteria" resultType="CheckUpReservationVO"> 
+	<![CDATA[ 
+		SELECT 
+			`creid`, `credate`, `uid`, `chid`, `crid`
+		 FROM 
+		 	`tbl_checkupreservation` 
+		 WHERE 
+		 	`creid`>0 ORDER BY `creid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="countPaging" resultType="int"> 
+	<![CDATA[ 
+		select count(creid) 
+			from
+		tbl_checkupreservation 
+			where 
+		creid>0 
+		]]>
+	</select>
+	<sql id="lsearch">
+		<if test="searchType != null">
+			<if test="searchType == 'd'.toString()">
+				AND `credate` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'id'.toString()">
+				AND `uid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'ch'.toString()">
+				AND `chid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'cr'.toString()">
+				AND `crid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="listSearch" resultType="CheckUpReservationVO"> 
+	<![CDATA[ 
+		SELECT 
+	`creid`, `credate`, `uid`, `chid`, `crid`
+		 FROM 
+		 	`tbl_checkupreservation` 
+		 WHERE 
+		 	`creid`>0  
+		]]>
+		<include refid="lsearch"></include>
+		<![CDATA[
+		ORDER BY `creid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(creid) 
+			from
+		tbl_checkupreservation 
+			where 
+		creid>0 
+		]]>
+		<include refid="lsearch"></include>
+	</select>
+	
+
+
+
+<!-- 	//////////////////////////////////////////////////////////
+	////////////////member//////////////////////////////////////
+	//////////////////////////////////////////////////////////	 -->
+	<select id="memlistPage" resultType="MemberVO"> 
+	<![CDATA[ 
+	SELECT `uid`, `uname`, `ugender`, `ubirth` 
+		 FROM 
+	 `tbl_member` 
+	  ORDER BY `uid` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="memlistCriteria" resultType="MemberVO"> 
+	<![CDATA[ 
+		SELECT 
+			`uid`, `uname`, `ugender`, `ubirth` 
+		 FROM 
+		 	`tbl_member` 
+			 ORDER BY `uid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="memcountPaging" resultType="int"> 
+	<![CDATA[ 
+		select count(uid) 
+			from
+		tbl_member 
+		]]>
+	</select>
+	<sql id="memsearch">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				where `uid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				where `uname` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'bir'.toString()">
+				where `ubirth` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="memlistSearch" resultType="MemberVO"> 
+	<![CDATA[ 
+		SELECT 
+			`uid`, `uname`, `ugender`, `ubirth` 
+		 FROM 
+		 	`tbl_member` 
+		 	
+		]]>
+		<include refid="memsearch"></include>
+		<![CDATA[
+		ORDER BY `uid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="memlistSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(uid) 
+			from
+		tbl_member 
+		]]>
+		<include refid="memsearch"></include>
+	</select>
+	
+<!-- 	//////////////////////////////////////////////////////////
+	////////////////checkup//////////////////////////////////////
+	//////////////////////////////////////////////////////////	 -->
+		<select id="checkuplistPage" resultType="CheckUpVO"> 
+	<![CDATA[ 
+		SELECT `chid`, `chname`
+		 FROM 
+	 `tbl_checkup` 
+		 WHERE `chid`>0 ORDER BY `chid` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="checkuplistCriteria" resultType="CheckUpVO"> 
+	<![CDATA[ 
+	SELECT 
+			`chid`, `chname`
+		 FROM 
+		 	`tbl_checkup` 
+		 WHERE 
+		 	`chid`>0 ORDER BY `chid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="checkupcountPaging" resultType="int"> 
+	<![CDATA[ 
+			select count(chid) 
+			from
+		tbl_checkup 
+			where 
+		chid>0 
+		]]>
+	</select>
+	<sql id="checkupsearch">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				AND `chid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				AND `chname` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			
+		</if>
+	</sql>
+	<select id="checkuplistSearch" resultType="CheckUpVO"> 
+	<![CDATA[ 
+		SELECT 
+			`chid`, `chname`
+		 FROM 
+		 	`tbl_checkup` 
+		 WHERE 
+		 	`chid`>0  
+		]]>
+		<include refid="checkupsearch"></include>
+		<![CDATA[
+	ORDER BY `chid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="checkuplistSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(chid) 
+			from
+		tbl_checkup 
+			where 
+		chid>0 
+		]]>
+		<include refid="checkupsearch"></include>
+	</select>
+	<!-- 	//////////////////////////////////////////////////////////
+	////////////////checkuproom//////////////////////////////////////
+	//////////////////////////////////////////////////////////	 -->
+	<select id="checkuproomlistPage" resultType="CheckUpRoomVO"> 
+	<![CDATA[ 
+	SELECT `crid`, `chid`, `crnumber`
+		 FROM 
+	 `tbl_checkuproom` 
+		 WHERE `crid`>0 ORDER BY `crid` DESC
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="checkuproomlistCriteria" resultType="CheckUpRoomVO"> 
+	<![CDATA[ 
+		SELECT 
+			`crid`, `chid`, `crnumber`
+		 FROM 
+		 	`tbl_checkuproom` 
+		 WHERE 
+		 	`crid`>0 ORDER BY `crid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="checkuproomcountPaging" resultType="int"> 
+	<![CDATA[ 
+		select count(crid) 
+			from
+		tbl_checkuproom 
+			where 
+		crid>0 
+		]]>
+	</select>
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				AND `crid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				AND `chid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'rm'.toString()">
+				AND `crnumber` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
+	<select id="checkuproomlistSearch" resultType="CheckUpRoomVO"> 
+	<![CDATA[ 
+		SELECT 
+			`crid`, `chid`, `crnumber`
+		 FROM 
+		 	`tbl_checkuproom` 
+		 WHERE 
+		 	`crid`>0  
+		]]>
+		<include refid="search"></include>
+		<![CDATA[
+		ORDER BY `crid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="checkuproomlistSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(crid) 
+			from
+		tbl_checkuproom 
+			where 
+		crid>0 
+		]]>
+		<include refid="search"></include>
+	</select>
+	
+
+</mapper>

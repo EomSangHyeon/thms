@@ -14,15 +14,12 @@
 		$("#newBtn").click(function() {
 			self.location = "register";
 		});
-	/* 	$(".modify").click(function() {
-			self.location="modifyPage${pageMaker.makeSearch(pageMaker.cri.page)}&chid="+$("#chid").val();
-		}); */
  		$("#remove").click(function(){
  			    $.ajax({
  			        dataType:'text',
  			    	url: 'remove',
  			        type:"post", 
- 		 	       data: {"chid": $("#chid").val()}	,
+ 		 	       data: {"chid": $("#remove").val()}	,
  		 	       success : function(data){
  		        	location.href="list";
  		  	      }
@@ -76,7 +73,7 @@
 							<td>${CheckUpVO.chname }</td>
 							<td>
 								<a href="modifyPage?chid=${CheckUpVO.chid}"><button type="button" id="modify" class="btn btn-warning">수정</button></a>
-								<button id="remove" class="btn btn-danger">삭제</button></td>
+								<button id="remove" value="${CheckUpVO.chid}" class="btn btn-danger">삭제</button></td>
 						</tr>
 					</c:forEach>
 			
