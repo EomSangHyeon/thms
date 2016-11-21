@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
+<%@ include file="../include/header.jsp" %>
 <script type="text/javascript">
 	 function searchcheckup() {
 		event.preventDefault();
@@ -19,7 +15,7 @@
 	      document.getElementById("chid").value = id;
 	}
 </script>
-<body>
+<%@ include file="../admin/admin_sidebar.jsp" %>
 <form method="post">
 
 <div>검사ID : <input type="text" name="chid" id ="chid"><button onclick="searchcheckup()">찾기</button></div>
@@ -28,5 +24,4 @@
 	<button type="submit">입력</button>
 </div>
 </form>
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>
