@@ -15,7 +15,13 @@
 		<table>
 			<tr>
 				<td>검색유형</td>
-				<td><input type="text" name="searchType"></td>
+				<td><select name="searchType">
+						<option value="uid">아이디</option>
+						<option value="uname">이름</option>
+						<option value="uemail">이메일</option>
+						<option value="unick">닉네임</option>
+						<option value="ustatus">권한</option>
+				</select></td>
 			</tr>
 			<tr>
 				<td>검색어</td>

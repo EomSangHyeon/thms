@@ -35,13 +35,22 @@
 				"width=600, height=500, left=600");
 
 	}
+
+	function leaveRoom() {
+		alert("ss");
+
+	}
 </script>
 
 
 </head>
 <body>
 	selectPatientList
-	<input type="button" value="환자병실확인" onclick="self.location='/room/list';" />
+	<input type="button" value="환자병실확인"
+		onclick="self.location='/room/list';" />
+	<input type="button" value="환자 추가"
+		onclick="self.location='/member/testJoinPatient';" />
+
 	<br>
 	<table>
 		<tr>
@@ -60,7 +69,8 @@
 				<td>${patient.did }</td>
 				<td><input type="button" value="입실" id="enterRoom"
 					onclick="goRoom(' ${patient.hoid}')"></td>
-				<td><input type="button" value="퇴실" id="checkOut"></td>
+				<td><input type="button" value="퇴실" id="checkOut"
+					onclick="leaveRoom()"></td>
 				<td><input type="button" value=" 삭제"
 					onclick="deleteAjax('${patient.hoid }')"></td>
 			</tr>

@@ -4,33 +4,36 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.thms.mapper.RoomMapper">
+
 	<select id="insert" resultType="RoomVO">
-		insert into tbl_room(rmnumber, rmheadcount)
+		insert into tbl_room(rmnumber,
+		rmheadcount)
 		values(#{rmnumber},#{rmheadcount});
 	</select>
-	
+
 	<select id="listAll" resultType="RoomVO"> 
 	<![CDATA[ 
 	SELECT `rmid`, `rmnumber`, `rmheadcount` 
 		 FROM 
 	 `tbl_room` 
 		 WHERE `rmid`>0 ORDER BY `rmid` DESC 
-		]]>		
+		]]>
 	</select>
-	
-	
+
 	<select id="readPage" resultType="RoomVO">
 		SELECT
-		`rmid`, `rmnumber`, `rmheadcount`
+		`rmid`, `rmnumber`,
+		`rmheadcount`
 		FROM
 		`tbl_room`
 		WHERE
 		`rmid`=#{rmid}
 	</select>
-	
+
 	<update id="update">
 		update tbl_room set
-		`rmid` =#{rmid},`rmnumber` =#{rmnumber},`rmheadcount` =#{rmheadcount}
+		`rmid` =#{rmid},`rmnumber`
+		=#{rmnumber},`rmheadcount` =#{rmheadcount}
 		where
 		`rmid`=#{rmid}
 	</update>
@@ -38,8 +41,8 @@
 	<delete id="delete">
 		delete from tbl_room where `rmid`=#{rmid}
 	</delete>
-	
-	
+
+
 	<select id="listPage" resultType="RoomVO"> 
 	<![CDATA[ 
 	SELECT `rmid`, `rmnumber`, `rmheadcount` 
@@ -49,16 +52,19 @@
 		 limit #{pageStart},#{perPageNum} 
 		]]>
 	</select>
+
 	<select id="listCriteria" resultType="RoomVO"> 
 	<![CDATA[ 
+
 		SELECT `rmid`, `rmnumber`, `rmheadcount` 
 		 FROM 
 		 	`tbl_room` 
 		 WHERE 
 		 	`rmid`>0 ORDER BY `rmid` DESC 
-		 limit #{pageStart},#{perPageNum} 
+		 limit #{pageStart},#{perPageNum}  
 		]]>
 	</select>
+
 	<select id="countPaging" resultType="int"> 
 	<![CDATA[ 
 		select count(rmid) 
@@ -68,6 +74,7 @@
 		rmid>0 
 		]]>
 	</select>
+
 	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'id'.toString()">
@@ -78,21 +85,24 @@
 			</if>
 		</if>
 	</sql>
-	<select id="listSearch" resultType="RoomVO"> 
+
+	<select id="listSearch" resultType="RoomVO">
+
 	<![CDATA[ 
-		SELECT 
-			`rmid`, `rmnumber`, `rmheadcount` 
-		 FROM 
-		 	`tbl_room` 
-		 WHERE 
-		 	`rmid`>0  
+	
+	 	(select b.rmid, b.rmnumber ,b.rmheadcount - count(b.rmid) rmcurrentcount, 
+	 	b.rmheadcount from tbl_hospitalize a,
+		tbl_room b where a.rmid = b.rmid  group by a.rmid desc  )
 		]]>
 		<include refid="search"></include>
 		<![CDATA[
-		ORDER BY `rmid` DESC 
-		 limit #{pageStart},#{perPageNum} 
+		limit #{pageStart},#{perPageNum}
 		]]>
+		
+		<!-- SELECT `rmid`, `rmnumber`, `rmheadcount` FROM `tbl_room` WHERE `rmid`>0 -->
+      <!-- ORDER BY `rmid` DESC limit #{pageStart},#{perPageNum} -->
 	</select>
+
 	<select id="listSearchCount" resultType="int"> 
 	<![CDATA[ 
 		select count(rmid) 
