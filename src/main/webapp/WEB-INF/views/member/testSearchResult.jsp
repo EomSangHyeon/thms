@@ -61,15 +61,16 @@
 						
 				<table class="table table-striped">
 					<tr>
-						<td>아이디</td>
-						<td>이름</td>
-						<td>이메일</td>
-						<td>성별</td>
-						<td>닉네임</td>
-						<td>생일</td>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>이메일</th>
+						<th>성별</th>
+						<th>닉네임</th>
+						<th>생일</th>
 						<c:if test="${check.ustatus =='master' || check.ustatus =='admin' }">
-							<td>상태</td>
+							<th>상태</th>
 						</c:if>
+						<th>삭제</th>
 					</tr>
 					<c:forEach items="${searchmember}" var="search">
 						<tr>
@@ -85,7 +86,7 @@
 								<td>${search.ustatus}</td>
 							</c:if>
 							<td>
-								<input type="button" id="deleteuser" value="삭제"	onclick="deleteUser('${search.uid }')">
+								<input class="btn btn-danger" type="button" id="deleteuser" value="삭제"	onclick="deleteUser('${search.uid }')">
 							</td>
 						</tr>
 					</c:forEach>
