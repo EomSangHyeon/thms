@@ -132,7 +132,7 @@ public class ReservationController {
 			dto.setSearchMonth(cal.get(Calendar.YEAR) +"-"+ (cal.get(Calendar.MONTH) + 1));
 			
 			List<ReservationVO> reservationList = reservationService.getScheduleList(dto);
-			int[][] reservationCount = new int[endDay][2];
+			int[][] reservationCount = new int[endDay + 1][2];
 			int ampm2 = 0;
 			for(int i=0; i<reservationList.size(); i++) {
 				int date = Integer.parseInt(reservationList.get(i).getRdate().substring(reservationList.get(i).getRdate().lastIndexOf("-") + 1));
