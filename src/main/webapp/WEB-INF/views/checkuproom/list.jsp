@@ -32,7 +32,7 @@
 				 			        dataType:'text',
 				 			    	url: 'remove',
 				 			        type:"post", 
-				 		 	       data: {"crid": $("#crid").val()}	,
+				 		 	       data: {"crid": $("#remove").val()}	,
 				 		 	       success : function(data){
 				 		        	location.href="list";
 				 		  	      }
@@ -73,8 +73,7 @@
 							<button id="newBtn" class="btn btn-primary">검사실 입력</button>
 						</div>
 					</div>
-				</div>
-			
+				</div>			
 			
 				<table class="table table-striped">
 					<tr>
@@ -90,7 +89,7 @@
 							<td>${CheckUpRoomVO.crnumber}</td>
 							<td>
 								<a href="modifyPage?crid=${CheckUpRoomVO.crid}"><button type="button" class="btn btn-warning">수정</button></a>
-								<button id="remove" class="btn btn-danger">삭제</button>
+							<button id="remove"  value="${CheckUpRoomVO.crid}" class="btn btn-danger">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>

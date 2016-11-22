@@ -71,6 +71,7 @@ public class RoomController {
 	@ResponseBody
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	public void remove(@RequestParam("rmid") int rmid, SearchCriteria cri, RedirectAttributes rttr) throws Exception {
+		System.out.println(rmid);
 		service.delete(rmid);
 
 	}
