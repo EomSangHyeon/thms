@@ -12,10 +12,11 @@
 </head>
 <body>
 	<script type="text/javascript">
+	
 		function searchUid() {
 			var comeon = $("#uid").val();
 			alert(comeon);
-			window.open("searchUid?uid=" + comeon, "",
+			window.open("searchUid?searchType=uid&keyword=" + comeon, "",
 					"width=600, height=500, left=600");
 
 		}

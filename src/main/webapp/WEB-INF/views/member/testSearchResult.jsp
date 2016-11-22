@@ -20,22 +20,23 @@
 			dataType : 'text',
 			url : 'deleteUserAjax',
 			data : {
-				uid :haha
+				uid : haha
 			},
 			success : function() {
-			
+
 				alert("삭제되었습니다");
-			location.href = "testSearchResult"; 
+				location.href = "testSearchResult";
 			}
 
 		})
 	}
 </script>
+
+
+
 </head>
 <body>
-	search
-
-
+	search ${check.ustatus}
 	<br>
 	<form action="testSearchResult" method="POST">
 		<table>
@@ -67,7 +68,7 @@
 			<td>성별</td>
 			<td>닉네임</td>
 			<td>생일</td>
-			<c:if test="${check =='master' }">
+			<c:if test="${check.ustatus =='master' || check.ustatus =='admin' }">
 				<td>상태</td>
 			</c:if>
 		</tr>
@@ -80,13 +81,13 @@
 				<td>${search.ugender}</td>
 				<td>${search.unick}</td>
 				<td>${search.ubirth}</td>
-				<c:if test="${check =='master' }">
+				<c:if test="${check.ustatus =='master' || check.ustatus =='admin' }">
 					<td>${search.ustatus}</td>
 				</c:if>
 				<td><input type="button" id="deleteuser" value="삭제"
 					onclick="deleteUser('${search.uid }')"></td>
 			</tr>
-				
+
 		</c:forEach>
 	</table>
 

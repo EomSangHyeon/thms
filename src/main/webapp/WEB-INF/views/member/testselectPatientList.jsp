@@ -32,12 +32,12 @@
 
 	function goRoom(comeon) {
 		window.open("confirmRoom?hoid=" + comeon, "",
-				"width=600, height=500, left=600");
+				"width=1000, height=900, left=600");
 
 	}
 
 	function leaveRoom() {
-		alert("ss");
+		alert("안만듬");
 
 	}
 </script>
