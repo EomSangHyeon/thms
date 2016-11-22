@@ -85,6 +85,16 @@
 			</if>
 		</if>
 	</sql>
+		<sql id="search1">
+		<if test="searchType != null">
+			<if test="searchType == 'id'.toString()">
+				and `rmid` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'na'.toString()">
+				and `rmnumber` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+		</if>
+	</sql>
 
 	<select id="listSearch" resultType="RoomVO">
 
@@ -136,7 +146,7 @@
 			where 
 		rmid>0 
 		]]>
-		<include refid="search"></include>
+		<include refid="search1"></include>
 	</select>
 
 </mapper> 
