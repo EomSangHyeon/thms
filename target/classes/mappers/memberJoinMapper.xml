@@ -5,16 +5,21 @@
 
 <mapper namespace="com.thms.mapper.UserMapper">
 
+	<!-- 유저삭제 -->
+	<delete id="deleteUser">
+		delete from tbl_member where uid=#{uid}
+
+	</delete>
+
+
 	<!-- AJAX를 통해서 방이 가능한지 확인 -->
 	<select id="checkRoon" resultType="String">
 		select
-		(select rmheadcount from tbl_room where rmid=#{rmid} ) -
-		(select count(rmid) from tbl_hospitalize where rmid=#{rmid} )
+		(select rmheadcount from
+		tbl_room where rmid=#{rmid} ) -
+		(select count(rmid) from
+		tbl_hospitalize where rmid=#{rmid} )
 	</select>
-
-
-
-
 
 
 	<delete id="deletePatient">
@@ -288,4 +293,14 @@
 		where uid
 		= #{uid}
 	</select>
+
+	<!-- 유저 다 들고오기 -->
+	<select id="listUser" resultType="com.thms.domain.MemberVO">
+		select * from tbl_member
+		limit
+		#{pageStart}, #{perPageNum}
+
+	</select>
+
+
 </mapper>

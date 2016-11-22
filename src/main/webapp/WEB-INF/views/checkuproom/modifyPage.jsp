@@ -1,10 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
+<%@ include file="../include/header.jsp" %>
 <script type="text/javascript">
 	 function searchcheckup() {
 		event.preventDefault();
@@ -22,33 +17,68 @@
 			var formObj = $("form[role='form']");
 			console.log(formObj);
 			
-			$(".modify").on("click",function(){
+			$("#modify").on("click",function(){
 				formObj.submit();
 			});
-			$(".remove").on("click",function(){
+			$("#remove").on("click",function(){
 				self.location="/checkuproom/list?page=${cri.page}&perPageNum=${cri.perPageNum}"+
 						"&searchType=${cri.searchType}&keyword=${cri.keyword}";
 			}); 
 		});
 </script>
-<body>
-<form role="form" method="post">
-<input type="hidden" name="page" value="${cri.page}">
-	<input type="hidden" name="perPageNum" value="${cri.perPageNum}">	
-	<input type="hidden" name="searchType" value="${cri.searchType}">
-	<input type="hidden" name="keyword" value="${cri.keyword}">
+<%@ include file="../admin/admin_sidebar.jsp" %>
+<div class="container-fluid">
+	<div class="row">		
+		<div class="col-sm-9 col-md-10 main">
+			
+			<div class = "box box-header">
+				<h2>검사실 수정</h2>
+			</div>
+			
+			<div class="box box-body">
+			
+				<form role="form" method="post" class="form-horizontal">
+					<input type="hidden" name="page" value="${cri.page}">
+					<input type="hidden" name="perPageNum" value="${cri.perPageNum}">	
+					<input type="hidden" name="searchType" value="${cri.searchType}">
+					<input type="hidden" name="keyword" value="${cri.keyword}">
+				
+				
+					<div class="form-group">
+						<label class="control-label col-sm-2">검사실 ID : </label> 
+						<div class="col-sm-6">
+							<input class="form-control" type="text" name="crid" value="${checkUpRoomVO.crid}" readonly="readonly">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2">검사 ID :</label> 
+						<div class="col-sm-6">
+							<div class="input-group">
+								<input class="form-control" type="text" name="chid" id ="chid" value="${checkUpRoomVO.chid}">
+								<span class="input-group-btn"><button class="btn btn-primary" onclick="searchcheckup()">찾기</button></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2">검사실 :</label>
+						<div class="col-sm-6">
+							<input type="text" name="crnumber" id ="crnumber" value="${checkUpRoomVO.crnumber}">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-6">
+							<button type="submit" id="modify" class="btn btn-warning">수정</button>
+							<button type="submit" id="remove" class="btn btn-danger">취소</button>
+						</div>
+					</div>
+				</form>
 
-
-<div>검사실ID <input type="text" name="crid" value="${checkUpRoomVO.crid}" readonly="readonly"></div>
-<div>검사ID : <input type="text" name="chid" id ="chid" value="${checkUpRoomVO.chid}"><button onclick="searchcheckup()">찾기</button></div>
-<div>검사실 : <input type="text" name="crnumber" id ="crnumber" value="${checkUpRoomVO.crnumber}"></div>
-
-
-
-<div>
-	<button type="submit" class="modify">수정</button>
-	<button type="submit" class="remove">취소</button>
-</div>
-</form>
-</body>
-</html>
+			</div><!-- box-body -->
+						
+		</div><!-- /col-sm-9 col-md-10 main -->				
+	</div><!-- .row -->
+</div><!-- .container-fluid -->
+<%@ include file="../include/footer.jsp" %>

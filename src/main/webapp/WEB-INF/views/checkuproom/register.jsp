@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
+<%@ include file="../include/header.jsp" %>
+
 <script type="text/javascript">
 	 function searchcheckup() {
 		event.preventDefault();
@@ -19,14 +15,46 @@
 	      document.getElementById("chid").value = id;
 	}
 </script>
-<body>
-<form method="post">
+<%@ include file="../admin/admin_sidebar.jsp" %>
+<div class="container-fluid">
+	<div class="row">		
+		<div class="col-sm-9 col-md-10 main">
+			
+			<div class = "box box-header">
+				<h2>검사실 수정</h2>
+			</div>
+			
+			<div class="box box-body">
+			
+				<form method="post" class="form-horizontal">
+				
+					<div class="form-group">
+						<label class="control-label col-sm-2">검사ID :</label> 
+						<div class="col-sm-6">
+							<div class="input-group">
+								<input class="form-control" type="text" name="chid" id ="chid">
+								<span class="input-group-btn"><button class="btn btn-primary" onclick="searchcheckup()">찾기</button></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2">검사실 : </label>
+						<div class="col-sm-6"> 
+							<input class="form-control" type="text" name="crnumber" id ="dclinic">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-6">
+							<button class="btn btn-primary" type="submit">입력</button>
+						</div>
+					</div>
+				</form>
 
-<div>검사ID : <input type="text" name="chid" id ="chid"><button onclick="searchcheckup()">찾기</button></div>
-<div>검사실 : <input type="text" name="crnumber" id ="dclinic"></div>
-<div>
-	<button type="submit">입력</button>
-</div>
-</form>
-</body>
-</html>
+			</div><!-- box-body -->
+						
+		</div><!-- /col-sm-9 col-md-10 main -->				
+	</div><!-- .row -->
+</div><!-- .container-fluid -->
+<%@ include file="../include/footer.jsp" %>

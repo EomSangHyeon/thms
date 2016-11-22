@@ -22,6 +22,8 @@
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
+	var clickedDate = "";
+
 	if($("select[name='sjid']").val() != "")
 		getDid();
 
@@ -39,15 +41,49 @@ $(document).ready(function() {
 			$(this).removeClass("enter_color");
 		},
 		click: function() {
-			var clickedDate = this.id;
-			var sjname = $("select[name='sjid'] option:selected").text();
-			var dname = $("select[name='did'] option:selected").text();
-			$("#confirmModal").addClass("show");
-			/* var str = dname +"("+ sjname +")에 "+ clickedDate +" 날짜로 예약 하시겠습니까?";
-			if(confirm(str)) {
-				
-			} */
+			var str = this.id.split("-");
+			clickedDate = str[0];
+			if(str[1] < 10)
+				clickedDate += "-0"+ str[1];
+			else
+				clickedDate += "-"+ str[1];
+			if(str[2] < 10)
+				clickedDate += "-0"+ str[2];
+			else
+				clickedDate += "-"+ str[2];
 		}
+	});
+
+	$("#chooseAmPm").on("click", function() {
+		var sjname = $("select[name='sjid'] option:selected").text();
+		var dname = $("select[name='did'] option:selected").text();
+		var ampm = $("input:radio[name='ampm']:checked").val();
+
+		if($("input:radio[name='ampm']").is(":checked") != true) {
+			alert("진료시간대를 선택해주세요.");
+			return;
+		}
+		
+		if($("select[name='sjid']").val() == "") {
+			alert("진료과목을 선택해주세요.");
+			$("#confirmModal").modal("hide");
+			return;
+		}
+
+		if($("select[name='did']").val() == "") {
+			alert("의료진을 선택해주세요.");
+			$("#confirmModal").modal("hide");
+			return;
+		}
+
+		$.post("/reservation/register", {
+			rdate: clickedDate,
+			sjid: $("select[name='sjid'] option:selected").val(),
+			did: $("select[name='did'] option:selected").val(),
+			ampm: $("input:radio[name='ampm']:checked").val()
+		}, function(data) {
+			alert(data);
+		});
 	});
 });
 
@@ -147,25 +183,6 @@ function getSchedule(year, month) {
 	self.location = url +"year="+ year +"&month="+ month;
 }
 </script>
-<!-- Modal -->
-<div id="conformModal" class="modal modal-primary fade" role="dailog">
-	<div class=modal-dailog>
-		<!-- Modal content -->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"></h4>
-			</div>
-			<div class="modal-body" data-rno>
-				<p><input type="text" id="replytext" class="form-control"/></p>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-info" id="replyModBtn">예약하기</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-			</div>
-		</div>
-	</div>
-</div>
 <!-- Main content -->
 <div class="container-fluid">
 	<div class="row">
@@ -176,6 +193,39 @@ function getSchedule(year, month) {
 			<div class="box">
 				<div class="box-header width-border">
 					<h3 class="box-title">의료진 일정관리</h3>
+				</div>
+
+				<!-- Modal -->
+				<div id="confirmModal" class="modal fade" role="dailog">
+					<div class="modal-dailog modal-sm" style="margin: 30px auto;">
+						<!-- Modal content -->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">예약 시간대 선택</h4>
+							</div>
+							<div class="modal-body">
+								<p>
+<c:if test="${empty login}">
+									<a href="/member/login">로그인</a> 후 이용해주세요.
+</c:if>
+<c:if test="${not empty login}">
+									<label>
+										<input type="radio" name="ampm" value="am"/>오전
+									</label>
+									<br/>
+									<label>
+										<input type="radio" name="ampm" value="pm"/>오후
+									</label>
+</c:if>
+								</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" id="chooseAmPm">예약하기</button>
+								<button type="button" class="btn btn-warning" data-dismiss="modal">취소</button>
+							</div>
+						</div>
+					</div>
 				</div>
 
 				<div class="box-body">
@@ -238,9 +288,9 @@ function getSchedule(year, month) {
 											<div class="text-right">${calDate[i][j]}</div>
 											<br/>
 											<div class="text-center" style="background-color:#00D8FF;">오전</div>
-											<div class="text-center">0 / ${medicalCount[j][0]}</div>
+											<div class="text-center">${reservationCount[calDate[i][j]][0]} / ${medicalCount[j][0]}</div>
 											<div class="text-center" style="background-color:#FFA7A7;">오후</div>
-											<div class="text-center">0 / ${medicalCount[j][1]}</div>
+											<div class="text-center">${reservationCount[calDate[i][j]][1]} / ${medicalCount[j][1]}</div>
 										</div>
 		</c:if>
 									</td>

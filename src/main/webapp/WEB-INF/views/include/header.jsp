@@ -18,6 +18,8 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins 
      folder instead of downloading all of them to reduce the load. -->
 <link href="/resources/dist/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
 .navbar { margin-bottom: 0; border-radius: 0; }
 footer { background-color: #f2f2f2; padding: 25px; }
@@ -120,7 +122,7 @@ $(document).ready(function() {
 	          <li><a href="/introduce/location">오시는 길</a></li>
 	        </ul>
 	      </li>
-				<li id="reservation"><a href="#">진료예약</a></li>
+				<li id="reservation"><a href="/reservation/register">진료예약</a></li>
 				<li id="nboard"><a href="/nboard/list">의료소식</a></li>
 				<li id="sboard"><a href="/sboard/list">병원게시판</a></li>
 <%-- <c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">

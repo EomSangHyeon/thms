@@ -5,7 +5,18 @@
 
 <mapper namespace="com.thms.mapper.ReservationMapper">
 	<insert id="add" parameterType="ReservationVO">
-		INSERT INTO `reservation` (`rdate`) 
-		VALUES (#{rdate})
+		INSERT INTO `tbl_reservation` (`sjid`, `did`, `ampm`, `rdate`, `uid`, `regdate`) 
+		VALUES (#{sjid}, #{did}, #{ampm}, #{rdate}, #{uid}, NOW())
 	</insert>
+
+	<select id="getScheduleList" parameterType="ReservationDTO" resultType="ReservationVO">
+		<![CDATA[
+			SELECT 
+				* 
+			FROM 
+				`tbl_reservation` 
+			WHERE 
+				`sjid`=#{sjid} AND `did`=#{did} AND LEFT(`rdate`, 7)=#{searchMonth}
+		]]>
+	</select>
 </mapper>

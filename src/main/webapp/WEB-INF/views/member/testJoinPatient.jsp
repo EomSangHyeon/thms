@@ -12,6 +12,14 @@
 </head>
 <body>
 	<script type="text/javascript">
+		function searchUid() {
+			var comeon = $("#uid").val();
+			alert(comeon);
+			window.open("searchUid?uid=" + comeon, "",
+					"width=600, height=500, left=600");
+
+		}
+
 		function restRoom() {
 			$.ajax({
 				type : 'post',
@@ -28,38 +36,6 @@
 
 			})
 		}
-
-		function searchUidForPatient() {
-			$.ajax({
-				type : 'post',
-				url : 'ajaxForPatientUid',
-				dataType : 'text',
-				data : {
-					uid : $("#uid").val()
-				},
-
-				success : function(data) {
-					alert(data);
-					var list = new Array(data);
-					/* 	var list = new Array("test", "test1"); */
-
-					for (var idx = 0; idx < list.length; idx++) {
-						$("#forPatientUid").append(
-								"<option value='"+list[idx]+"'>" + list[idx]
-										+ "</option>");
-					}
-				}
-
-			})
-
-		}
-		/* 
-		$("#forPatientUid").html(
-				'<b style="font-size:18px;color:red">' + data
-						+ '</b>'
-
-		) */
-		//'<b style="font-size:18px;color:blue">' + data + '</b>'
 	</script>
 
 	<!--  사용자 uid 검색 가능하게  ajax로
@@ -67,11 +43,12 @@
 병실 빈병실 검색하게 해서 나오게하기 ajax
 의사 이름으로 검색 하게하기 ajax
 -->
-	<form action="joinForPatient" method="post">
+	<form action="joinForPatient.do" method="post">
 		<label>사용자 아이디 검색</label>
 		<div>
-			<input type="text" id="uid" name="uid"
-				onchange="searchUidForPatient()">
+			<input type="text" id="uid" name="uid"> <input type="button"
+				id="btn" name="btn" onclick="searchUid()" value="검색">
+
 		</div>
 		<div id="forPatientUid"></div>
 
@@ -85,7 +62,7 @@
 		<div>
 			<input type="text" id="rmid" name="rmid" onchange="restRoom()">
 		</div>
-		<div id="searchRmid"></div> 
+		<div id="searchRmid"></div>
 		<label> 담당의사 번호</label>
 		<div>
 			<input type="text" id="did" name="did"

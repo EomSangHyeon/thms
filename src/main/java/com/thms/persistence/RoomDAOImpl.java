@@ -34,6 +34,8 @@ public class RoomDAOImpl implements RoomDAO{
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".listAll");
 	}
+
+	
 	@Override
 	public void update(RoomVO vo) throws Exception {
 		// TODO Auto-generated method stub
@@ -72,5 +74,6 @@ public class RoomDAOImpl implements RoomDAO{
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace + ".countPaging", cri);
 	}
+
 
 }

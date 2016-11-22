@@ -67,7 +67,7 @@
 				</tr>
 				<tr>
 					<td>유저아이디</td>
-					<td><input type="text" id="uid" name="uid" value=${hh.uid} ></td>
+					<td><input type="text" id="uid" name="uid" value=${hh.uid} readonly/ ></td>
 				</tr>
 				<tr>
 					<td>입실날자</td>

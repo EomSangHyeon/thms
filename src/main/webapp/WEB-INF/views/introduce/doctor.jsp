@@ -45,7 +45,7 @@ $(document).ready(function(){
 		        			<td>${doc.dname}</td>
 		        			<td>${doc.dgender}</td>
 		        			<td>${doc.dclinic}</td>
-		        			<td><button class="btn btn-primary">예약하기</button></td>
+		        			<td><button class="btn btn-primary" onclick="self.location='/reservation/register?sjid=${doc.sjid}&did=${doc.did}';">예약하기</button></td>
 		        		</tr>
 		  </c:if>
 	</c:forEach>
