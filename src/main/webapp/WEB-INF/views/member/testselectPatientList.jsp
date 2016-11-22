@@ -16,7 +16,7 @@
 				hoid : here
 			},
 			success : function() {
-				alert("삭제하였습니다")
+				alert("삭제하였습니다");
 				location.href = 'testselectPatientList'
 			}
 		})
@@ -27,12 +27,13 @@
 
 	function goRoom(comeon) {
 		window.open("confirmRoom?hoid=" + comeon, "",
+
 				"width=400, height=500, left=600");
 
 	}
 
 	function leaveRoom() {
-		alert("ss");
+		alert("안만듬");
 
 	}
 </script>
@@ -68,7 +69,7 @@
 							
 							<div class="form-group">
 								<input class="btn btn-primary" type="button" value="환자병실확인"	onclick="self.location='/room/list';" />
-								<input class="btn btn-primary" type="button" value="환자 추가" onclick="self.location='/member/testJoinPatient';" />	
+								<input class="btn btn-primary" type="button" value="입원자 추가" onclick="self.location='/member/testJoinPatient';" />	
 							</div>
 						</div>
 					</div>

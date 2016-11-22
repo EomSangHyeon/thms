@@ -144,11 +144,25 @@ public class JoinDAOImpl implements JoinDAO {
 	@Override
 	public void deleteUser(MemberVO vo) {
 
-		System.out.println(vo.getUid() + "여기 나와야함");
+
 		
 		session.delete(namespace + ".deleteUser", vo);
 
 	}
+
+	@Override
+	public String checkPw(MemberVO vo) {
+		
+		return session.selectOne(namespace+".bringPw",vo);
+	}
+
+	@Override
+	public void myModify(MemberVO vo) {
+		session.update(namespace+".myModify",vo);
+		
+	}
+
+	
 
 }
 

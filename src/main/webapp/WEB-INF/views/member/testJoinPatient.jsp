@@ -8,10 +8,11 @@
 </head>
 
 	<script type="text/javascript">
+	
 		function searchUid() {
 			var comeon = $("#uid").val();
 			alert(comeon);
-			window.open("searchUid?uid=" + comeon, "",
+			window.open("searchUid?searchType=uid&keyword=" + comeon, "",
 					"width=600, height=500, left=600");
 
 		}
@@ -45,7 +46,7 @@
 		<div class="col-sm-9 col-md-10 main">
 		
 		<div class = "box box-header">
-				<h2>입원자 입력</h2>
+				<h2>입원자 추가</h2>
 			</div>
 			
 			<div class = "box box-body">
@@ -56,7 +57,7 @@
 						<label class="control-label col-sm-2">입원자 ID : </label>
 						<div class="col-sm-6">
 							<div class="input-group">
-								<input class="form-control" type="text" id="uid" name="uid"> 
+								<input class="form-control" type="text" id="uid" name="uid" readonly="readonly"> 
 								<span class="input-group-btn"><input class="btn btn-primary" type="button" id="btn" name="btn" onclick="searchUid()" value="검색"></span>
 							</div>
 						</div>			
@@ -65,21 +66,29 @@
 					<div class="form-group">			
 						<label class="control-label col-sm-2">입원일 입력 : </label>
 						<div class="col-sm-6">
-							<input class="form-control" type="text" id="horegdate" name="horegdate">
+							<input class="form-control" type="date" id="horegdate" name="horegdate">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-2"> 빈 병실 검색</label>
+						<label class="control-label col-sm-2">빈 병실 검색 : </label>
 						<div class="col-sm-6">
-							<input class="form-control" type="text" id="rmid" name="rmid" onchange="restRoom()">
+							<div class="input-group">
+								<input class="form-control" type="text" id="rmid" name="rmid" onchange="restRoom()" readonly="readonly">
+								<span class="input-group-btn"><input class="btn btn-primary" type="button" id="" name="" onclick="" value="검색"></span>
+							</div>							
+						</div>						
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-6">
+							<div id="searchRmid"></div>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-2"> 담당의사 번호</label>
+						<label class="control-label col-sm-2">담당의사 번호 : </label>
 						<div class="col-sm-6">
-							<input type="text" id="did" name="did" onchange="searchDidForPatient()">
+							<input class="form-control" type="text" id="did" name="did" onchange="searchDidForPatient()">
 						</div>
 					</div>
 					

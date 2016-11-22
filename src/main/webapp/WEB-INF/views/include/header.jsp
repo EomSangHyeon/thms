@@ -143,16 +143,16 @@ $(document).ready(function() {
 </c:if>
 <c:if test="${not empty login}">
 	<c:if test="${login.ustatus == 'customer'}">
-				<li><a href="/mypage/edit">my page</a></li>
+				<li><a href="/member/checkPw">my page</a></li>
 	</c:if>
 	<c:if test="${login.ustatus == 'hospital'}">
-				<li><a href="/admin/edit">hospital page</a></li>
+				<li><a href="/member/checkPw">hospital page</a></li>
 	</c:if>
 	<c:if test="${login.ustatus == 'admin'}">
-				<li><a href="/admin/edit">admin page</a></li>
+				<li><a href="/member/checkPw">admin page</a></li>
 	</c:if>
 	<c:if test="${login.ustatus == 'master'}">
-				<li><a href="/admin/edit">master page</a></li>
+				<li><a href="/member/checkPw">master page</a></li>
 	</c:if>
 	
 				<li><a href="/member/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>

@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/header.jsp" %>
 
-
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -15,18 +14,19 @@
 			dataType : 'text',
 			url : 'deleteUserAjax',
 			data : {
-				uid :haha
+				uid : haha
 			},
 			success : function() {
-			
+
 				alert("삭제되었습니다");
-			location.href = "testSearchResult"; 
+				location.href = "testSearchResult";
 			}
 
 		})
 	}
 </script>
 
+<<<<<<< HEAD
 <%@ include file="../admin/admin_sidebar.jsp" %>
 <div class="container-fluid">
 	<div class="row">
@@ -61,33 +61,33 @@
 						
 				<table class="table table-striped">
 					<tr>
-						<th>아이디</th>
-						<th>이름</th>
-						<th>이메일</th>
-						<th>성별</th>
-						<th>닉네임</th>
-						<th>생일</th>
-						<c:if test="${check =='master' }">
-							<th>상태</th>
+						<td>아이디</td>
+						<td>이름</td>
+						<td>이메일</td>
+						<td>성별</td>
+						<td>닉네임</td>
+						<td>생일</td>
+						<c:if test="${check.ustatus =='master' || check.ustatus =='admin' }">
+							<td>상태</td>
 						</c:if>
-						<th>삭제</th>
 					</tr>
 					<c:forEach items="${searchmember}" var="search">
 						<tr>
-							<td><a
-								href="/member/testMemberModify?uid=${search.uid }&ustatus=${search.ustatus}">${search.uid}</a></td>
+							<td>
+								<a href="/member/testMemberModify?uid=${search.uid }&ustatus=${search.ustatus}">${search.uid}</a>
+							</td>
 							<td>${search.uname}</td>
 							<td>${search.uemail}</td>
 							<td>${search.ugender}</td>
 							<td>${search.unick}</td>
 							<td>${search.ubirth}</td>
-							<c:if test="${check =='master' }">
+							<c:if test="${check.ustatus =='master' || check.ustatus =='admin' }">
 								<td>${search.ustatus}</td>
 							</c:if>
-							<td><input class="btn btn-danger" type="button" id="deleteuser" value="삭제"
-								onclick="deleteUser('${search.uid }')"></td>
+							<td>
+								<input type="button" id="deleteuser" value="삭제"	onclick="deleteUser('${search.uid }')">
+							</td>
 						</tr>
-							
 					</c:forEach>
 				</table>
 			
