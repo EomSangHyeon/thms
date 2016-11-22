@@ -82,4 +82,11 @@ public class CheckUpRoomDAOImpl implements CheckUpRoomDAO{
 		return session.selectOne(namespace + ".countPaging", cri);
 	}
 
+	@Override
+	public List<CheckUpRoomVO> listView(Integer chid) throws Exception {
+		// TODO Auto-generated method stub
+		System.out.println(chid);
+		return session.selectList(namespace+".listView",chid);
+	}
+
 }

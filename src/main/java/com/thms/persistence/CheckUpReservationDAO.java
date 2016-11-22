@@ -3,6 +3,7 @@ package com.thms.persistence;
 import java.util.List;
 
 import com.thms.domain.CheckUpReservationVO;
+import com.thms.domain.CheckUpReservationViewVO;
 import com.thms.domain.CheckUpRoomVO;
 import com.thms.domain.CheckUpVO;
 import com.thms.domain.Criteria;
@@ -22,7 +23,7 @@ public interface CheckUpReservationDAO {
 
 	public List<CheckUpReservationVO> listCriteria(Criteria cri) throws Exception;
 	
-	public List<CheckUpReservationVO> listSearch(SearchCriteria cri) throws Exception;
+	public List<CheckUpReservationViewVO> listSearch(SearchCriteria cri) throws Exception;
 	
 	public int listSearchCount(SearchCriteria cri)throws Exception;
 
@@ -48,6 +49,8 @@ public interface CheckUpReservationDAO {
 	public int checkuplistSearchCount(SearchCriteria cri)throws Exception;
 
 	public int checkupcountPaging(Criteria cri) throws Exception;
+	
+	public List<CheckUpVO> test(SearchCriteria cri) throws Exception;
 	//////////////////////////////////////
 	///////////checkuproom/////////////////////////
 	public List<CheckUpRoomVO> checkuproomlistPage(int page) throws Exception;

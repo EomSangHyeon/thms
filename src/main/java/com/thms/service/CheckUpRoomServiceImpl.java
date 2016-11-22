@@ -72,6 +72,12 @@ public class CheckUpRoomServiceImpl implements CheckUpRoomService{
 		return dao.listSearchCount(cri);
 	}
 
+	@Override
+	public List<CheckUpRoomVO> listView(Integer chid) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listView(chid);
+	}
+
 	
 
 }

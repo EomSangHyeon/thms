@@ -29,16 +29,18 @@
 						$("#newBtn").click(function() {
 							self.location = "register";
 						});
-				 		$("#remove").click(function(){
-				 			    $.ajax({
-				 			        dataType:'text',
-				 			    	url: 'remove',
-				 			        type:"post", 
-				 		 	       data: {"creid": $("#creid").val()}	,
-				 		 	       success : function(data){
-				 		        	location.href="list";
-				 		  	      }
-				 		  	  })
+						$("#remove").click(function() {
+							$.ajax({
+								dataType : 'text',
+								url : 'remove',
+								type : "post",
+								data : {
+									"creid" : $("#creid").val()
+								},
+								success : function(data) {
+									location.href = "list";
+								}
+							})
 						});
 					});
 </script>
@@ -52,9 +54,9 @@
 				<c:out value="${cri.searchType eq 'd'?'selected':''}"/>>생일</option>
 			<option value="id"
 				<c:out value="${cri.searchType eq 'id'?'selected':''}"/>>아이디</option>
-				<option value="ch"
+			<option value="ch"
 				<c:out value="${cri.searchType eq 'ch'?'selected':''}"/>>검사ID</option>
-				<option value="cr"
+			<option value="cr"
 				<c:out value="${cri.searchType eq 'cr'?'selected':''}"/>>검사실ID</option>
 		</select> <input type="text" name="keyword" id="keywordInput"
 			value="${cri.keyword}" />
@@ -68,21 +70,23 @@
 		<th>날짜</th>
 		<th>환자아이디</th>
 		<th>검사ID</th>
-		<th>검사실ID</th>		
-		<c:forEach items="${list}" var="CheckUpReservationVO">
-			<tr>
-				<td>${CheckUpReservationVO.creid}</td>
-				<td>${CheckUpReservationVO.credate}</td>
-				<td>${CheckUpReservationVO.uid}</td>
-				<td>${CheckUpReservationVO.chid}</td>
-				<td>${CheckUpReservationVO.crid}</td>
-			<td><a href="modifyPage?creid=${CheckUpReservationVO.creid}"><button type="button" >수정</button></a></td>
-				<td><input id=creid type="hidden" value="${CheckUpReservationVO.creid}"><button id="remove" >삭제</button></td>
-			</tr>
+		<th>검사실ID</th>
+		<c:forEach items="${list}" var="CheckUpReservationViewVO">
+			
+				<tr>
+					<td>${CheckUpReservationViewVO.v_crid}</td>
+					<td>${CheckUpReservationViewVO.v_credate}</td>
+					<td>${CheckUpReservationViewVO.v_uid}</td>
+					<td>${CheckUpReservationViewVO.v_chname}</td>
+					<td>${CheckUpReservationViewVO.cr_number}</td>
+					<td><a href="modifyPage?creid=${CheckUpReservationViewVO.v_crid}"><button type="button">수정</button></a></td>
+					<td><input id=creid type="hidden" value="${CheckUpReservationVO.creid}">
+					<button id="remove">삭제</button></td>
+				</tr>
 		</c:forEach>
 
 	</table>
-	 <div>
+	<div>
 		<div>
 			<ul>
 				<c:if test="${pageMaker.prev}">

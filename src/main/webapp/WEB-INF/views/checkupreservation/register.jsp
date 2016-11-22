@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <title>Insert title here</title>
 </head>
 <script type="text/javascript">
@@ -18,8 +20,28 @@
 	function setmemID(id) {
 		document.getElementById("uid").value = id;
 	}
+	$(document).ready(function() {
+		if ($("select[name='chid']").val() != "")
+			getid();
 
-	function searchCh() {
+		$("select[name='chid']").on("change", getid);
+	});
+
+	function getid() {
+		var selected_chid = $("select[name='chid']").val();
+
+		$.getJSON("register/" + selected_chid, function(list) {
+			var htmlStr = "<option value=''>---</option>";
+			$(list).each(
+					function(key, val) {
+						htmlStr += "<option value='"+ val.crid +"'>"
+								+ val.crnumber + "</option>";
+					});
+			$("select[name='crid']").html(htmlStr);
+
+		});
+	}
+	/* function searchCh() {
 		event.preventDefault();
 		var popUrl = "/checkupreservation/checkupList";
 		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=yes;";
@@ -36,8 +58,9 @@
 	}
 	function setcheckuproomID(id) {
 		document.getElementById("crid").value = id;
-	}
+	} */
 </script>
+
 <body>
 	<form method="post">
 		<div>
@@ -48,16 +71,21 @@
 			<button onclick="searchuid()">찾기</button>
 		</div>
 		<div>
-			검사ID<input type="text" name="chid" id="chid">
-			<button onclick="searchCh()">찾기</button>
+			검사ID <select name="chid" id="chid">
+				<option value="">----</option>
+				<c:forEach items="${test}" var="CheckUpVO">
+					<option value="${CheckUpVO.chid}">${CheckUpVO.chname}</option>
+				</c:forEach>
+
+			</select>
 		</div>
 		<div>
-			검사실ID<input type="text" name="crid" id="crid">
-			<button onclick="searchchroom()">찾기</button>
-		</div>
-		<div>
-			<button type="submit">입력</button>
-		</div>
+			검사실ID <select name="crid" id="crid">
+				<option value="">----</option>
+			</select>
+			<div>
+				<button type="submit">입력</button>
+			</div>
 	</form>
 </body>
 </html>

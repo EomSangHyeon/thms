@@ -13,6 +13,8 @@ public interface CheckUpRoomDAO {
 	public CheckUpRoomVO readPage(Integer crid) throws Exception;
 	
 	public List<CheckUpRoomVO> listAll() throws Exception;
+	
+	public List<CheckUpRoomVO> listView(Integer chid) throws Exception;
 
 	public void update(CheckUpRoomVO vo)throws Exception;
 	

@@ -17,6 +17,12 @@
 		 WHERE `crid`>0 ORDER BY `crid` DESC 
 		]]>
 	</select>
+	
+	<select id="listView" resultType="CheckUpRoomVO">
+			<![CDATA[
+				SELECT * FROM `tbl_checkuproom` WHERE `chid`=#{chid}
+			]]>
+	</select>
 	<select id="readPage" resultType="CheckUpRoomVO">
 		SELECT
 		`crid`, `chid`, `crnumber`

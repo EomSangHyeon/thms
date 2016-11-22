@@ -28,4 +28,6 @@ public interface DoctorDAO {
 	public int listSearchCount(SearchCriteria cri)throws Exception;
 
 	public int countPaging(Criteria cri) throws Exception;
+	
+	
 }
