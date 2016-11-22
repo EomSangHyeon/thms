@@ -4,7 +4,7 @@
 	 function searchcheckup() {
 		event.preventDefault();
 		var popUrl = "../checkup/listView";
-		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=yes;"; 
+		var popOption = "width=370, height=670, resizable=no, scrollbars=no, status=yes;"; 
 		window.open(popUrl,"부서선택",popOption);
 
 	}

@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
+<%@ include file="../include/header.jsp" %>
 
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
-<body>
+
 	<script type="text/javascript">
 		function searchUid() {
 			var comeon = $("#uid").val();
@@ -43,34 +39,60 @@
 병실 빈병실 검색하게 해서 나오게하기 ajax
 의사 이름으로 검색 하게하기 ajax
 -->
-	<form action="joinForPatient.do" method="post">
-		<label>사용자 아이디 검색</label>
-		<div>
-			<input type="text" id="uid" name="uid"> <input type="button"
-				id="btn" name="btn" onclick="searchUid()" value="검색">
-
-		</div>
-		<div id="forPatientUid"></div>
-
-		<label> 입원일 입력</label>
-		<div>
-			<input type="text" id="horegdate" name="horegdate">
-		</div>
-
-
-		<label> 빈 병실 검색</label>
-		<div>
-			<input type="text" id="rmid" name="rmid" onchange="restRoom()">
-		</div>
-		<div id="searchRmid"></div>
-		<label> 담당의사 번호</label>
-		<div>
-			<input type="text" id="did" name="did"
-				onchange="searchDidForPatient()">
-		</div>
-		<div id="forPatientDid"></div>
-		<input type="submit">
-	</form>
-
-</body>
-</html>
+<%@ include file="../admin/admin_sidebar.jsp" %>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-9 col-md-10 main">
+		
+		<div class = "box box-header">
+				<h2>입원자 입력</h2>
+			</div>
+			
+			<div class = "box box-body">
+	
+				<form class="form-horizontal" action="joinForPatient.do" method="post">
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2">입원자 ID : </label>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<input class="form-control" type="text" id="uid" name="uid"> 
+								<span class="input-group-btn"><input class="btn btn-primary" type="button" id="btn" name="btn" onclick="searchUid()" value="검색"></span>
+							</div>
+						</div>			
+					</div>
+					
+					<div class="form-group">			
+						<label class="control-label col-sm-2">입원일 입력 : </label>
+						<div class="col-sm-6">
+							<input class="form-control" type="text" id="horegdate" name="horegdate">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2"> 빈 병실 검색</label>
+						<div class="col-sm-6">
+							<input class="form-control" type="text" id="rmid" name="rmid" onchange="restRoom()">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2"> 담당의사 번호</label>
+						<div class="col-sm-6">
+							<input type="text" id="did" name="did" onchange="searchDidForPatient()">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-6">
+							<input class="btn btn-primary" type="submit" value="입력">
+						</div>
+					</div>
+				</form>
+	
+			</div><!-- box-body -->
+						
+		</div><!-- /col-sm-9 col-md-10 main -->				
+	</div><!-- .row -->
+</div><!-- .container-fluid -->
+<%@ include file="../include/footer.jsp"%>

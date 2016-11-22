@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page session="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
@@ -54,42 +50,67 @@
 	}
 </script>
 
-</head>
-<body>
-	<form action=" updateConfirmRoom.do" method="POST">
-		<table>
-			<c:forEach items="${here }" var="hh">
-				<tr>
-					<td>환자번호</td>
-					<td><input type="text" id="hoid" name="hoid"
-						value=${hh.hoid
-						} readonly /></td>
-				</tr>
-				<tr>
-					<td>유저아이디</td>
-					<td><input type="text" id="uid" name="uid" value=${hh.uid} readonly/ ></td>
-				</tr>
-				<tr>
-					<td>입실날자</td>
-					<td><input type="text" id="horegdate" name="horegdate"
-						value=${hh.horegdate}></td>
-				</tr>
-				<tr>
-					<td>방아이디</td>
-					<td><input type="text" id="rmid" name="rmid" value=${hh.rmid }
-						onchange="restRoom()""></td>
-					<td><span id="spanForRmid"></span></td>
-				</tr>
-				<tr>
-					<td>의사아이디</td>
-					<td><input type="text" id="did" name="did" value=${hh.did}></td>
-				</tr>
-			</c:forEach>
-			<tr>
-				<td><input type=button onclick="exit()" value="확정"></td>
-			</tr>
-		</table>
-	</form>
-
-</body>
-</html>
+<div class="container-fluid">
+	<div class="row">		
+		<div class="col-sm-6 main">
+			
+			<div class = "box box-header">
+				<h2>입실 확인</h2>
+			</div>
+			
+			<div class="box box-body" >
+				<form class="form-horizontal" action=" updateConfirmRoom.do" method="POST">
+					<c:forEach items="${here }" var="hh">
+						<div class="form-group">
+							<label class="control-label col-sm-2">환자번호</label>
+							<div class="col-sm-4">							
+								<input class="form-control" type="text" id="hoid" name="hoid" value=${hh.hoid} readonly />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2">유저아이디</label>
+							<div class="col-sm-4">
+								<input class="form-control" type="text" id="uid" name="uid" value=${hh.uid} readonly/ >
+							</div>
+						</div>
+							
+								
+						<div class="form-group">
+							<label class="control-label col-sm-2">입실날자</label>
+							<div class="col-sm-4">
+								<input class="form-control" type="text" id="horegdate" name="horegdate"
+									value=${hh.horegdate}>
+							</div>
+						</div>
+							
+								
+						<div class="form-group">
+							<label class="control-label col-sm-2">방아이디</label>
+							<div class="col-sm-4">
+								<input class="form-control" type="text" id="rmid" name="rmid" value=${hh.rmid }
+									onchange="restRoom()"">
+								<span id="spanForRmid"></span>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-sm-2">의사아이디</label>
+							<div class="col-sm-4">								
+								<input class="form-control" type="text" id="did" name="did" value=${hh.did}>
+							</div>
+						</div>
+						</c:forEach>
+						
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-6">
+								<input class="btn btn-primary" type=button onclick="exit()" value="입원 확정">
+							</div>
+						</div>
+				</form>
+			
+			</div><!-- box-body -->
+						
+		</div><!-- /col-sm-9 col-md-10 main -->				
+	</div><!-- .row -->
+</div><!-- .container-fluid -->

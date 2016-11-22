@@ -1,13 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page contentType="text/html; charset=UTF-8" session="true"%>
-<!DOCTYPE html>
+<%@ include file="../include/header.jsp" %>
 
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -32,11 +27,10 @@
 	}
 </script>
 </head>
-<body>
+<%@ include file="../admin/admin_sidebar.jsp" %>
 	search
 
-
-	<br>
+	
 	<form action="testSearchResult" method="POST">
 		<table>
 			<tr>
@@ -117,5 +111,4 @@
 		</ul>
 	</div>
 
-</body>
-</html>
+<%@ include file="../include/footer.jsp" %>
