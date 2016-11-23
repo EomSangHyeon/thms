@@ -53,7 +53,7 @@ public class MemberController {
 		} else {
 			here = here + " 입실 불가";
 		}
-		
+
 		ResponseEntity<String> entity = new ResponseEntity<String>(here, HttpStatus.OK);
 
 		return entity;
@@ -162,13 +162,10 @@ public class MemberController {
 	@RequestMapping(value = "testSearchResult")
 	public void listPage(SearchCriteria cri, Model model, HttpSession session) {
 		System.out.println("testSearchResult");
-		System.out.println(((MemberVO) session.getAttribute("login")).getUstatus());
-	
-			String ustatus = ((MemberVO) session.getAttribute("login")).getUstatus();
-			System.out.println(ustatus);
-			model.addAttribute("check", ustatus);
-		
-		
+
+		MemberVO memberVo = (MemberVO) session.getAttribute("login");
+		model.addAttribute("check", memberVo);
+
 		if (cri.getSearchType() == null) {
 
 			model.addAttribute("searchmember", dao.selectUser(cri));
@@ -224,14 +221,60 @@ public class MemberController {
 		return entity;
 	}
 
+	// 회원정보 수정전 비밀번호 확인
+	@RequestMapping(value = "checkPw")
+	public void checkPw() {
+	}
+
+	// 회원정보 수정전 비밀번호 확인 실행
+	@RequestMapping(value = "checkPw.do", method = RequestMethod.POST)
+	public String checkPwDo(String pw, HttpSession session, Model model) {
+		System.out.println("pw");
+
+		MemberVO vo1 = (MemberVO) session.getAttribute("login");
+
+		String readlPw = dao.checkPw(vo1);
+		System.out.println("들어온  " + pw);
+		System.out.println("나오는 아이디" + vo1.getUid());
+		System.out.println("나와야하는" + readlPw);
+
+		if (readlPw.equals(pw)) {
+			return "redirect:memberModify";
+		} else {
+
+			return "redirect:checkPw";
+		}
+	}
+
+	// 개인정보 수정 에서 회원정보 수정 부분
+	@RequestMapping(value = "memberModify", method = RequestMethod.POST)
+	public void modifyMember(HttpSession session, Model model) {
+		System.out.println("memberModify");
+		MemberVO vo = (MemberVO) session.getAttribute("login");
+
+		model.addAttribute("searchmember", dao.selectOneMember(vo.getUid()));
+	}
+
+	// 개인정보 수정 회원정보 수정확인
+	@RequestMapping(value = "memberModify.do", method = RequestMethod.POST)
+	public String modifyMemberDo(MemberVO vo) {
+		System.out.println("memberModify.do");
+		System.out.println(vo.getUid() + "   " + vo.getUname());
+		dao.myModify(vo);
+		return "redirect:checkPw";
+	}
+
 	// 회원정보수정
 	@RequestMapping(value = "testMemberModify")
-	public void memberModify(HttpServletRequest request, Model model,HttpSession session) {
+	public void memberModify(HttpServletRequest request, Model model, HttpSession session) {
 		System.out.println("modify member");
 
+		MemberVO memberVo = (MemberVO) session.getAttribute("login");
+		model.addAttribute("check", memberVo);
+
 		// 한개 정보 들고오기
-		model.addAttribute("searchmember", dao.selectOneMember(request.getParameter("uid")));
-	
+		model.addAttribute("searchmember", dao.selectOneMember(memberVo.getUid()));
+
 	}
 
 	// 정보 수정 확정
@@ -240,6 +283,7 @@ public class MemberController {
 		System.out.println("confirmUpdate");
 
 		dao.memberModify(vo);
+
 		return "redirect:/member/testSearchResult";
 	}
 
@@ -358,9 +402,19 @@ public class MemberController {
 	}
 
 	// 환자 가입을 위한 유저 검색하는 작은 페이지로 가기
-	@RequestMapping(value = "searchUid", method = RequestMethod.POST)
-	public void searchUid() {
-
+	@RequestMapping(value = "searchUid")
+	public void searchUid(SearchCriteria cri, Model model) {
+		System.out.println("searchUid");
+		
+		model.addAttribute("searchmember",dao.listCriteria(cri)  );
+		
+		List al = new ArrayList();
+		al = dao.listCriteria(cri);
+		
+		PageMaker maker = new PageMaker();
+		maker.setCri(cri);
+		maker.setTotalCount(al.size() );
+		model.addAttribute("pageMaker", maker);
 	}
 
 	// ===========================================

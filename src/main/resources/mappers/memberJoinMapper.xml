@@ -257,23 +257,36 @@
 		#{unick}
 
 	</select>
+
 	<!-- 회원 정보수정 id를 통해서 -->
 	<update id="updateMember">
+
 		update
 		tbl_member
 		set
 		uname=#{uname},
 		ugender=#{ugender},
+		ubirth=#{ubirth},
+		ustatus=#{ustatus}
+		where uid=#{uid}
+
+
+	</update>
+	
+	
+	
+		<!-- my 회원 정보수정 -->
+	<update id="myModify">
+		update
+		tbl_member
+		set
+		uname=#{uname},
+		upw=#{upw},
+		ugender=#{ugender},
+		uemail=#{uemail},
 		ubirth=#{ubirth}
 		where uid=#{uid}
-		<choose>
-			<when test="ustatus =='admin' ">
-				and ustatus=#{ustatus}
-			</when>
-			<when test="ustatus =='master' ">
-				and ustatus=#{ustatus}
-			</when>
-		</choose>
+
 
 	</update>
 
@@ -294,6 +307,10 @@
 		= #{uid}
 	</select>
 
+	<!-- 비번 하나 들고오기 -->
+	<select id="bringPw" resultType="String">
+		select upw from tbl_member where uid=#{uid}
+	</select>
 	<!-- 유저 다 들고오기 -->
 	<select id="listUser" resultType="com.thms.domain.MemberVO">
 		select * from tbl_member

@@ -18,11 +18,11 @@
   	<li>관리자 전용 페이지</li>
 </c:if>
 <c:if test="${login.ustatus == 'admin' || login.ustatus == 'hospital' || login.ustatus == 'master'}">
-  	<li><a href="/admin/edit">개인정보 수정 </a></li>
+  	<li><a href="/member/checkPw">개인정보 수정 </a></li>
 </c:if>
 <c:if test="${login.ustatus == 'admin' || login.ustatus == 'master'}">
  		<h3> 회원 관리</h3>
-		<li><a href="#">회원관리 </a></li>  
+		<li><a href="/member/testSearchResult">회원관리 </a></li>  
 </c:if>
 		
 <c:if test="${login.ustatus == 'hospital' || login.ustatus == 'master'}">
@@ -33,6 +33,7 @@
    	<li><a href="/checkup/list">검사목록 관리</a></li>
    	<li><a href="/checkuproom/list">검사실 관리</a></li>
    	<li><a href="/room/list">병실목록 관리</a></li>
+   	<li><a href="/member/testselectPatientList">입원자 관리</a></li>
 </c:if>
     
   </ul>		  
