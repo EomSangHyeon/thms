@@ -59,6 +59,11 @@ public class RoomDAOImpl implements RoomDAO{
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + ".listCriteria", cri);
 	}
+	
+	public List<RoomVO> honglistSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".honglistSearch",cri);
+	}
 	@Override
 	public List<RoomVO> listSearch(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
