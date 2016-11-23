@@ -30,6 +30,7 @@ import com.thms.domain.PatientVO;
 import com.thms.domain.SearchCriteria;
 import com.thms.dto.LoginDTO;
 import com.thms.persistence.JoinDAOImpl;
+import com.thms.persistence.RoomDAOImpl;
 import com.thms.service.MemberService;
 
 @Controller
@@ -39,6 +40,9 @@ public class MemberController {
 	// ===================hong
 	@Inject
 	JoinDAOImpl dao;
+
+	@Inject
+	RoomDAOImpl rdao;
 
 	@Autowired
 	protected JavaMailSender mailSender;
@@ -133,7 +137,9 @@ public class MemberController {
 	// 환자 입력을 위한 검색
 	@RequestMapping("testJoinPatient")
 	public void joinPatient() {
+		System.out.println("testJoinPatient");
 
+	
 	}
 
 	// 환자 입력할때 아이디 확인
@@ -401,19 +407,34 @@ public class MemberController {
 		return "ok";
 	}
 
+	// 환자 가입을 위한 방검색
+	@RequestMapping(value = "searchRoom")
+	public void searchRoom(SearchCriteria cri, Model model) throws Exception {
+		System.out.println("searchRoom");
+		model.addAttribute("searchmember", rdao.honglistSearch(cri));
+
+		List al = new ArrayList();
+		al = rdao.honglistSearch(cri);
+
+		PageMaker maker = new PageMaker();
+		maker.setCri(cri);
+		maker.setTotalCount(al.size());
+		model.addAttribute("pageMaker", maker);
+	}
+
 	// 환자 가입을 위한 유저 검색하는 작은 페이지로 가기
 	@RequestMapping(value = "searchUid")
 	public void searchUid(SearchCriteria cri, Model model) {
 		System.out.println("searchUid");
-		
-		model.addAttribute("searchmember",dao.listCriteria(cri)  );
-		
+
+		model.addAttribute("searchmember", dao.listCriteria(cri));
+
 		List al = new ArrayList();
 		al = dao.listCriteria(cri);
-		
+
 		PageMaker maker = new PageMaker();
 		maker.setCri(cri);
-		maker.setTotalCount(al.size() );
+		maker.setTotalCount(al.size());
 		model.addAttribute("pageMaker", maker);
 	}
 

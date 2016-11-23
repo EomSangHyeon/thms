@@ -11,58 +11,59 @@
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+<script>
+	function sendUid(comeon) {
+	
+		opener.setUid(comeon);
+		alert(comeon);
+		window.close();
+		
+	}
+</script>
 </head>
 <body>
 
 	<br>
 	<form action="searchUid" method="POST">
-		<table>
-			<tr>
-				<td>검색유형</td>
-				<td><select name="searchType">
-						<option value="uid">아이디</option>
-						<option value="uname">이름</option>
-						<option value="uemail">이메일</option>
-						<option value="unick">닉네임</option>
-						<option value="ustatus">권한</option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>검색어</td>
-				<td><input type="text" name="keyword"></td>
-			</tr>
-			<tr>
-				<td><input type="submit" name="ketword"></td>
-			</tr>
+
+
+		<label>검색유형 <select name="searchType">
+				<option value="uid">아이디</option>
+				<option value="uname">이름</option>
+				<option value="uemail">이메일</option>
+				<option value="unick">닉네임</option>
+				<option value="ustatus">권한</option>
+		</select> 검색어 <input type="text" name="keyword">
+		</label> <label><input type="submit"></label>
+
 		</table>
+
 	</form>
+	<br>
 
-	<table>
-		<tr>
-		
-			<td>아이디</td>
-			<td>이름</td>
-			<td>이메일</td>
-			<td>성별</td>
-			<td>닉네임</td>
-			<td>생일</td>
-			<td>상태</td>
 
-		</tr>
-		<c:forEach items="${searchmember}" var="search">
-			<tr>
-				<td>${search.uid}</td>
-				<td>${search.uname}</td>
-				<td>${search.uemail}</td>
-				<td>${search.ugender}</td>
-				<td>${search.unick}</td>
-				<td>${search.ubirth}</td>
-				<td>${search.ustatus}</td>
-			</tr>
+	<label>아이디</label>
+	<label>이름</label>
+	<label>이메일</label>
+	<label>성별</label>
+	<label>닉네임</label>
+	<label>생일</label>
+	<label>상태</label>
+	<br>
 
-		</c:forEach>
-	</table>
+	<c:forEach items="${searchmember}" var="search">
+
+		<label><a href="javascript:sendUid('${search.uid}')">${search.uid}</a></label>
+		<label>${search.uname}</label>
+		<label>${search.uemail}</label>
+		<label>${search.ugender}</label>
+		<label>${search.unick}</label>
+		<label>${search.ubirth}</label>
+		<label>${search.ustatus}</label>
+
+		<br>
+	</c:forEach>
+
 
 
 	<div class="text-center">

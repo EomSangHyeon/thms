@@ -36,6 +36,7 @@
 		alert("안만듬");
 
 	}
+	
 </script>
 
 <%@ include file="../admin/admin_sidebar.jsp" %>
