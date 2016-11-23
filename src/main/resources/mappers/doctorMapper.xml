@@ -80,35 +80,41 @@
 	<sql id="search">
 		<if test="searchType != null">
 			<if test="searchType == 'id'.toString()">
-				AND `did` LIKE CONCAT('%', #{keyword}, '%')
+				AND `v_did` LIKE CONCAT('%', #{keyword}, '%')
 			</if>
 			<if test="searchType == 'na'.toString()">
-				AND `dname` LIKE CONCAT('%', #{keyword}, '%')
+				AND `v_dname` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'nu'.toString()">
+				AND `v_dclinic` LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'su'.toString()">
+				AND `v_sjid` LIKE CONCAT('%', #{keyword}, '%')
 			</if>
 		</if>
 	</sql>
-	<select id="listSearch" resultType="DoctorVO"> 
+	<select id="listSearch" resultType="DoctorViewVO"> 
 	<![CDATA[ 
-		SELECT `did`, 
-			`dname`, `dgender` ,`dclinic` ,`sjid`
+		SELECT `v_did`, 
+			`v_dname`, `v_dgender` ,`v_dclinic` ,`v_sjid`
 		 FROM 
-		 	`tbl_doctor` 
+		 	`doctor_v` 
 		 WHERE 
-		 	`did`>0  
+		 	`v_did`>0  
 		]]>
 		<include refid="search"></include>
 		<![CDATA[
-		ORDER BY `did` DESC 
+		ORDER BY `v_did` DESC 
 		 limit #{pageStart},#{perPageNum} 
 		]]>
 	</select>
 	<select id="listSearchCount" resultType="int"> 
 	<![CDATA[ 
-		select count(did) 
+		select count(v_did) 
 			from
-		tbl_doctor 
+		doctor_v 
 			where 
-		did>0 
+		v_did>0 
 		]]>
 		<include refid="search"></include>
 	</select>
