@@ -19,4 +19,39 @@
 				`sjid`=#{sjid} AND `did`=#{did} AND LEFT(`rdate`, 7)=#{searchMonth}
 		]]>
 	</select>
+
+	<select id="getScheduleListByUID" resultType="ReservationViewVO">
+		<![CDATA[
+			SELECT 
+				* 
+			FROM 
+				`view_reservation` 
+		]]>
+
+		<if test="searchType != null">
+			WHERE `uid`=#{keyword} 
+		</if>
+
+		<![CDATA[ 
+			ORDER BY `rdate` DESC 
+			LIMIT #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+
+	<select id="listSearchCount" resultType="int">
+		<![CDATA[
+			SELECT 
+				COUNT(*) 
+			FROM 
+				`view_reservation` 
+		]]>
+
+		<if test="searchType != null">
+			WHERE `uid`=#{keyword}
+		</if>
+	</select>
+
+	<delete id="del" parameterType="int">
+		DELETE FROM `tbl_reservation` WHERE `rid`=#{rid}
+	</delete>
 </mapper>

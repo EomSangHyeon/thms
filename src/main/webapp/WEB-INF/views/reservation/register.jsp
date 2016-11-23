@@ -82,7 +82,10 @@ $(document).ready(function() {
 			did: $("select[name='did'] option:selected").val(),
 			ampm: $("input:radio[name='ampm']:checked").val()
 		}, function(data) {
-			alert(data);
+			if(data == "success") {
+				alert("외례예약이 완료되었습니다.");
+				self.location.reload();
+			}
 		});
 	});
 });

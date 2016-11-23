@@ -2,9 +2,12 @@ package com.thms.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -371,7 +374,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public void loginGET(@ModelAttribute("dto") LoginDTO dto) throws Exception {
-
+		
 	}
 
 	@RequestMapping(value = "/loginPost", method = RequestMethod.POST)
