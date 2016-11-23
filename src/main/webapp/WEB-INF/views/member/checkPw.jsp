@@ -12,12 +12,12 @@
 </c:if>
 	pw
 	<br> 
-	<form action="memberModify" method="POST">
+	<form action="checkPw.do" >
 		<table>
 			<tr>
 				<td><input type="hidden" name="uid" id="uid"></td>
 				<td>비밀번호 확인 :</td>
-				<td><input type="password" name="pw"></td>
+				<td><input type="password" name="pw" required="required"></td>
 			</tr>
 			<tr>
 				<td><input type="submit"></td>

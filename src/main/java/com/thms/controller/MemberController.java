@@ -133,7 +133,7 @@ public class MemberController {
 	@RequestMapping(value = "joinForPatient.do", method = RequestMethod.POST)
 	public String joinConfirmPatient(PatientVO vo) {
 		System.out.println("joinForPatient.do");
-		
+
 		dao.joinForPatient(vo);
 		return "redirect:/member/testselectPatientList";
 
@@ -236,27 +236,28 @@ public class MemberController {
 	// 회원정보 수정전 비밀번호 확인
 	@RequestMapping(value = "checkPw")
 	public void checkPw() {
+		System.out.println("checkPw");
 	}
 
 	// 회원정보 수정전 비밀번호 확인 실행
-	@RequestMapping(value = "checkPw.do", method = RequestMethod.POST)
+	@RequestMapping(value = "checkPw.do")
 	public String checkPwDo(String pw, HttpSession session, Model model) {
-		System.out.println("pw");
+		System.out.println("checkPw.do");
 
 		MemberVO vo1 = (MemberVO) session.getAttribute("login");
 
-		String readlPw = dao.checkPw(vo1);
-
-		if (readlPw.equals(pw)) {
+		String realPw = dao.checkPw(vo1);
+		System.out.println(realPw + "진짜 비번");
+		System.out.println(pw+"입력한");
+		if (realPw.equals(pw.toString())) {
 			return "redirect:memberModify";
 		} else {
-
 			return "redirect:checkPw";
 		}
 	}
 
 	// 개인정보 수정 에서 회원정보 수정 부분
-	@RequestMapping(value = "memberModify", method = RequestMethod.POST)
+	@RequestMapping(value = "memberModify")
 	public void modifyMember(HttpSession session, Model model) {
 		System.out.println("memberModify");
 		MemberVO vo = (MemberVO) session.getAttribute("login");
