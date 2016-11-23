@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import com.thms.domain.CheckUpReservationViewVO;
 import com.thms.domain.ReservationViewVO;
 import com.thms.domain.SearchCriteria;
 
@@ -31,4 +32,5 @@ public class MypageDAOImpl implements MypageDAO {
 	public void del(int rid) throws Exception {
 		sqlSession.delete(namespace +".del", rid);
 	}
+	
 }

@@ -6,14 +6,17 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.thms.domain.CheckUpReservationViewVO;
 import com.thms.domain.ReservationViewVO;
 import com.thms.domain.SearchCriteria;
+import com.thms.persistence.CheckUpReservationDAO;
 import com.thms.persistence.MypageDAO;
 
 @Service
 public class MypageServiceImpl implements MypageService {
 	@Inject
 	private MypageDAO dao;
+	@Inject
 
 	@Override
 	public List<ReservationViewVO> getScheduleListByUID(SearchCriteria cri) throws Exception {
@@ -29,4 +32,5 @@ public class MypageServiceImpl implements MypageService {
 	public void del(int rid) throws Exception {
 		dao.del(rid);
 	}
+
 }

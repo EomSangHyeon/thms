@@ -54,4 +54,5 @@
 	<delete id="del" parameterType="int">
 		DELETE FROM `tbl_reservation` WHERE `rid`=#{rid}
 	</delete>
+
 </mapper>

@@ -2,6 +2,7 @@ package com.thms.service;
 
 import java.util.List;
 
+import com.thms.domain.CheckUpReservationViewVO;
 import com.thms.domain.ReservationViewVO;
 import com.thms.domain.SearchCriteria;
 

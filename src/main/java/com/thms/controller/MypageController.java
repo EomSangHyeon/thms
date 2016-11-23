@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,8 +63,11 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/checkup", method = RequestMethod.GET)
-	public void mypageCheckup() {
+	public void mypageCheckup(@RequestParam("uid") String uid,HttpSession session, Model model)throws Exception {
+		MemberVO memberVo = (MemberVO) session.getAttribute("login");
+		System.out.println(uid);
 		logger.info("GET mypageCheckup....................");
+	/*	model.addAttribute(mypageService.relist("uid"));*/
 	}
 
 	@RequestMapping(value = "/hospitalize", method = RequestMethod.GET)
