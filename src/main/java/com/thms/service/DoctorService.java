@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.thms.domain.Criteria;
 import com.thms.domain.DoctorVO;
+import com.thms.domain.DoctorViewVO;
 import com.thms.domain.SearchCriteria;
 
 public interface DoctorService {
@@ -19,7 +20,7 @@ public interface DoctorService {
 	
 	public int listCountCreiteria(Criteria cri) throws Exception;
 	
-	public List<DoctorVO> listSearchCriteria(SearchCriteria cri) throws Exception;
+	public List<DoctorViewVO> listSearchCriteria(SearchCriteria cri) throws Exception;
 	
 	public int listSearchCount(SearchCriteria cri)throws Exception;
 	

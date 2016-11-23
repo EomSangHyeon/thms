@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.thms.domain.CheckUpReservationVO;
+import com.thms.domain.CheckUpReservationViewVO;
 import com.thms.domain.CheckUpRoomVO;
 import com.thms.domain.CheckUpVO;
 import com.thms.domain.Criteria;
@@ -37,7 +38,7 @@ public class CheckUpReservationServiceImpl implements CheckUpReservationService{
 		return dao.countPaging(cri);
 	}
 	@Override
-	public List<CheckUpReservationVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+	public List<CheckUpReservationViewVO> listSearchCriteria(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listSearch(cri);
 	}
@@ -130,6 +131,12 @@ public class CheckUpReservationServiceImpl implements CheckUpReservationService{
 	public void delete(Integer creid) throws Exception {
 		// TODO Auto-generated method stub
 		dao.delete(creid);
+	}
+
+	@Override
+	public List<CheckUpVO> test(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.test(cri);
 	}
 	
 }

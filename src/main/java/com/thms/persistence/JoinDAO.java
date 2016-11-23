@@ -28,15 +28,16 @@ public interface JoinDAO {
 
 	/// 수정
 	public List<String> selectSearchForPatientUid(String uid);
+
 	///
 	public void deleteUser(MemberVO vo);
-	
+
 	public void joinForPatient(PatientVO vo);
 
 	public List<PatientVO> selectPatientList(Criteria cri);
 
 	public List<MemberVO> selectUser(Criteria cri);
-	
+
 	public int searchTotalPatient();
 
 	public List<PatientVO> searchPatientList(SearchCriteria cri);
@@ -50,4 +51,8 @@ public interface JoinDAO {
 	public void deletePatient(String hoid);
 
 	public String checkRoom(String rmid);
+
+	public String checkPw(MemberVO vo);
+	
+	public void myModify(MemberVO vo);
 }

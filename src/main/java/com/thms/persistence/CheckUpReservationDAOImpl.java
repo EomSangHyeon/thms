@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.thms.domain.CheckUpReservationVO;
+import com.thms.domain.CheckUpReservationViewVO;
 import com.thms.domain.CheckUpRoomVO;
 import com.thms.domain.CheckUpVO;
 import com.thms.domain.Criteria;
@@ -42,7 +43,7 @@ public class CheckUpReservationDAOImpl implements CheckUpReservationDAO{
 		return session.selectList(namespace + ".listCriteria", cri);
 	}
 	@Override
-	public List<CheckUpReservationVO> listSearch(SearchCriteria cri) throws Exception {
+	public List<CheckUpReservationViewVO> listSearch(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".listSearch",cri);
 	}
@@ -166,5 +167,11 @@ public class CheckUpReservationDAOImpl implements CheckUpReservationDAO{
 	public void delete(Integer creid) throws Exception {
 		// TODO Auto-generated method stub
 		session.delete(namespace + ".delete", creid);
+	}
+
+	@Override
+	public List<CheckUpVO> test(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".test",cri);
 	}
 	}

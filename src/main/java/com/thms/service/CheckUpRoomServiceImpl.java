@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.thms.domain.CheckUpRoomVO;
+import com.thms.domain.CheckUpRoomViewVO;
 import com.thms.domain.Criteria;
 import com.thms.domain.SearchCriteria;
 import com.thms.persistence.CheckUpRoomDAO;
@@ -61,7 +62,7 @@ public class CheckUpRoomServiceImpl implements CheckUpRoomService{
 	}
 
 	@Override
-	public List<CheckUpRoomVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+	public List<CheckUpRoomViewVO> listSearchCriteria(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listSearch(cri);
 	}
@@ -70,6 +71,12 @@ public class CheckUpRoomServiceImpl implements CheckUpRoomService{
 	public int listSearchCount(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listSearchCount(cri);
+	}
+
+	@Override
+	public List<CheckUpRoomVO> listView(Integer chid) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listView(chid);
 	}
 
 	

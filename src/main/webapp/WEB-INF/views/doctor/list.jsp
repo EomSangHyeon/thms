@@ -60,6 +60,10 @@
 									<c:out value="${cri.searchType eq 'id'?'selected':''}"/>>번호</option>
 								<option value="na"
 									<c:out value="${cri.searchType eq 'na'?'selected':''}"/>>이름</option>
+								<option value="nu"
+									<c:out value="${cri.searchType eq 'nu'?'selected':''}"/>>진료실</option>
+								<option value="su"
+									<c:out value="${cri.searchType eq 'su'?'selected':''}"/>>부서</option>
 							</select> 
 							<input class="form-control" type="text" name="keyword" id="keywordInput"
 								value="${cri.keyword}" />
@@ -71,21 +75,23 @@
 			
 				<table class="table table-striped">
 					<tr>
+						<th>번호</th>
 						<th>이름</th>
 						<th>성별</th>
 						<th>진료실</th>
-						<th>부서ID</th>
+						<th>부서</th>
 						<th>수정 / 삭제</th>						
 					</tr>
-					<c:forEach items="${list}" var="DoctorVO">
+					<c:forEach items="${list}" var="DoctorViewVO">
 						<tr>
-							<td>${DoctorVO.dname}</td>
-							<td>${DoctorVO.dgender}</td>
-							<td>${DoctorVO.dclinic}</td>
-							<td>${DoctorVO.sjid}</td>
+							<td>${DoctorViewVO.v_did}</td>
+							<td>${DoctorViewVO.v_dname}</td>
+							<td>${DoctorViewVO.v_dgender}</td>
+							<td>${DoctorViewVO.v_dclinic}</td>
+							<td>${DoctorViewVO.v_sjid}</td>
 							<td>
-								<a href="modifyPage?did=${DoctorVO.did}"><button type="button" class="btn btn-warning">수정</button></a>
-								<button class="btn btn-danger" value="${DoctorVO.did}" id="remove">삭제</button>
+								<a href="modifyPage?did=${DoctorViewVO.v_did}"><button type="button" class="btn btn-warning">수정</button></a>
+								<button class="btn btn-danger" value="${DoctorViewVO.v_did}" id="remove">삭제</button>
 							</td>						
 						</tr>
 					</c:forEach>			

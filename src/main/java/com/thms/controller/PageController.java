@@ -30,7 +30,7 @@ public class PageController {
 	}*/
 	
 	// mypage
-	/*@RequestMapping(value = "/mypage/edit", method = RequestMethod.GET)
+	@RequestMapping(value = "/mypage/edit", method = RequestMethod.GET)
 	public void mypageEdit() {
 		logger.info("GET mypageEdit....................");
 	}	
@@ -45,7 +45,7 @@ public class PageController {
 	@RequestMapping(value = "/mypage/hospitalize", method = RequestMethod.GET)
 	public void mypageHospitalize() {
 		logger.info("GET mypageHospitalize....................");
-	}*/
+	}
 	
 	// introduce
 //	@RequestMapping(value = "/introduce/hospital", method = RequestMethod.GET)

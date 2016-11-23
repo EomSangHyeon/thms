@@ -16,12 +16,9 @@
 	}
 
 	$(document)
-	.ready(
-			function() {
-				$("#searchBtn")
-						.click(
-								function() {
-									self.location = "memberList${pageMaker.makeQuery(1)}&searchType="
+	.ready(function(){
+		$("#searchBtn").click(function() {
+				self.location = "memberList${pageMaker.makeQuery(1)}&searchType="
 											+ $(
 													"select option:selected")
 													.val()
