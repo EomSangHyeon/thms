@@ -324,7 +324,7 @@
 	</select>
 	
 <!-- sjid를 통해 의사 들고가기 -->
-	<select id="bringDoctor" resultType="String">
+	<select id="bringDoctor" resultType="com.thms.domain.DoctorVO">
 		select * from tbl_doctor where sjid = #{sjid}
 
 	</select>

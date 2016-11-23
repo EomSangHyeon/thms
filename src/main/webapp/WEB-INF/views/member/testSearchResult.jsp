@@ -26,7 +26,7 @@
 	}
 </script>
 
-<<<<<<< HEAD
+
 <%@ include file="../admin/admin_sidebar.jsp" %>
 <div class="container-fluid">
 	<div class="row">

@@ -81,7 +81,7 @@ public class JoinDAOImpl implements JoinDAO {
 
 	@Override
 	public void joinForPatient(PatientVO vo) {
-
+	
 		session.selectList(namespace + ".joinForPatient", vo);
 
 	}
@@ -144,38 +144,31 @@ public class JoinDAOImpl implements JoinDAO {
 	@Override
 	public void deleteUser(MemberVO vo) {
 
-
-		
 		session.delete(namespace + ".deleteUser", vo);
 
 	}
 
 	@Override
 	public String checkPw(MemberVO vo) {
-		
-		return session.selectOne(namespace+".bringPw",vo);
+
+		return session.selectOne(namespace + ".bringPw", vo);
 	}
 
 	@Override
 	public void myModify(MemberVO vo) {
-		session.update(namespace+".myModify",vo);
-		
+		session.update(namespace + ".myModify", vo);
+
 	}
 
 	@Override
 	public List<SubjectVO> bringSubject() {
-		
-		return session.selectList(namespace+".bringSubject");
+
+		return session.selectList(namespace + ".bringSubject");
 	}
 
 	@Override
 	public List<DoctorVO> bringDoctor(String sjid) {
-	
-		return session.selectList(namespace+".bringDoctor",sjid);
+		return session.selectList(namespace + ".bringDoctor", sjid);
 	}
 
-	
-
 }
-
-

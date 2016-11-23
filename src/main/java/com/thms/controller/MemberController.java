@@ -1,7 +1,9 @@
 package com.thms.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -128,8 +130,10 @@ public class MemberController {
 	}
 
 	// 환자 입력을 수행
-	@RequestMapping("joinForPatient.do")
+	@RequestMapping(value = "joinForPatient.do", method = RequestMethod.POST)
 	public String joinConfirmPatient(PatientVO vo) {
+		System.out.println("joinForPatient.do");
+		
 		dao.joinForPatient(vo);
 		return "redirect:/member/testselectPatientList";
 
@@ -149,7 +153,6 @@ public class MemberController {
 	public ResponseEntity<List> forPatient(HttpServletRequest request, Model model) {
 		System.out.println("ajaxForPatientUid");
 		String uid = request.getParameter("uid");
-		System.out.println(uid);
 
 		System.out.println(dao.selectSearchForPatientUid(uid));
 		List<String> lista = new ArrayList<String>();
@@ -185,6 +188,7 @@ public class MemberController {
 			maker.setTotalCount(al.size());
 
 			model.addAttribute("pageMaker", maker);
+
 		} else if (cri.getSearchType() == "") {
 			List al = new ArrayList();
 			al = dao.listCriteria(cri);
@@ -196,6 +200,7 @@ public class MemberController {
 			maker.setTotalCount(al.size());
 
 			model.addAttribute("pageMaker", maker);
+
 		} else if (cri.getSearchType() != null || cri.getSearchType() != "") {
 
 			model.addAttribute("searchmember", dao.listCriteria(cri));
@@ -218,7 +223,6 @@ public class MemberController {
 		ResponseEntity<String> entity = null;
 
 		String ustatus = ((MemberVO) session.getAttribute("login")).getUstatus();
-		System.out.println(ustatus);
 
 		if (ustatus.equals("master")) {
 
@@ -242,9 +246,6 @@ public class MemberController {
 		MemberVO vo1 = (MemberVO) session.getAttribute("login");
 
 		String readlPw = dao.checkPw(vo1);
-		System.out.println("들어온  " + pw);
-		System.out.println("나오는 아이디" + vo1.getUid());
-		System.out.println("나와야하는" + readlPw);
 
 		if (readlPw.equals(pw)) {
 			return "redirect:memberModify";
@@ -281,7 +282,7 @@ public class MemberController {
 		model.addAttribute("check", memberVo);
 
 		// 한개 정보 들고오기
-		model.addAttribute("searchmember", dao.selectOneMember(memberVo.getUid()));
+		model.addAttribute("searchmember", dao.selectOneMember(request.getParameter("uid")));
 
 	}
 
@@ -442,12 +443,13 @@ public class MemberController {
 
 	@ResponseBody
 	@RequestMapping(value = "forSjid", method = RequestMethod.POST)
-	public void forsjid(String sjid, Model model) {
-		System.out.println("forSjid");
-		System.out.println(sjid);
-		DoctorVO vo = (DoctorVO) dao.bringDoctor(sjid);
-		model.addAttribute("goDoctor", dao.bringDoctor(sjid));
-	
+	public ResponseEntity<List<DoctorVO>> forsjid(String sjid) {
+
+		List<DoctorVO> volist = (List<DoctorVO>) dao.bringDoctor(sjid);
+		ResponseEntity<List<DoctorVO>> entity = new ResponseEntity<List<DoctorVO>>(volist, HttpStatus.OK);
+
+		return entity;
+
 	}
 
 	// ===========================================

@@ -28,7 +28,7 @@
 	}
 
 	function showDoctor(hi) {
-		alert(hi);
+
 		$.ajax({
 
 			type : 'post',
@@ -38,12 +38,21 @@
 				sjid : hi
 			},
 			success : function(data) {
-				alert(data);
-				html.(<select id="sjname" name="sjname">
-				<c:forEach items="goDoctor" var="hh">
-				<option value="1">1</option>
-				</c:forEach>
-			</select> )
+
+				var obj = JSON.parse(data);
+
+				str = "<select id='did' name='did'>";
+				for (var i = 0; i < obj.length; i++) {
+					var jobj = obj[i]
+					alert(jobj.dname)
+					alert(jobj.did);
+					str += "<option value = "+jobj.did+">" + jobj.dname;
+					str += "</option>";
+				}
+				str += "</select>"
+
+				$("#showDname").html(str)
+
 			}
 
 		})
@@ -112,11 +121,15 @@
 						<label class="control-label col-sm-2">담당의사 번호 : </label>
 						<div class="col-sm-6">
 							<select id="sjid" name="sjid" onchange="showDoctor(this.value);">
+								<option selected>선택하기</option>
 								<c:forEach items="${subject}" var="here">
 									<option value="${here.sjid}">${here.sjname}</option>
 								</c:forEach>
-								<div id=""></div>
-							</select> 
+							</select>
+
+							<div id="showDname"></div>
+
+
 						</div>
 					</div>
 

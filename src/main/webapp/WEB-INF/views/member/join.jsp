@@ -156,7 +156,7 @@ body {
 	};
 	var temp;
 	function ajaxsend() {
-		alert("인증");
+
 		$
 				.ajax({
 					type : 'post',
@@ -167,7 +167,6 @@ body {
 					},
 					success : function(data) {
 						alert("이메일을 확인해주세요.");
-						alert(data);
 
 						$('#confirmajax1').html(
 								'<b style="font-size:18px;color:red">'
@@ -175,7 +174,7 @@ body {
 
 						$('#confirmajax2')
 								.html(
-										"<input type='text' id='checknumber'required='required'>  "
+										"<input type='text' id='checknumber' required='required'>  "
 												+ "<input type='button' class='btn btn-primary'  id='checkbtn' value='번호확인' onclick='ajaxconfirm()'> ")
 						temp = data;
 					}
@@ -184,16 +183,17 @@ body {
 	}
 
 	function ajaxconfirm() {
-		alert("들어옴");
 
 		if ($("#checknumber").val() == temp) {
-			alert("인증되었습니다")
-		} else {
-			alert("일치하지 않습니다")
+			alert("인증되었습니다");
+		} if ($("#checknumber").val() != temp) {
+			alert("일치하지 않습니다");
+		} if($("#checknumber").val() =="") {
+			alert("입력해주세요");
+			focus();
 		}
 
 	}
-
 </script>
 
 <div class="wrapper">
