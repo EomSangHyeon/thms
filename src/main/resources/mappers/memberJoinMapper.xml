@@ -272,10 +272,10 @@
 
 
 	</update>
-	
-	
-	
-		<!-- my 회원 정보수정 -->
+
+
+
+	<!-- my 회원 정보수정 -->
 	<update id="myModify">
 		update
 		tbl_member
@@ -309,13 +309,23 @@
 
 	<!-- 비번 하나 들고오기 -->
 	<select id="bringPw" resultType="String">
-		select upw from tbl_member where uid=#{uid}
+		select upw from tbl_member where
+		uid=#{uid}
 	</select>
 	<!-- 유저 다 들고오기 -->
 	<select id="listUser" resultType="com.thms.domain.MemberVO">
 		select * from tbl_member
 		limit
 		#{pageStart}, #{perPageNum}
+
+	</select>
+	<select id="bringSubject" resultType="com.thms.domain.SubjectVO">
+		select * from tbl_subject
+	</select>
+	
+<!-- sjid를 통해 의사 들고가기 -->
+	<select id="bringDoctor" resultType="String">
+		select * from tbl_doctor where sjid = #{sjid}
 
 	</select>
 

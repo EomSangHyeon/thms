@@ -13,7 +13,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script>
 	function sendRoom(comeon) {
-		
+
 		opener.setRmid(comeon);
 		window.close();
 	}
@@ -41,10 +41,9 @@
 
 	<c:forEach items="${searchmember}" var="search">
 
-		<label><a href="javascript:sendRoom('${search.rmid}')">${search.rmid}</a></label>
-		<label>${search.rmnumber}</label>
-		<label>${search.rmcurrentcount}</label>
-		<label>${search.rmheadcount}</label>
+		<a href="javascript:sendRoom('${search.rmid}')"><label>${search.rmid}</label>
+			<label>${search.rmnumber}</label> <label>${search.rmcurrentcount}</label>
+			<label>${search.rmheadcount}</label></a>
 
 		<br>
 	</c:forEach>

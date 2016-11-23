@@ -26,6 +26,29 @@
 		window.open("searchRoom", "", "width=600, height=500, left=600");
 
 	}
+
+	function showDoctor(hi) {
+		alert(hi);
+		$.ajax({
+
+			type : 'post',
+			dataType : 'text',
+			url : "forSjid",
+			data : {
+				sjid : hi
+			},
+			success : function(data) {
+				alert(data);
+				html.(<select id="sjname" name="sjname">
+				<c:forEach items="goDoctor" var="hh">
+				<option value="1">1</option>
+				</c:forEach>
+			</select> )
+			}
+
+		})
+
+	}
 </script>
 
 <!--  사용자 uid 검색 가능하게  ajax로
@@ -52,10 +75,9 @@
 						<div class="col-sm-6">
 							<div class="input-group">
 								<input class="form-control" type="text" id="uid" name="uid"
-									value='${here 	 }' readonly="readonly"> <span
-									class="input-group-btn"><input class="btn btn-primary"
-									type="button" id="btn" name="btn" onclick="searchUid()"
-									value="검색"></span>
+									readonly="readonly"> <span class="input-group-btn"><input
+									class="btn btn-primary" type="button" id="btn" name="btn"
+									onclick="searchUid()" value="검색"></span>
 							</div>
 						</div>
 					</div>
@@ -89,17 +111,12 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">담당의사 번호 : </label>
 						<div class="col-sm-6">
-							<select id="sjid" name="sjid" onchange="alert(hh)">
-							<option value="hh">hh</option>
-							<option value="hh">hh</option>
-							<option value="hh">hh</option>
+							<select id="sjid" name="sjid" onchange="showDoctor(this.value);">
+								<c:forEach items="${subject}" var="here">
+									<option value="${here.sjid}">${here.sjname}</option>
+								</c:forEach>
+								<div id=""></div>
 							</select> 
-							
-							
-							
-							
-							<input class="form-control"
-								type="text" id="did" name="did" onchange="searchDidForPatient()">
 						</div>
 					</div>
 

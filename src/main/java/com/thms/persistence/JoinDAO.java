@@ -3,10 +3,11 @@ package com.thms.persistence;
 import java.util.List;
 
 import com.thms.domain.Criteria;
+import com.thms.domain.DoctorVO;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PatientVO;
-import com.thms.domain.RoomVO;
 import com.thms.domain.SearchCriteria;
+import com.thms.domain.SubjectVO;
 
 public interface JoinDAO {
 
@@ -53,6 +54,10 @@ public interface JoinDAO {
 	public String checkRoom(String rmid);
 
 	public String checkPw(MemberVO vo);
-	
+
 	public void myModify(MemberVO vo);
+
+	public List<SubjectVO> bringSubject();
+
+	public List<DoctorVO> bringDoctor(String sjid);
 }

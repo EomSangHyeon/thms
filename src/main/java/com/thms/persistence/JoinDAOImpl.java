@@ -1,6 +1,5 @@
 package com.thms.persistence;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,10 +8,11 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.thms.domain.Criteria;
+import com.thms.domain.DoctorVO;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PatientVO;
-import com.thms.domain.RoomVO;
 import com.thms.domain.SearchCriteria;
+import com.thms.domain.SubjectVO;
 
 @Repository
 public class JoinDAOImpl implements JoinDAO {
@@ -160,6 +160,18 @@ public class JoinDAOImpl implements JoinDAO {
 	public void myModify(MemberVO vo) {
 		session.update(namespace+".myModify",vo);
 		
+	}
+
+	@Override
+	public List<SubjectVO> bringSubject() {
+		
+		return session.selectList(namespace+".bringSubject");
+	}
+
+	@Override
+	public List<DoctorVO> bringDoctor(String sjid) {
+	
+		return session.selectList(namespace+".bringDoctor",sjid);
 	}
 
 	

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.thms.domain.DoctorVO;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PageMaker;
 import com.thms.domain.PatientVO;
@@ -136,10 +137,11 @@ public class MemberController {
 
 	// 환자 입력을 위한 검색
 	@RequestMapping("testJoinPatient")
-	public void joinPatient() {
+	public void joinPatient(Model model) {
 		System.out.println("testJoinPatient");
 
-	
+		model.addAttribute("subject", dao.bringSubject());
+
 	}
 
 	// 환자 입력할때 아이디 확인
@@ -436,6 +438,16 @@ public class MemberController {
 		maker.setCri(cri);
 		maker.setTotalCount(al.size());
 		model.addAttribute("pageMaker", maker);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "forSjid", method = RequestMethod.POST)
+	public void forsjid(String sjid, Model model) {
+		System.out.println("forSjid");
+		System.out.println(sjid);
+		DoctorVO vo = (DoctorVO) dao.bringDoctor(sjid);
+		model.addAttribute("goDoctor", dao.bringDoctor(sjid));
+	
 	}
 
 	// ===========================================

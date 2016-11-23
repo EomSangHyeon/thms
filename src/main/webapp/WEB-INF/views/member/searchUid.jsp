@@ -53,14 +53,13 @@
 
 	<c:forEach items="${searchmember}" var="search">
 
-		<label><a href="javascript:sendUid('${search.uid}')">${search.uid}</a></label>
+		<a href="javascript:sendUid('${search.uid}')"><label>${search.uid}</label>
 		<label>${search.uname}</label>
 		<label>${search.uemail}</label>
 		<label>${search.ugender}</label>
 		<label>${search.unick}</label>
 		<label>${search.ubirth}</label>
-		<label>${search.ustatus}</label>
-
+		<label>${search.ustatus}</label></a>
 		<br>
 	</c:forEach>
 
