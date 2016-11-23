@@ -6,7 +6,7 @@
 	 function searchcheckup() {
 		event.preventDefault();
 		var Url = "../checkup/listView";
-		var Option = "width=370, height=360, resizable=no, scrollbars=no, status=yes;"; 
+		var Option = "width=370, height=670, resizable=no, scrollbars=no, status=yes;"; 
 		window.open(Url,"검사선택",Option);
 
 	}

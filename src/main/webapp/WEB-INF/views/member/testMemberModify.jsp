@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ page contentType="text/html; charset=UTF-8" session="true"%>
 <!DOCTYPE html>
 
 <html>
@@ -13,7 +15,7 @@
 </head>
 <body>
 	<!--  정보수정인데 관리자가 오면 status 수정가능하고 아니면 안보이게 -->
-
+	${check.ustatus }
 	<form action="confirmUpdateMember" method="POST">
 		<table>
 			<c:forEach items="${searchmember}" var="search">
@@ -45,10 +47,22 @@
 					<td>생년월일</td>
 					<td><input type="text" name="ubirth" value="${search.ubirth}"></td>
 				</tr>
-				<tr>
-					<td>권한</td>
-					<td><input type="text" name="ustatus" value="${search.ustatus}"></td>
-				</tr>
+
+				<c:if test="${check.ustatus =='master' || check.ustatus =='admin' }">
+					<tr>
+						<td>권한</td>
+						<td><input type="text" name="ustatus"
+							value="${search.ustatus}"></td>
+					</tr>
+				</c:if>
+				<c:if test="${check.ustatus =='customer'}">
+					<tr>
+						<td>권한</td>
+						<td><input type="text" name="ustatus"
+							value="${search.ustatus}" readonly /></td>
+					</tr>
+				</c:if>
+
 			</c:forEach>
 			<tr>
 				<td><input type="submit"></td>

@@ -82,14 +82,14 @@
 						<th>검사실번호</th>
 						<th>수정 / 삭제</th>
 					</tr>		
-					<c:forEach items="${list}" var="CheckUpRoomVO">
+					<c:forEach items="${list}" var="CheckUpRoomViewVO">
 						<tr>
-							<td>${CheckUpRoomVO.crid}</td>
-							<td>${CheckUpRoomVO.chid}</td>
-							<td>${CheckUpRoomVO.crnumber}</td>
+							<td>${CheckUpRoomViewVO.v_crid}</td>
+							<td>${CheckUpRoomViewVO.v_chname}</td>
+							<td>${CheckUpRoomViewVO.v_crnumber}</td>
 							<td>
-								<a href="modifyPage?crid=${CheckUpRoomVO.crid}"><button type="button" class="btn btn-warning">수정</button></a>
-							<button id="remove"  value="${CheckUpRoomVO.crid}" class="btn btn-danger">삭제</button>
+								<a href="modifyPage?crid=${CheckUpRoomViewVO.v_crid}"><button type="button" class="btn btn-warning">수정</button></a>
+							<button id="remove"  value="${CheckUpRoomViewVO.v_crid}" class="btn btn-danger">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>

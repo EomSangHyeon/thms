@@ -3,6 +3,7 @@ package com.thms.service;
 import java.util.List;
 
 import com.thms.domain.CheckUpReservationVO;
+import com.thms.domain.CheckUpReservationViewVO;
 import com.thms.domain.CheckUpRoomVO;
 import com.thms.domain.CheckUpVO;
 import com.thms.domain.Criteria;
@@ -23,7 +24,7 @@ public interface CheckUpReservationService {
 
 	public int listCountCreiteria(Criteria cri) throws Exception;
 
-	public List<CheckUpReservationVO> listSearchCriteria(SearchCriteria cri) throws Exception;
+	public List<CheckUpReservationViewVO> listSearchCriteria(SearchCriteria cri) throws Exception;
 
 	public int listSearchCount(SearchCriteria cri) throws Exception;	
 	
@@ -46,6 +47,7 @@ public interface CheckUpReservationService {
 
 	public int checkuplistSearchCount(SearchCriteria cri) throws Exception;
 	
+	public List<CheckUpVO> test(SearchCriteria cri) throws Exception;
 	/////////////////////checkuproom//////////////////////////
 	
 	public List<CheckUpRoomVO> checkuproomlistCriteria(Criteria cri) throws Exception;
