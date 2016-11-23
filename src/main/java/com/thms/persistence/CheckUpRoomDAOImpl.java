@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.thms.domain.CheckUpRoomVO;
+import com.thms.domain.CheckUpRoomViewVO;
 import com.thms.domain.Criteria;
 import com.thms.domain.SearchCriteria;
 @Repository
@@ -65,7 +66,7 @@ public class CheckUpRoomDAOImpl implements CheckUpRoomDAO{
 	}
 
 	@Override
-	public List<CheckUpRoomVO> listSearch(SearchCriteria cri) throws Exception {
+	public List<CheckUpRoomViewVO> listSearch(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".listSearch",cri);
 	}

@@ -41,7 +41,7 @@ public class CheckUpRoomController {
 			
 			return  "redirect:/checkuproom/list";
 		}
-	 
+	
 	 @RequestMapping(value="/list", method=RequestMethod.GET)
 		public void listAll(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception {
 		 model.addAttribute("list", service.listSearchCriteria(cri));
@@ -75,6 +75,7 @@ public class CheckUpRoomController {
 	 @ResponseBody
 		@RequestMapping(value = "/remove", method = RequestMethod.POST)
 		public void remove(@RequestParam("crid") int crid, SearchCriteria cri, RedirectAttributes rttr)throws Exception {
+		 	System.out.println(crid);
 			service.delete(crid);
 			
 		}

@@ -20,6 +20,9 @@
 	function setmemID(id) {
 		document.getElementById("uid").value = id;
 	}
+	
+	
+	
 	$(document).ready(function() {
 		if ($("select[name='chid']").val() != "")
 			getid();

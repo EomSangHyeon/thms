@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.thms.domain.Criteria;
 import com.thms.domain.DoctorVO;
+import com.thms.domain.DoctorViewVO;
 import com.thms.domain.SearchCriteria;
 
 @Repository
@@ -77,7 +78,7 @@ public class DoctorDAOImpl implements DoctorDAO {
 	}
 
 	@Override
-	public List<DoctorVO> listSearch(SearchCriteria cri) throws Exception {
+	public List<DoctorViewVO> listSearch(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+".listSearch",cri);
 		

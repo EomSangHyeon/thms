@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.thms.domain.Criteria;
 import com.thms.domain.DoctorVO;
+import com.thms.domain.DoctorViewVO;
 import com.thms.domain.SearchCriteria;
 import com.thms.persistence.DoctorDAO;
 
@@ -63,7 +64,7 @@ public class DoctorServiceImpl implements DoctorService{
 		return dao.countPaging(cri);
 	}
 	@Override
-	public List<DoctorVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+	public List<DoctorViewVO> listSearchCriteria(SearchCriteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.listSearch(cri);
 	}

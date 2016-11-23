@@ -48,7 +48,7 @@
 								<option value="n"
 									<c:out value="${cri.searchType==null?'selected':''}"/>>---</option>
 								<option value="id"
-									<c:out value="${cri.searchType eq 'id'?'selected':''}"/>>검사ID</option>
+									<c:out value="${cri.searchType eq 'id'?'selected':''}"/>>번호</option>
 								<option value="na"
 									<c:out value="${cri.searchType eq 'na'?'selected':''}"/>>검사내용</option>
 							</select> 
@@ -63,7 +63,7 @@
 			
 				<table class="table table-striped">
 					<tr>
-						<th>검사ID</th>
+						<th>번호</th>
 						<th>검사내용</th>
 						<th>수정 / 삭제</th>
 					</tr>

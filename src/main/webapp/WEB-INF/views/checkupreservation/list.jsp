@@ -66,11 +66,11 @@
 
 
 	<table>
-		<th>검사예약ID</th>
+		<th>번호</th>
 		<th>날짜</th>
 		<th>환자아이디</th>
-		<th>검사ID</th>
-		<th>검사실ID</th>
+		<th>검사</th>
+		<th>검사실</th>
 		<c:forEach items="${list}" var="CheckUpReservationViewVO">
 			
 				<tr>
