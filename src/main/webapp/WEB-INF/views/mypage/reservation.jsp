@@ -53,7 +53,7 @@ $(document).ready(function() {
 					</tbody>	        
 				</table>
 
-				<div class="col-sm-9 col-md-10 main">
+				<div class="text-center">
 					<ul class="pagination">
 						<c:if test="${pageMaker.prev}">
 							<li><a href="reservation${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
