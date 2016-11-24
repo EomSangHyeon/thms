@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,8 +63,25 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/checkup", method = RequestMethod.GET)
-	public void mypageCheckup() {
-		logger.info("GET mypageCheckup....................");
+	public void mypageCheckup(@ModelAttribute("cri") Criteria cri,  HttpSession session, Model model)throws Exception {
+		MemberVO memberVo = (MemberVO) session.getAttribute("login");
+		model.addAttribute("memberVo", memberVo);
+		
+		SearchCriteria searchCriteria = new SearchCriteria();
+		searchCriteria.setPage(cri.getPage());
+		searchCriteria.setPerPageNum(cri.getPerPageNum());
+		searchCriteria.setSearchType("uid");
+		searchCriteria.setKeyword(memberVo.getUid());
+		model.addAttribute("checkup", mypageService.listcheckupCriteria(searchCriteria));
+		
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(mypageService.listcheckupCount(searchCriteria));
+
+		model.addAttribute("pageMaker", pageMaker);
+		
+		
 	}
 
 	@RequestMapping(value = "/hospitalize", method = RequestMethod.GET)

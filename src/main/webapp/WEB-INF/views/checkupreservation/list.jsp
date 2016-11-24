@@ -33,6 +33,7 @@
 									"creid" : $("#creid").val()
 								},
 								success : function(data) {
+									alert("삭제되었습니다");
 									location.href = "list";
 								}
 							})
@@ -86,19 +87,17 @@
 						<th>수정 / 삭제</th>
 					</tr>
 					
-					<c:forEach items="${list}" var="CheckUpReservationViewVO">						
+					<c:forEach items="${list}" var="CheckUpReservationViewVO">
 					<tr>
-						<td>${CheckUpReservationViewVO.v_crid}</td>
-						<td>${CheckUpReservationViewVO.v_credate}</td>
-						<td>${CheckUpReservationViewVO.v_uid}</td>
-						<td>${CheckUpReservationViewVO.v_chname}</td>
-						<td>${CheckUpReservationViewVO.cr_number}</td>
-						<td>
-						<a href="modifyPage?creid=${CheckUpReservationViewVO.v_crid}"><button class="btn btn-warning" type="button">수정</button></a>
-						<input id=creid type="hidden" value="${CheckUpReservationVO.creid}">
-						<button class="btn btn-danger" id="remove">삭제</button>
-						</td>
-					</tr>
+					<td>${CheckUpReservationViewVO.v_crid}</td>
+					<td>${CheckUpReservationViewVO.v_credate}</td>
+					<td>${CheckUpReservationViewVO.v_uid}</td>
+					<td>${CheckUpReservationViewVO.v_chname}</td>
+					<td>${CheckUpReservationViewVO.cr_number}</td>
+					<td><a href="modifyPage?creid=${CheckUpReservationViewVO.v_crid}"><button type="button">수정</button></a></td>
+					<td><input id=creid type="hidden" value="${CheckUpReservationViewVO.v_crid}">
+					<button id="remove">삭제</button></td>
+				</tr>
 					</c:forEach>
 			
 				</table>

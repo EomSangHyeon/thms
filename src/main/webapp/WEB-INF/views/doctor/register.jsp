@@ -17,6 +17,31 @@
 	function setID(id){
    	document.getElementById("sjid").value = id;
 	}
+	
+	 $(document).ready(function() {
+			$("#submit").click(function(){
+				if($("#dname").val() == ""){
+					alert("이름을 입력하세요");
+					$("#dname").focus();
+					return false;
+				}else if($("#dgender").val() == ""){
+					alert("성별을 선택하세요");
+					$("#dgender").focus();
+					return false;
+				}else if($("#dclinic").val() == ""){
+					alert("병실을 입력하세요");
+					$("#dclinic").focus();
+					return false;
+				}else if($("#sjid").val() == ""){
+					alert("진료과목을 입력하세요");
+					$("#sjid").focus();
+					return false;
+				}else{
+					return true;
+				}
+			});
+		});
+	
 </script>
 
 <%@ include file="../admin/admin_sidebar.jsp" %>
@@ -66,7 +91,7 @@
 					
 					<div class="form-group">
       			<div class="col-sm-offset-2 col-sm-6">				
-							<button class="btn btn-primary" type="submit">입력</button>
+							<button class="btn btn-primary" type="submit" id="submit">입력</button>
 						</div>
 					</div>
 							

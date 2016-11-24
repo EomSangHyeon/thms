@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.thms.domain.PatientViewVO;
+import com.thms.domain.CheckUpReservationViewVO;
 import com.thms.domain.ReservationViewVO;
 import com.thms.domain.SearchCriteria;
 
@@ -43,4 +44,15 @@ public class MypageDAOImpl implements MypageDAO {
 	public int listHospitalizeCount(SearchCriteria cri) throws Exception {
 		return sqlSession.selectOne(namespace1 +".listHospitalizeCount", cri);
 	}
+	public List<CheckUpReservationViewVO> listSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".listchSearch",cri);
+	}
+
+	@Override
+	public int listcheckupCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".listchSearchCount",cri);
+	}
+	
 }

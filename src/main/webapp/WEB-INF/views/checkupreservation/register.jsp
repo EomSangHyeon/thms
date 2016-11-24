@@ -41,41 +41,44 @@
 
 		});
 	}
-	/* function searchCh() {
-		event.preventDefault();
-		var popUrl = "/checkupreservation/checkupList";
-		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=yes;";
-		window.open(popUrl, "", popOption);
-	}
-	function setcheckupID(id) {
-		document.getElementById("chid").value = id;
-	}
-	function searchchroom() {
-		event.preventDefault();
-		var popUrl = "/checkupreservation/checkuproomList";
-		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=yes;";
-		window.open(popUrl, "", popOption);
-	}
-	function setcheckuproomID(id) {
-		document.getElementById("crid").value = id;
-	} */
+	$(document).ready(function() {
+		$("#submit").click(function(){
+			if($("#credate").val() == ""){
+				alert("날짜를 입력하세요");
+				$("#credate").focus();
+				return false;
+			}else if($("#uid").val() == ""){
+				alert("아이디를 입력하세요");
+				$("#uid").focus();
+				return false;
+			}else if($("#chid").val() == ""){
+				alert("검사를 입력하세요");
+				$("#chid").focus();
+				return false;
+			}else if($("#crid").val() == ""){
+				alert("검사실을 입력하세요");
+				$("#crid").focus();
+				return false;
+			}else{
+				return true;
+			}
+		});
+	});
 </script>
 <%@ include file="../admin/admin_sidebar.jsp" %>
 <div class="container-fluid">
 	<div class="row">		
 		<div class="col-sm-9 col-md-10 main">
-			
 			<div class = "box box-header">
 				<h2>검사예약 입력</h2>
 			</div>
 			
 			<div class="box box-body">
-
 				<form method="post" class="form-horizontal">
 					<div class="form-group">
 						<label class="control-label col-sm-2">검사 날짜</label>
 						<div class="col-sm-6">
-							<input class="form-control" type="date" name="credate">
+							<input class="form-control" type="date" name="credate" id="credate">
 						</div>
 					</div>
 					
@@ -112,7 +115,7 @@
 
 					<div class="form-group">
       			<div class="col-sm-offset-2 col-sm-6">
-							<button class="btn btn-primary" type="submit">입력</button>
+							<button type="submit" id="submit">입력</button>
 						</div>
 					</div>
 				</form>
