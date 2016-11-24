@@ -2,10 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<%@ include file="../include/header.jsp" %>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <title>Insert title here</title>
@@ -14,7 +11,7 @@
 	function searchuid() {
 		event.preventDefault();
 		var popUrl = "/checkupreservation/memberList";
-		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=yes;";
+		var popOption = "width=600, height=700, resizable=no, scrollbars=no, status=yes;";
 		window.open(popUrl, "", popOption);
 	}
 	function setmemID(id) {
@@ -63,32 +60,66 @@
 		document.getElementById("crid").value = id;
 	} */
 </script>
-
-<body>
-	<form method="post">
-		<div>
-			검사 날짜<input type="date" name="credate">
-		</div>
-		<div>
-			환자ID<input type="text" name="uid" id="uid">
-			<button onclick="searchuid()">찾기</button>
-		</div>
-		<div>
-			검사ID <select name="chid" id="chid">
-				<option value="">----</option>
-				<c:forEach items="${test}" var="CheckUpVO">
-					<option value="${CheckUpVO.chid}">${CheckUpVO.chname}</option>
-				</c:forEach>
-
-			</select>
-		</div>
-		<div>
-			검사실ID <select name="crid" id="crid">
-				<option value="">----</option>
-			</select>
-			<div>
-				<button type="submit">입력</button>
+<%@ include file="../admin/admin_sidebar.jsp" %>
+<div class="container-fluid">
+	<div class="row">		
+		<div class="col-sm-9 col-md-10 main">
+			
+			<div class = "box box-header">
+				<h2>검사예약 입력</h2>
 			</div>
-	</form>
-</body>
-</html>
+			
+			<div class="box box-body">
+
+				<form method="post" class="form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-sm-2">검사 날짜</label>
+						<div class="col-sm-6">
+							<input class="form-control" type="date" name="credate">
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2">환자ID</label>
+						<div class="col-sm-6">
+							<div class="input-group">
+								<input class="form-control" type="text" name="uid" id="uid">
+								<span class="input-group-btn"><button class="btn btn-primary" onclick="searchuid()">찾기</button></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2">검사ID</label>
+						<div class="col-sm-6">
+							<select class="form-control" name="chid" id="chid">
+								<option value="">----</option>
+								<c:forEach items="${test}" var="CheckUpVO">
+								<option value="${CheckUpVO.chid}">${CheckUpVO.chname}</option>
+								</c:forEach>			
+							</select>
+						</div>						
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-2">검사실ID</label>
+						<div class="col-sm-6">
+							<select class="form-control" name="crid" id="crid">
+								<option value="">검사를 먼저 선택 하세요</option>
+							</select>
+						</div>
+					</div>	
+
+					<div class="form-group">
+      			<div class="col-sm-offset-2 col-sm-6">
+							<button class="btn btn-primary" type="submit">입력</button>
+						</div>
+					</div>
+				</form>
+	
+			</div><!-- box-body -->
+						
+		</div><!-- /col-sm-9 col-md-10 main -->				
+	</div><!-- .row -->
+</div><!-- .container-fluid -->
+<%@ include file="../include/footer.jsp"%>

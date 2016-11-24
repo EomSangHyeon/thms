@@ -34,6 +34,9 @@
    	<li><a href="/checkuproom/list">검사실 관리</a></li>
    	<li><a href="/room/list">병실목록 관리</a></li>
    	<li><a href="/member/testselectPatientList">입원자 관리</a></li>
+   	<h3> 예약 관리</h3>
+   	<li><a href="#">외래예약 관리</a></li>
+   	<li><a href="/checkupreservation/list">검사예약 관리</a></li>   	
 </c:if>
     
   </ul>		  
