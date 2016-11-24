@@ -55,4 +55,31 @@
 		DELETE FROM `tbl_reservation` WHERE `rid`=#{rid}
 	</delete>
 
+
+	<select id="listchSearch" resultType="CheckUpReservationViewVO"> 
+	<![CDATA[ 
+		SELECT 
+			`v_crid`, `v_credate`, `v_uid`, `v_chname`, `cr_number`
+		 FROM 
+		 	`checkupreservation_v` 
+		]]>
+		<if test="searchType != null">
+			WHERE `v_uid`=#{keyword}
+		</if>
+		<![CDATA[
+		ORDER BY `v_crid` DESC 
+		 limit #{pageStart},#{perPageNum} 
+		]]>
+	</select>
+	<select id="listchSearchCount" resultType="int"> 
+	<![CDATA[ 
+		select count(v_crid) 
+			from
+		checkupreservation_v 
+		]]>
+		<if test="searchType != null">
+			WHERE `v_uid`=#{keyword}
+		</if>
+	</select>
+
 </mapper>

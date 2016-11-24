@@ -63,11 +63,25 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/checkup", method = RequestMethod.GET)
-	public void mypageCheckup(@RequestParam("uid") String uid,HttpSession session, Model model)throws Exception {
+	public void mypageCheckup(@ModelAttribute("cri") Criteria cri,  HttpSession session, Model model)throws Exception {
 		MemberVO memberVo = (MemberVO) session.getAttribute("login");
-		System.out.println(uid);
-		logger.info("GET mypageCheckup....................");
-	/*	model.addAttribute(mypageService.relist("uid"));*/
+		model.addAttribute("memberVo", memberVo);
+		
+		SearchCriteria searchCriteria = new SearchCriteria();
+		searchCriteria.setPage(cri.getPage());
+		searchCriteria.setPerPageNum(cri.getPerPageNum());
+		searchCriteria.setSearchType("uid");
+		searchCriteria.setKeyword(memberVo.getUid());
+		model.addAttribute("checkup", mypageService.listcheckupCriteria(searchCriteria));
+		
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(mypageService.listcheckupCount(searchCriteria));
+
+		model.addAttribute("pageMaker", pageMaker);
+		
+		
 	}
 
 	@RequestMapping(value = "/hospitalize", method = RequestMethod.GET)

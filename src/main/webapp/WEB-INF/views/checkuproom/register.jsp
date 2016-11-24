@@ -14,6 +14,21 @@
 	 function setID(id){
 	      document.getElementById("chid").value = id;
 	}
+	 $(document).ready(function() {
+			$("#submit").click(function(){
+				if($("#chid").val() == ""){
+					alert("검사를 입력하세요");
+					$("#chid").focus();
+					return false;
+				}else if($("#dclinic").val() == ""){
+					alert("검사실을 입력하세요");
+					$("#dclinic").focus();
+					return false;
+				}else{
+					return true;
+				}
+			});
+		});
 </script>
 <%@ include file="../admin/admin_sidebar.jsp" %>
 <div class="container-fluid">
@@ -47,7 +62,7 @@
 					
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-6">
-							<button class="btn btn-primary" type="submit">입력</button>
+							<button class="btn btn-primary" type="submit" id="submit">입력</button>
 						</div>
 					</div>
 				</form>

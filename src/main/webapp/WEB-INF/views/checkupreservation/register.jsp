@@ -44,37 +44,42 @@
 
 		});
 	}
-	/* function searchCh() {
-		event.preventDefault();
-		var popUrl = "/checkupreservation/checkupList";
-		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=yes;";
-		window.open(popUrl, "", popOption);
-	}
-	function setcheckupID(id) {
-		document.getElementById("chid").value = id;
-	}
-	function searchchroom() {
-		event.preventDefault();
-		var popUrl = "/checkupreservation/checkuproomList";
-		var popOption = "width=370, height=360, resizable=no, scrollbars=no, status=yes;";
-		window.open(popUrl, "", popOption);
-	}
-	function setcheckuproomID(id) {
-		document.getElementById("crid").value = id;
-	} */
+	$(document).ready(function() {
+		$("#submit").click(function(){
+			if($("#credate").val() == ""){
+				alert("날짜를 입력하세요");
+				$("#credate").focus();
+				return false;
+			}else if($("#uid").val() == ""){
+				alert("아이디를 입력하세요");
+				$("#uid").focus();
+				return false;
+			}else if($("#chid").val() == ""){
+				alert("검사를 입력하세요");
+				$("#chid").focus();
+				return false;
+			}else if($("#crid").val() == ""){
+				alert("검사실을 입력하세요");
+				$("#crid").focus();
+				return false;
+			}else{
+				return true;
+			}
+		});
+	});
 </script>
 
 <body>
 	<form method="post">
 		<div>
-			검사 날짜<input type="date" name="credate">
+			검사 날짜<input type="date" name="credate" id="credate">
 		</div>
 		<div>
 			환자ID<input type="text" name="uid" id="uid">
 			<button onclick="searchuid()">찾기</button>
 		</div>
 		<div>
-			검사ID <select name="chid" id="chid">
+			검사 <select name="chid" id="chid">
 				<option value="">----</option>
 				<c:forEach items="${test}" var="CheckUpVO">
 					<option value="${CheckUpVO.chid}">${CheckUpVO.chname}</option>
@@ -83,11 +88,11 @@
 			</select>
 		</div>
 		<div>
-			검사실ID <select name="crid" id="crid">
+			검사실 <select name="crid" id="crid">
 				<option value="">----</option>
 			</select>
 			<div>
-				<button type="submit">입력</button>
+				<button type="submit" id="submit">입력</button>
 			</div>
 	</form>
 </body>

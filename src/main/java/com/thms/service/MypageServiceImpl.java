@@ -16,7 +16,6 @@ import com.thms.persistence.MypageDAO;
 public class MypageServiceImpl implements MypageService {
 	@Inject
 	private MypageDAO dao;
-	@Inject
 
 	@Override
 	public List<ReservationViewVO> getScheduleListByUID(SearchCriteria cri) throws Exception {
@@ -31,6 +30,16 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void del(int rid) throws Exception {
 		dao.del(rid);
+	}
+
+	@Override
+	public List<CheckUpReservationViewVO> listcheckupCriteria(SearchCriteria cri) throws Exception {
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listcheckupCount(SearchCriteria cri) throws Exception {
+		return dao.listcheckupCount(cri);
 	}
 
 }

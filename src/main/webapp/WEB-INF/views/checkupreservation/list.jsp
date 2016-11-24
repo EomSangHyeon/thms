@@ -38,6 +38,7 @@
 									"creid" : $("#creid").val()
 								},
 								success : function(data) {
+									alert("삭제되었습니다");
 									location.href = "list";
 								}
 							})
@@ -80,7 +81,7 @@
 					<td>${CheckUpReservationViewVO.v_chname}</td>
 					<td>${CheckUpReservationViewVO.cr_number}</td>
 					<td><a href="modifyPage?creid=${CheckUpReservationViewVO.v_crid}"><button type="button">수정</button></a></td>
-					<td><input id=creid type="hidden" value="${CheckUpReservationVO.creid}">
+					<td><input id=creid type="hidden" value="${CheckUpReservationViewVO.v_crid}">
 					<button id="remove">삭제</button></td>
 				</tr>
 		</c:forEach>

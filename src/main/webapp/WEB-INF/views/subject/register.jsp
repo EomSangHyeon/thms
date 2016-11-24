@@ -2,6 +2,20 @@
 <%@ include file="../include/header.jsp" %>
 
 <%@ include file="../admin/admin_sidebar.jsp" %>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#submit").click(function(){
+		if($("#sjname").val() == ""){
+			alert("진료 과목을 입력하세요");
+			$("#sjname").focus();
+			return false;
+		}else{
+			return true;
+		}
+	});
+});
+
+</script>
 <div class="container-fluid">
 	<div class="row">
 		<div class = "col-sm-9 col-md-10 main">
@@ -18,10 +32,10 @@
 					<div class="form-group">
 					
 						<div class="col-sm-4">							
-							<input class="form-control" type="text" name="sjname">
+							<input class="form-control" type="text" name="sjname" id="sjname">
 						</div>
 						<div class="col-sm-2">
-							<button type="submit" class="btn btn-primary">입력</button>
+							<button type="submit" class="btn btn-primary" id="submit">입력</button>
 						</div>						
 					</div>
 				</form>

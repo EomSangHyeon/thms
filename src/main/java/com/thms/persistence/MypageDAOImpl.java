@@ -32,5 +32,17 @@ public class MypageDAOImpl implements MypageDAO {
 	public void del(int rid) throws Exception {
 		sqlSession.delete(namespace +".del", rid);
 	}
+
+	@Override
+	public List<CheckUpReservationViewVO> listSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".listchSearch",cri);
+	}
+
+	@Override
+	public int listcheckupCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".listchSearchCount",cri);
+	}
 	
 }
