@@ -1,7 +1,9 @@
 package com.thms.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.thms.domain.DoctorVO;
 import com.thms.domain.MemberVO;
 import com.thms.domain.PageMaker;
 import com.thms.domain.PatientVO;
@@ -127,8 +130,10 @@ public class MemberController {
 	}
 
 	// 환자 입력을 수행
-	@RequestMapping("joinForPatient.do")
+	@RequestMapping(value = "joinForPatient.do", method = RequestMethod.POST)
 	public String joinConfirmPatient(PatientVO vo) {
+		System.out.println("joinForPatient.do");
+
 		dao.joinForPatient(vo);
 		return "redirect:/member/testselectPatientList";
 
@@ -136,10 +141,11 @@ public class MemberController {
 
 	// 환자 입력을 위한 검색
 	@RequestMapping("testJoinPatient")
-	public void joinPatient() {
+	public void joinPatient(Model model) {
 		System.out.println("testJoinPatient");
 
-	
+		model.addAttribute("subject", dao.bringSubject());
+
 	}
 
 	// 환자 입력할때 아이디 확인
@@ -147,7 +153,6 @@ public class MemberController {
 	public ResponseEntity<List> forPatient(HttpServletRequest request, Model model) {
 		System.out.println("ajaxForPatientUid");
 		String uid = request.getParameter("uid");
-		System.out.println(uid);
 
 		System.out.println(dao.selectSearchForPatientUid(uid));
 		List<String> lista = new ArrayList<String>();
@@ -183,6 +188,7 @@ public class MemberController {
 			maker.setTotalCount(al.size());
 
 			model.addAttribute("pageMaker", maker);
+
 		} else if (cri.getSearchType() == "") {
 			List al = new ArrayList();
 			al = dao.listCriteria(cri);
@@ -194,6 +200,7 @@ public class MemberController {
 			maker.setTotalCount(al.size());
 
 			model.addAttribute("pageMaker", maker);
+
 		} else if (cri.getSearchType() != null || cri.getSearchType() != "") {
 
 			model.addAttribute("searchmember", dao.listCriteria(cri));
@@ -216,7 +223,6 @@ public class MemberController {
 		ResponseEntity<String> entity = null;
 
 		String ustatus = ((MemberVO) session.getAttribute("login")).getUstatus();
-		System.out.println(ustatus);
 
 		if (ustatus.equals("master")) {
 
@@ -230,30 +236,28 @@ public class MemberController {
 	// 회원정보 수정전 비밀번호 확인
 	@RequestMapping(value = "checkPw")
 	public void checkPw() {
+		System.out.println("checkPw");
 	}
 
 	// 회원정보 수정전 비밀번호 확인 실행
-	@RequestMapping(value = "checkPw.do", method = RequestMethod.POST)
+	@RequestMapping(value = "checkPw.do")
 	public String checkPwDo(String pw, HttpSession session, Model model) {
-		System.out.println("pw");
+		System.out.println("checkPw.do");
 
 		MemberVO vo1 = (MemberVO) session.getAttribute("login");
 
-		String readlPw = dao.checkPw(vo1);
-		System.out.println("들어온  " + pw);
-		System.out.println("나오는 아이디" + vo1.getUid());
-		System.out.println("나와야하는" + readlPw);
-
-		if (readlPw.equals(pw)) {
+		String realPw = dao.checkPw(vo1);
+		System.out.println(realPw + "진짜 비번");
+		System.out.println(pw+"입력한");
+		if (realPw.equals(pw.toString())) {
 			return "redirect:memberModify";
 		} else {
-
 			return "redirect:checkPw";
 		}
 	}
 
 	// 개인정보 수정 에서 회원정보 수정 부분
-	@RequestMapping(value = "memberModify", method = RequestMethod.POST)
+	@RequestMapping(value = "memberModify")
 	public void modifyMember(HttpSession session, Model model) {
 		System.out.println("memberModify");
 		MemberVO vo = (MemberVO) session.getAttribute("login");
@@ -279,7 +283,7 @@ public class MemberController {
 		model.addAttribute("check", memberVo);
 
 		// 한개 정보 들고오기
-		model.addAttribute("searchmember", dao.selectOneMember(memberVo.getUid()));
+		model.addAttribute("searchmember", dao.selectOneMember(request.getParameter("uid")));
 
 	}
 
@@ -436,6 +440,17 @@ public class MemberController {
 		maker.setCri(cri);
 		maker.setTotalCount(al.size());
 		model.addAttribute("pageMaker", maker);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "forSjid", method = RequestMethod.POST)
+	public ResponseEntity<List<DoctorVO>> forsjid(String sjid) {
+
+		List<DoctorVO> volist = (List<DoctorVO>) dao.bringDoctor(sjid);
+		ResponseEntity<List<DoctorVO>> entity = new ResponseEntity<List<DoctorVO>>(volist, HttpStatus.OK);
+
+		return entity;
+
 	}
 
 	// ===========================================

@@ -25,7 +25,7 @@
 					<h4>비밀번호 확인 :</h4>
 					<div class="form-group">
 						<div class="col-sm-4">
-							<input class="form-control type="password" name="pw">							
+							<input class="form-control" type="password" name="pw" required="required">							
 						</div>
 						<div class="col-sm-2">
 							<input class="btn btn-primary" type="submit" value='입력'>

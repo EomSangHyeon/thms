@@ -10,7 +10,7 @@
 	function sendUid(comeon) {
 	
 		opener.setUid(comeon);
-		alert(comeon);
+
 		window.close();
 		
 	}

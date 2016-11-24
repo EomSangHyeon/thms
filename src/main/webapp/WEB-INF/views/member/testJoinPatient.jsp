@@ -26,6 +26,36 @@
 		window.open("searchRoom", "", "width=700, height=750, left=600");
 
 	}
+
+	function showDoctor(hi) {
+
+		$.ajax({
+
+			type : 'post',
+			dataType : 'text',
+			url : "forSjid",
+			data : {
+				sjid : hi
+			},
+			success : function(data) {
+
+				var obj = JSON.parse(data);
+
+				str = "<select class='form-control' id='did' name='did'>";
+				for (var i = 0; i < obj.length; i++) {
+					var jobj = obj[i]
+					str += "<option value = "+jobj.did+">" + jobj.dname;
+					str += "</option>";
+				}
+				str += "</select>"
+
+				$("#showDname").html(str)
+
+			}
+
+		})
+
+	}
 </script>
 
 <!--  사용자 uid 검색 가능하게  ajax로
@@ -52,10 +82,9 @@
 						<div class="col-sm-6">
 							<div class="input-group">
 								<input class="form-control" type="text" id="uid" name="uid"
-									value='${here 	 }' readonly="readonly"> <span
-									class="input-group-btn"><input class="btn btn-primary"
-									type="button" id="btn" name="btn" onclick="searchUid()"
-									value="검색"></span>
+									readonly="readonly"> <span class="input-group-btn"><input
+									class="btn btn-primary" type="button" id="btn" name="btn"
+									onclick="searchUid()" value="검색"></span>
 							</div>
 						</div>
 					</div>
@@ -89,17 +118,16 @@
 					<div class="form-group">
 						<label class="control-label col-sm-2">담당의사 번호 : </label>
 						<div class="col-sm-6">
-							<select id="sjid" name="sjid" onchange="alert(hh)">
-							<option value="hh">hh</option>
-							<option value="hh">hh</option>
-							<option value="hh">hh</option>
-							</select> 
-							
-							
-							
-							
-							<input class="form-control"
-								type="text" id="did" name="did" onchange="searchDidForPatient()">
+							<select class="form-control" id="sjid" name="sjid" onchange="showDoctor(this.value);">
+								<option selected>선택하기</option>
+								<c:forEach items="${subject}" var="here">
+									<option value="${here.sjid}">${here.sjname}</option>
+								</c:forEach>
+							</select>
+
+							<div id="showDname"></div>
+
+
 						</div>
 					</div>
 
