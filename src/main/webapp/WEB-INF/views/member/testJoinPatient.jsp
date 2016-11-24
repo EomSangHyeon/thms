@@ -18,12 +18,12 @@
 
 	function searchUid() {
 
-		window.open("searchUid", "", "width=600, height=500, left=600");
+		window.open("searchUid", "", "width=700, height=750, left=600");
 
 	}
 
 	function searchRestRoom() {
-		window.open("searchRoom", "", "width=600, height=500, left=600");
+		window.open("searchRoom", "", "width=700, height=750, left=600");
 
 	}
 </script>
