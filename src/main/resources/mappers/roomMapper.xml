@@ -162,4 +162,34 @@
 		<include refid="search1"></include>
 	</select>
 
+	<select id="getHospitalizeListByUID" resultType="PatientViewVO">
+		<![CDATA[
+			SELECT 
+				* 
+			FROM 
+				`view_hospitalize` 
+		]]>
+
+		<if test="searchType != null">
+			WHERE `uid`=#{keyword} 
+		</if>
+
+		<![CDATA[ 
+			ORDER BY `horegdate` DESC 
+			LIMIT #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	<select id="listHospitalizeCount" resultType="Integer">
+		<![CDATA[
+			SELECT 
+				COUNT(*) 
+			FROM 
+				`view_hospitalize` 
+		]]>
+
+		<if test="searchType != null">
+			WHERE `uid`=#{keyword} 
+		</if>
+	</select>
+
 </mapper> 

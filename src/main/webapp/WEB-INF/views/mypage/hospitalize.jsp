@@ -19,49 +19,33 @@
 	          </tr>
 	        </thead>
 	        <tbody>
+<c:forEach items="${hospitalizeList}" var="i">
 	          <tr>
-	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
-	            <td>102호</td>	            
+	            <td>${i.horegdate}</td>
+	            <td>${i.sjname}</td>
+	            <td>${i.dname}</td>
+	            <td>${i.rmnumber}</td>	            
 	          </tr>
-	          <tr>
-	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
-	            <td>102호</td>	            
-	          </tr>
-	          <tr>
-	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
-	            <td>102호</td>
-	          </tr>
-	          <tr>
-	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
-	            <td>102호</td>
-	          </tr>
-	          <tr>
-	            <td>2016-12-24</td>
-	            <td>소아과</td>
-	            <td>김똘똘</td>
-	            <td>102호</td>
-	          </tr>
+</c:forEach>
 	        </tbody>	        
 	      </table>	      
-	      <div class="col-sm-9 col-md-10 main" style="display: inline-block;text-align: center;">
-		      <ul class="pagination">
-		      	<li><a href="#"><<</a></li>
-		      	<li class="active"><a href="#">1</a></li>
-					  <li><a href="#">2</a></li>
-					  <li><a href="#">3</a></li>
-					  <li><a href="#">4</a></li>
-					  <li><a href="#">5</a></li>
-					  <li><a href="#">>></a></li>
-		      </ul>
-	      </div>
+	      <div class="text-center">
+					<ul class="pagination">
+						<c:if test="${pageMaker.prev}">
+							<li><a href="hospitalize${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+						</c:if>
+
+						<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="idx">
+							<li <c:out value="${pageMaker.cri.page == idx?'class =active':''}"/>>
+								<a href="hospitalize${pageMaker.makeQuery(idx)}">${idx}</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li><a href="hospitalize${pageMaker.makeQuery(pageMaker.endPage +1)}">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</div>
 	    </div>
 	  </div>		
 	</div>

@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.thms.domain.PatientViewVO;
 import com.thms.domain.ReservationViewVO;
 import com.thms.domain.SearchCriteria;
 import com.thms.persistence.MypageDAO;
@@ -28,5 +29,15 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public void del(int rid) throws Exception {
 		dao.del(rid);
+	}
+
+	@Override
+	public List<PatientViewVO> getHospitalizeListByUID(SearchCriteria cri) throws Exception {
+		return dao.getHospitalizeListByUID(cri);
+	}
+
+	@Override
+	public int listHospitalizeCount(SearchCriteria cri) throws Exception {
+		return dao.listHospitalizeCount(cri);
 	}
 }

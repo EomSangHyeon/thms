@@ -67,7 +67,23 @@ public class MypageController {
 	}
 
 	@RequestMapping(value = "/hospitalize", method = RequestMethod.GET)
-	public void mypageHospitalize() {
+	public void mypageHospitalize(HttpSession session, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
 		logger.info("GET mypageHospitalize....................");
+		MemberVO memberVo = (MemberVO) session.getAttribute("login");
+		model.addAttribute("memberVo", memberVo);
+
+		SearchCriteria searchCriteria = new SearchCriteria();
+		searchCriteria.setPage(cri.getPage());
+		searchCriteria.setPerPageNum(cri.getPerPageNum());
+		searchCriteria.setSearchType("uid");
+		searchCriteria.setKeyword(memberVo.getUid());
+
+		model.addAttribute("hospitalizeList", mypageService.getHospitalizeListByUID(searchCriteria));
+
+		PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(mypageService.listHospitalizeCount(searchCriteria));
+
+	    model.addAttribute("pageMaker", pageMaker);
 	}
 }
