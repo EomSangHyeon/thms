@@ -13,15 +13,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.thms.domain.CalendarCriteria;
+import com.thms.domain.Criteria;
 import com.thms.domain.MemberVO;
+import com.thms.domain.PageMaker;
 import com.thms.domain.ReservationVO;
 import com.thms.domain.ScheduleVO;
+import com.thms.domain.SearchCriteria;
 import com.thms.domain.SubjectVO;
 import com.thms.dto.ReservationDTO;
 import com.thms.persistence.SubjectDAO;
@@ -161,5 +165,26 @@ public class ReservationController {
 		reservationService.add(vo);
 
 		return "success";
+	}
+
+	@RequestMapping(value = "/reservation", method = RequestMethod.GET)
+	public void mypageReservation(HttpSession session, @ModelAttribute("cri") Criteria cri, Model model) throws Exception {
+		logger.info("GET mypageReservation....................");
+		MemberVO memberVo = (MemberVO) session.getAttribute("login");
+		model.addAttribute("memberVo", memberVo);
+
+		SearchCriteria searchCriteria = new SearchCriteria();
+		searchCriteria.setPage(cri.getPage());
+		searchCriteria.setPerPageNum(cri.getPerPageNum());
+		searchCriteria.setSearchType(null);
+		searchCriteria.setKeyword(null);
+
+		model.addAttribute("reservationList", reservationService.getScheduleListByUID(searchCriteria));
+
+		PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(reservationService.listSearchCount(searchCriteria));
+
+	    model.addAttribute("pageMaker", pageMaker);
 	}
 }
