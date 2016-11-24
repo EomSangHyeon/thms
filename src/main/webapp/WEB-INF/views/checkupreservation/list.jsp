@@ -56,7 +56,7 @@
 				<div class="form-group">					
 					<div class="col-sm-6">
 						<div class="form-inline">
-							<select name="searchType">
+							<select class="form-control" name="searchType">
 								<option value="n"
 									<c:out value="${cri.searchType==null?'selected':''}"/>>---</option>
 								<option value="d"
